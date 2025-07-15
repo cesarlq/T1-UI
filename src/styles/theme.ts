@@ -1,13 +1,13 @@
 import React from 'react';
 import { createTheme } from '@mui/material/styles';
-import { statusColors } from '@/utils/staticData'
+import { statusColors } from '../utils/staticData'
 import type { } from '@mui/lab/themeAugmentation';
 import CheckboxIcon from '../assets/icons/CheckboxIcon';
 import UnCheckboxIcon from '../assets/icons/UnCheckboxIcon';
 import IndeterminateCheckboxIcon from '../assets/icons/IndeterminateCheckboxIcon';
 import UnCheckRadioIcon from '../assets/icons/UnCheckRadio';
 import CheckRadio from '../assets/icons/CheckRadio';
-import ChevronDown from '@/assets/svg-icons/chevron-down-icon.svg';
+import ChevronDown from '../assets/svg-icons/chevron-down-icon.svg';
 
 
 const theme = createTheme({
