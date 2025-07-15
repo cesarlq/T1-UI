@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="26px" viewBox="0 0 25 26" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>lets-icons:money-light copy@2x</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="menu_desktop" transform="translate(-24, -593)">
+            <g id="Group-3" transform="translate(0, 444.1639)">
+                <g id="Group-14-Copy-2" transform="translate(0, 139)">
+                    <g id="lets-icons:money-light-copy" transform="translate(24, 10.5)">
+                        <rect id="ViewBox" x="0" y="0" width="25" height="25"></rect>
+                        <g id="Group" transform="translate(3.125, 6.25)" stroke="currentColor" stroke-width="1.5">
+                            <rect id="Rectangle" x="0" y="0" width="18.75" height="12.5" rx="2"></rect>
+                            <path d="M2.08333333,3.125 L5.20833333,3.125 M13.5416667,9.375 L16.6666667,9.375" id="Shape"
+                                stroke-linecap="round"></path>
+                            <circle id="Oval" cx="9.375" cy="6.25" r="2.08333333"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

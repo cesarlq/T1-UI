@@ -1,0 +1,11 @@
+<svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 32" clip-path="url(#clip0_0_275)">
+<path id="Line 3 Copy" d="M4.5 0.5L0 5L4.5 9.5" stroke="#4C4C4C" stroke-linecap="round"/>
+<path id="Line 3 Copy 8" d="M12.5 0.5L8 5L12.5 9.5" stroke="#4C4C4C" stroke-linecap="round"/>
+</g>
+<defs>
+<clipPath id="clip0_0_275">
+<rect width="12.5" height="9" fill="white" transform="translate(0 0.5)"/>
+</clipPath>
+</defs>
+</svg>

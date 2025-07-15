@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="14px" viewBox="0 0 15 14" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icons/icon-dowload</title>
+    <g id="icons/icon-dowload" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path
+            d="M13.828125,9 L13.828125,12.4924623 C13.828125,12.7695477 13.5652734,12.9949749 13.2421875,12.9949749 L1.7578125,12.9949749 C1.43472656,12.9949749 1.171875,12.7695477 1.171875,12.4924623 L1.171875,9 L-1.77635684e-15,9 L-1.77635684e-15,12.4924623 C-1.77635684e-15,13.3237186 0.788554687,14 1.7578125,14 L13.2421875,14 C14.2114453,14 15,13.3237186 15,12.4924623 L15,9 L13.828125,9 Z"
+            id="Path" fill="currentColor" fill-rule="nonzero"
+            transform="translate(7.5, 11.5) rotate(-360) translate(-7.5, -11.5)"></path>
+        <polygon id="Path" fill="currentColor" fill-rule="nonzero"
+            transform="translate(7.5, 5.5) rotate(-360) translate(-7.5, -5.5)"
+            points="10.2034856 6.67778224 8.06322616 8.83084546 8.06322616 0 6.93677384 0 6.93677384 8.83084546 4.79651443 6.67778224 4 7.47906172 7.5 11 11 7.47906172">
+        </polygon>
+    </g>
+</svg>

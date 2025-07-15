@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="26px" viewBox="0 0 25 26" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-park-outline:code-laptop</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="menu_desktop" transform="translate(-24, -686)">
+            <g id="Group-3" transform="translate(0, 444.1639)">
+                <g id="Group-14-Copy-3" transform="translate(0, 231)">
+                    <g id="icon-park-outline:code-laptop" transform="translate(24, 11)">
+                        <rect id="ViewBox" x="0" y="0" width="25" height="25"></rect>
+                        <g id="Group" stroke-linejoin="round" transform="translate(2.0833, 3.6458)"
+                            stroke="currentColor" stroke-width="1.66666667">
+                            <path
+                                d="M9.375,1.04166667 L3.64583333,1.04166667 C2.78288841,1.04166667 2.08333333,1.74122175 2.08333333,2.60416667 L2.08333333,13.5416667 L18.75,13.5416667 L18.75,7.8125"
+                                id="Path" stroke-linecap="round"></path>
+                            <path
+                                d="M0,13.5416667 L20.8333333,13.5416667 L20.8333333,14.5833333 C20.8333333,16.3092232 19.4342232,17.7083333 17.7083333,17.7083333 L3.125,17.7083333 C1.39911016,17.7083333 0,16.3092232 0,14.5833333 L0,13.5416667 Z"
+                                id="Path"></path>
+                            <path
+                                d="M15.1041667,0 L13.0208333,2.08333333 L15.1041667,4.16666667 M18.2291667,0 L20.3125,2.08333333 L18.2291667,4.16666667"
+                                id="Shape" stroke-linecap="round"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

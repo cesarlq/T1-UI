@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 3@2x</title>
+    <defs>
+        <path
+            d="M23.34,0 L23.34,0.00480147843 L23.3390979,0.0421954733 C23.3237623,0.511759259 23.0477222,4.752 18.079,5.262 L14.571,5.262 L14.5717987,5.40479583 C14.576737,6.295287 14.6034156,11.2177868 14.619224,16.4136301 L14.621625,17.23575 L14.621625,17.23575 L14.6238168,18.059125 C14.6269333,19.293485 14.6292475,20.5209844 14.6303262,21.6916875 L14.6303969,24.2967584 C14.6272035,27.3362898 14.6108864,29.5776818 14.571,29.817 C12.663,28.834 10.615,28.152 8.499,27.793 L8.499,5.397 L0,5.397 L0,1.11 C0,0.497 0.497,0 1.11,0 L23.34,0 Z"
+            id="path-1"></path>
+        <path
+            d="M9.847,0 L9.847,24.351 L3.725,26.08 L3.725,9.981 L0,9.981 L0,6.122 C5.988,5.193 6.121,0 6.121,0 L9.847,0 Z"
+            id="path-3"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Toolbars/head" transform="translate(-854, -17)">
+            <g id="Group-3" transform="translate(854, 17)">
+                <g id="Group-21">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-20"></g>
+                    <polygon id="Fill-19" fill="#CE4130" mask="url(#mask-2)"
+                        points="-5 -5 28.34 -5 28.34 34.817 -5 34.817"></polygon>
+                </g>
+                <g id="Group-24" transform="translate(20.153, 1.003)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Clip-23"></g>
+                    <polygon id="Fill-22" fill="#CE4130" mask="url(#mask-4)"
+                        points="-5 -5 14.847 -5 14.847 31.08 -5 31.08"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

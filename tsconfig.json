@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    // Compatibilidad máxima
+    "target": "ES2015",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ES2015", "ES2016", "ES2017"],
+    
+    // React
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["@emotion/react/types/css-prop"],
+    
+    // Módulos
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    
+    // Tipos
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "skipLibCheck": true,
+    
+    // Paths
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "src/**/*.d.ts",
+    "src/types/**/*",
+        
+],
+  "exclude": ["node_modules", "dist", "**/*.test.*", "**/*.stories.*"]
+}

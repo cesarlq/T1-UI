@@ -1,0 +1,25 @@
+/* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset básico */
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Evitar conflictos entre Tailwind y Material-UI */
+.MuiCssBaseline-root {
+  /* Tailwind reset no afecta componentes MUI */
+}

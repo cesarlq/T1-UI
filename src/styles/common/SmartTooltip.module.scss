@@ -1,0 +1,100 @@
+@use './variables.scss';
+
+.tooltip {
+  position: absolute;
+  z-index: 9999;
+  background: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 
+    0 0 0 0.5px rgba(255, 255, 255, 0.1) inset,
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.15);
+  
+  &.right {
+    left: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  &.left {
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  &.top {
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  &.bottom {
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.tooltipArrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(17, 17, 17, 0.95);
+  transform: rotate(45deg);
+  
+  .right & {
+    left: -4px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  
+  .left & {
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  
+  .top & {
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  
+  .bottom & {
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+.tooltipContent {
+  position: relative;
+  z-index: 1;
+}
+
+.tooltipTitle {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.tooltipDescription {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.tooltipShortcuts {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

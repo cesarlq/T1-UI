@@ -1,0 +1,703 @@
+@use './variables.scss';
+@use 'sass:color';
+
+// ========================================================================
+// DESIGN TOKENS - Apple/Shopify/Linear Inspired
+// ========================================================================
+
+// Extendemos la paleta de colores existente
+$color-primary: variables.$primary-color; // #DB3B2B
+$color-primary-hover: color.scale($color-primary, $lightness: -5%);
+$color-primary-light: rgba($color-primary, 0.1);
+$color-primary-lighter: rgba($color-primary, 0.05);
+
+// Nuevos colores para el sistema minimalista
+$color-surface-primary: #ffffff;
+$color-surface-secondary: #fafafa;
+$color-surface-hover: rgba(0, 0, 0, 0.02);
+$color-surface-active: rgba($color-primary, 0.08);
+$color-surface-selected: rgba($color-primary, 0.04);
+
+// Glass morphism colors
+$color-glass-light: rgba(255, 255, 255, 0.72);
+$color-glass-dark: rgba(0, 0, 0, 0.72);
+$color-glass-border: rgba(255, 255, 255, 0.18);
+
+// Text colors optimizadas
+$color-text-primary: variables.$font-color; // #4d4d4d
+$color-text-secondary: variables.$light-font-color; // #9b9b9b
+$color-text-accent: $color-primary;
+$color-text-inverse: #ffffff;
+
+// Borders
+$color-border-default: rgba(0, 0, 0, 0.04);
+$color-border-hover: rgba(0, 0, 0, 0.08);
+$color-border-active: transparent;
+
+// Shadows premium
+$shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.04);
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+$shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+$shadow-glow: 0 0 20px rgba($color-primary, 0.3);
+
+// Spacing fluido
+$space-xs: clamp(0.25rem, 1vw, 0.5rem);
+$space-sm: clamp(0.3rem, 1vw, 0.5rem);
+$space-md: clamp(0.75rem, 1vw, 1rem);
+$space-lg: clamp(1rem, 4vw, 1.5rem);
+
+
+// Typography responsive
+$text-xs: clamp(12px, .8vw, 15px); // 11px-12px
+$text-sm: clamp(14px, 1vw, 16px); // 13px-16px
+$text-base: clamp(0.9375rem, 2.5vw, 1rem); // 15px-16px
+
+// Animación premium
+$duration-fast: 150ms;
+$duration-normal: 200ms;
+$duration-slow: 300ms;
+$ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+// Layout
+$menu-item-height: 36px;
+$menu-item-height-mobile: 44px; // Apple HIG
+$menu-sidebar-width-reduced: 44px;
+$border-radius-sm: 6px;
+$border-radius-md: 8px;
+$border-radius-lg: 10px;
+$border-radius-xl: 12px;
+
+// ========================================================================
+// MIXINS - Reutilizables
+// ========================================================================
+
+@mixin glass-morphism($opacity: 0.72) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid $color-glass-border;
+}
+
+@mixin hover-lift {
+  transform: translateY(-1px);
+  box-shadow: $shadow-md;
+}
+
+@mixin focus-ring {
+  outline: 2px solid rgba($color-primary, 0.5);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba($color-primary, 0.1);
+}
+
+@mixin smooth-transition($properties: all) {
+  transition: $properties $duration-normal $ease-smooth;
+}
+
+@mixin gpu-accelerate {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+// ========================================================================
+// CONTAINER STYLES - Premium Design
+// ========================================================================
+
+.itemSubPath {
+  list-style: none;
+  position: relative;
+  contain: layout style;
+  
+  &[data-reduce="true"] {
+    .linkContainer {
+      width: $menu-sidebar-width-reduced;
+      height: $menu-item-height;
+      padding: 0;
+      display: grid;
+      place-content: center;
+      border-radius: $border-radius-xl;
+      
+      .arrow {
+        display: none;
+      }
+    }
+  }
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  min-height: $menu-item-height;
+  padding: $space-sm $space-md;
+  margin: 2px 0;
+  list-style-type: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  contain: layout style paint;
+  @include gpu-accelerate;
+  @include smooth-transition;
+  
+  // Glass morphism sutil
+  background: transparent;
+  border: 1px solid transparent;
+  
+  // Touch optimization
+  @media (hover: none) and (pointer: coarse) {
+    min-height: $menu-item-height-mobile;
+    -webkit-tap-highlight-color: transparent;
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+  
+  // Hover state premium
+  &:hover {
+    background: $color-surface-hover;
+    // border-color: $color-border-hover;
+    
+    .menuIcon {
+      filter: brightness(1.1);
+    }
+    
+    .menuText {
+      color: $color-text-primary;
+    }
+  }
+  
+  // Focus state (WCAG AAA)
+  &:focus-visible {
+    @include focus-ring;
+  }
+  
+  // Active state world-class
+  &[data-active="true"] {
+    background: linear-gradient(
+      135deg,
+      $color-surface-selected 0%,
+      $color-surface-active 100%
+    );
+    box-shadow: 
+      inset 0 1px 3px rgba($color-primary, 0.1),
+      $shadow-xs;
+    
+    // Indicador lateral premium
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 70%;
+      background: linear-gradient(
+        180deg,
+        $color-primary 0%,
+        $color-primary-hover 100%
+      );
+      border-radius: 0 $border-radius-sm $border-radius-sm 0;
+      box-shadow: 
+        2px 0 8px rgba($color-primary, 0.3),
+        inset -1px 0 2px rgba(255, 255, 255, 0.2);
+      animation: slideIn 0.4s $ease-bounce;
+    }
+
+    .link {
+      font-weight: 600;
+      color: $color-text-primary;
+    }
+    
+    .menuIcon {
+      transform: scale(1.05);
+    }
+  }
+  
+  &[data-has-active-child="true"] {
+    font-weight: 600;
+    // Solo el indicador lateral, sin background
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 70%;
+      background: linear-gradient(
+        180deg,
+        $color-primary 0%,
+        $color-primary-hover 100%
+      );
+      border-radius: 0 $border-radius-sm $border-radius-sm 0;
+      box-shadow: 
+        2px 0 8px rgba($color-primary, 0.3),
+        inset -1px 0 2px rgba(255, 255, 255, 0.2);
+      animation: slideIn 0.4s $ease-bounce;
+      opacity: 0.8; // Ligeramente más sutil que el estado activo completo
+    }
+    
+  }
+  
+  // Mobile optimizations
+  @media (max-width: variables.$breakpoint-mobile) {
+    margin: 2px $space-sm;
+    padding: $space-sm;
+  }
+}
+
+// ========================================================================
+// LINK & CONTENT STYLES
+// ========================================================================
+
+.link {
+  background-color: transparent;
+  user-select: none;
+  border: none;
+  display: flex;
+  align-items: left;
+  gap: $space-md;
+  text-decoration: none;
+  color: $color-text-primary;
+  font-size: $text-sm;
+  font-weight: 400;
+  line-height: 1.5;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  @include smooth-transition;
+  
+
+  // Estado activo cuando SÍ está reducido y SÍ tiene subpaths
+  &[data-reduce="true"] {
+    justify-content: center;
+    gap: 0;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(0.3);
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  @include smooth-transition(all);
+  @include gpu-accelerate;
+}
+.menuIcon {
+  width: variables.$icon-size-lg;
+  height: variables.$icon-size-lg;
+  @include smooth-transition(all);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.menuText {
+  flex: 1;
+  display: flex;
+  text-align: left;
+  font-size: $text-sm;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @include smooth-transition;
+}
+
+.arrowWrapper {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include smooth-transition(transform);
+}
+
+.arrow {
+  @include smooth-transition;
+  color: $color-text-secondary;
+  
+  .linkContainer:hover & {
+    color: $color-text-accent;
+  }
+}
+
+// ========================================================================
+// LOADING & FEEDBACK STATES
+// ========================================================================
+
+.loadingSpinner {
+  position: relative;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    filter: drop-shadow(0 2px 4px rgba($color-primary, 0.2));
+    animation: subtle-breathing 2s ease-in-out infinite;
+  }
+  
+  circle {
+    stroke: $color-primary;
+    @include smooth-transition(stroke-dashoffset);
+  }
+}
+
+.progressText {
+  position: absolute;
+  font-size: $text-xs;
+  font-weight: 700;
+  color: $color-text-accent;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba($color-primary, 0.3) 0%,
+    rgba($color-primary, 0.1) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+}
+
+.rippleContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.successPulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  
+  .successInner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba($color-primary, 0.4) 0%,
+      rgba($color-primary, 0.2) 50%,
+      transparent 100%
+    );
+    box-shadow: 
+      0 0 20px rgba($color-primary, 0.4),
+      inset 0 0 20px rgba($color-primary, 0.2);
+    animation: success-pulse 0.6s ease-out;
+  }
+}
+
+// ========================================================================
+// NOTIFICATION STYLES
+// ========================================================================
+
+.notificationDot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: .5rem;
+  
+}
+
+.notificationCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background: linear-gradient(
+    135deg,
+    $color-primary 0%,
+    $color-primary-hover 100%
+  );
+  color: $color-text-inverse;
+  font-size: $text-xs;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+// ========================================================================
+// SUBPATHS STYLES
+// ========================================================================
+
+.subPaths {
+  overflow: hidden;
+  padding: 4px 0 4px 28px;
+  position: relative;
+  
+  // Línea vertical elegante
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      $color-border-hover 20%,
+      $color-border-hover 80%,
+      transparent 100%
+    );
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    opacity: 0.5;
+  }
+  
+  @media (max-width: variables.$breakpoint-mobile) {
+    padding-left: 24px;
+    
+    &::before {
+      left: 16px;
+    }
+  }
+}
+
+.subPath {
+  background: transparent;
+  border: none;
+  min-height: 36px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+  border-radius: $border-radius-md;
+  padding: $space-sm $space-md;
+  margin: 2px 0;
+  color: $color-text-primary;
+  font-size: $text-xs;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  @include smooth-transition;
+  @include gpu-accelerate;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $color-border-hover;
+    opacity: 0;
+    @include smooth-transition;
+  }
+  
+  &:hover {
+    background: $color-surface-hover;
+    
+    &::before {
+      opacity: 1;
+      background: $color-primary;
+    }
+    
+    .subPathText {
+      color: $color-text-primary;
+    }
+  }
+  
+  &[data-active="true"] {
+    background: $color-surface-active;
+    font-weight: 600;
+    color: $color-text-primary;
+    
+    &::before {
+      opacity: 1;
+      background: $color-primary;
+      width: 8px;
+      height: 8px;
+    }
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  @media (hover: none) and (pointer: coarse) {
+    min-height: $menu-item-height-mobile;
+  }
+}
+
+.subPathText {
+  flex: 1;
+  display: flex;
+  gap: .5rem;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @include smooth-transition;
+}
+
+.subPathEndAdornment {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-xs;
+}
+
+.endAdornment {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  min-width: fit-content;
+  width: 19.356px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  align-self: center;
+  background: var(--Color-brand-Red-200, #F9D2D2);
+
+  color: var(--Color-Base-Black-oxford, #4C4C4C);
+  text-align: center;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  justify-content: center;
+  @include smooth-transition;
+}
+
+.endAdornmentSubPath {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+    width: 19.356px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    align-self: center;
+    background: var(--Color-brand-Red-200, #F9D2D2);
+
+    color: var(--Color-Base-Black-oxford, #4C4C4C);
+    text-align: center;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    justify-content: center;
+    @include smooth-transition;
+  
+  &:hover {
+    background: rgba($color-primary, 0.15);
+    transform: scale(1.05);
+  }
+}
+
+// ========================================================================
+// ANIMATIONS
+// ========================================================================
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50%) scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes subtle-breathing {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(0.95); 
+  }
+}
+
+@keyframes notification-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px rgba($color-primary, 0.5),
+      0 0 10px rgba($color-primary, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px rgba($color-primary, 0.8),
+      0 0 20px rgba($color-primary, 0.5),
+      0 0 30px rgba($color-primary, 0.3);
+  }
+}
+
+@keyframes success-pulse {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+// ========================================================================
+// ACCESSIBILITY & PERFORMANCE
+// ========================================================================
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .linkContainer {
+    border: 1px solid transparent;
+    
+    &:hover {
+      border-color: $color-text-primary;
+    }
+    
+    &[data-active="true"] {
+      border-color: $color-primary;
+      background: $color-primary-light;
+    }
+  }
+  
+  .subPath {
+    border: 1px solid transparent;
+    
+    &:hover {
+      border-color: $color-text-primary;
+    }
+    
+    &[data-active="true"] {
+      border-color: $color-primary;
+    }
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

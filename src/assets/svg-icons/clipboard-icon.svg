@@ -1,0 +1,14 @@
+<svg width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Symbols">
+<g id="Group 4646">
+<path id="Rectangle 2204" d="M4.5 3.70898H3C1.89543 3.70898 1 4.60441 1 5.70898V19.709C1 20.8136 1.89543 21.709 3 21.709H14C15.1046 21.709 16 20.8136 16 19.709V5.70898C16 4.60441 15.1046 3.70898 14 3.70898H13" stroke="#4C4C4C" stroke-width="1.2"/>
+<path id="Line 167" d="M7 8.20898H13" stroke="#4C4C4C" stroke-linecap="round"/>
+<path id="Line 168" d="M7 12.709H13" stroke="#4C4C4C" stroke-linecap="round"/>
+<path id="Vector 39" d="M3.5 7.70898L4 8.70898L5.5 6.70898" stroke="#4C4C4C" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 40" d="M3.5 12L4 13L5.5 11" stroke="#4C4C4C" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line 169" d="M7 17.709H13" stroke="#4C4C4C" stroke-linecap="round"/>
+<circle id="Ellipse 31" cx="4.5" cy="17.209" r="1" stroke="#4C4C4C"/>
+<path id="Rectangle 2205" d="M4.6 2.70869C4.6 2.48778 4.77909 2.30869 5 2.30869H5.39566C6.19887 2.30869 6.85 1.65756 6.85 0.854349C6.85 0.71388 6.96387 0.600007 7.10434 0.600007H8.39171H9.89566C10.0361 0.600007 10.15 0.71388 10.15 0.854349C10.15 1.65756 10.8011 2.30869 11.6043 2.30869H12C12.2209 2.30869 12.4 2.48778 12.4 2.70869V3.70869C12.4 3.92961 12.2209 4.10869 12 4.10869H5C4.77909 4.10869 4.6 3.92961 4.6 3.70869V2.70869Z" stroke="#4C4C4C" stroke-width="1.2" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

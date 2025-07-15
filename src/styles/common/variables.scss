@@ -1,0 +1,271 @@
+@use 'sass:color';
+
+$primary-color: #DB3B2B;
+
+// COLORES PRIMARIOS - Brand Red
+// ============================================
+$brand-red-900: #D6352B;     // Color más oscuro
+$brand-red-800: #E5453D;     // 
+$brand-red-600: #E8867E;     // 
+$brand-red-400: #F8BDA9;     // 
+$brand-red-200: #F8D2D2;     // 
+$brand-red-50: #FEF4F4;      // Color más claro
+
+// Estado pressed/hover
+$brand-red-pressed: #CC0000;
+
+// ============================================
+// ESCALA DE GRISES
+// ============================================
+$gray-800: #C3C3C3;
+$gray-600: #CFCFCF;
+$gray-400: #DBDBDB;
+$gray-200: #E7E7E7;
+$gray-100: #F3F3F3;
+$gray-50: #F8F8F8;
+
+
+// ============================================
+// COLORES DE ESTADO / SEMÁNTICOS
+// ============================================
+$color-error: #D6352B;       // Error
+$color-success: #51A570;     // Ok/Success
+$color-warning: #FF8900;     // Warning
+$color-yellow: #F39C12;      // Yellow/Alert
+$color-warning-light: #FFF4BF; // Warning 2 - Light
+
+
+$box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+$border-radius: 12px;
+$font-color: #4d4d4d;
+$light-font-color: #9b9b9b;
+$light-background-color: rgb(252, 250, 250);
+
+// Breakpoints
+$breakpoint-xs: 0px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 750px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Breakpoints
+$breakpoint-mobile: 750px;
+$breakpoint-tablet: 1110px;
+$breakpoint-desktop: 1200px;
+
+// Mixins para media queries
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: $breakpoint-xs) { @content; }
+  }
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+  @if $breakpoint == xxl {
+    @media (min-width: $breakpoint-xxl) { @content; }
+  }
+  @if $breakpoint == mobile {
+    @media (min-width: $breakpoint-mobile) { @content; }
+  }
+  @if $breakpoint == tablet {
+    @media (min-width: $breakpoint-tablet) { @content; }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: $breakpoint-desktop) { @content; }
+  }
+}
+
+@mixin respond-down($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: #{$breakpoint-sm - 1px}) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (max-width: #{$breakpoint-md - 1px}) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: #{$breakpoint-lg - 1px}) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (max-width: #{$breakpoint-xl - 1px}) { @content; }
+  }
+  @if $breakpoint == xxl {
+    @media (max-width: #{$breakpoint-xxl - 1px}) { @content; }
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: #{$breakpoint-mobile - 1px}) { @content; }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: #{$breakpoint-tablet - 1px}) { @content; }
+  }
+  @if $breakpoint == desktop {
+    @media (max-width: #{$breakpoint-desktop - 1px}) { @content; }
+  }
+}
+// ========================================================================
+// DESIGN TOKENS - Apple/Shopify/Linear Inspired
+// ========================================================================
+
+// Extendemos la paleta de colores existente
+$color-primary: $primary-color; // #DB3B2B
+$color-primary-hover: color.scale($color-primary, $lightness: -5%);
+$color-primary-light: rgba($color-primary, 0.1);
+$color-primary-lighter: rgba($color-primary, 0.05);
+
+// Nuevos colores para el sistema minimalista
+$color-surface-primary: #ffffff;
+$color-surface-secondary: #fafafa;
+$color-surface-hover: rgba(0, 0, 0, 0.04);
+$color-surface-active: rgba($color-primary, 0.08);
+$color-surface-selected: rgba($color-primary, 0.04);
+
+// Glass morphism colors
+$color-glass-light: rgba(255, 255, 255, 0.72);
+$color-glass-dark: rgba(0, 0, 0, 0.72);
+$color-glass-border: rgba(255, 255, 255, 0.18);
+
+// Text colors optimizadas
+$color-text-primary: $font-color; // #4d4d4d
+$color-text-secondary: $light-font-color; // #9b9b9b
+$color-text-accent: $color-primary;
+$color-text-inverse: #ffffff;
+
+// Borders
+$color-border-default: rgba(0, 0, 0, 0.04);
+$color-border-hover: rgba(0, 0, 0, 0.08);
+$color-border-active: transparent;
+
+// Shadows premium
+$shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.04);
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+$shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+$shadow-glow: 0 0 20px rgba($color-primary, 0.3);
+
+// Animación premium
+$duration-fast: 150ms;
+$duration-normal: 200ms;
+$duration-slow: 300ms;
+$ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+// Layout
+$menu-item-height: 36px;
+$menu-item-height-mobile: 44px; // Apple HIG
+$menu-sidebar-width-reduced: 44px;
+$border-radius-sm: 6px;
+$border-radius-md: 8px;
+$border-radius-lg: 10px;
+$border-radius-xl: 12px;
+
+
+// Tamaños de fuente responsivos
+$font-size-xs: clamp(12px, 2.5vw, 14px);
+$font-size-sm: clamp(14px, 3vw, 16px);
+$font-size-base: clamp(16px, 3.5vw, 18px);
+$font-size-lg: clamp(18px, 4vw, 22px);
+$font-size-xl: clamp(22px, 4.5vw, 26px);
+$font-size-xxl: clamp(26px, 5vw, 32px);
+
+// Typography responsive
+$text-xs: clamp(12px, .8vw, 15px); // 11px-12px
+$text-sm: clamp(14px, 1vw, 16px); // 13px-16px
+$text-base: clamp(0.9375rem, 2.5vw, 1rem); // 15px-16px
+
+// Tamaños de íconos responsivos
+$icon-size-xs: clamp(12px, .4vw, 14px);
+$icon-size-sm: clamp(14px, .6vw, 16px);
+$icon-size-md: clamp(16px, .8vw, 20px);
+$icon-size-lg: clamp(25px, .5vw, 22px);
+$icon-size-xl: clamp(24px, 4vw, 28px);
+$icon-size-xxl: clamp(28px, 5vw, 32px);
+
+// Espaciados responsivos
+$spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+$spacing-sm: clamp(0.5rem, 2vw, 1rem);
+$spacing-md: clamp(1rem, 3vw, 1.5rem);
+$spacing-lg: clamp(1.5rem, 4vw, 2rem);
+$spacing-xl: clamp(2rem, 5vw, 3rem);
+
+// Spacing fluido
+$space-xs: clamp(0.25rem, 1vw, 0.5rem);
+$space-sm: clamp(0.3rem, 1vw, 0.5rem);
+$space-md: clamp(0.75rem, 1vw, 1rem);
+$space-lg: clamp(1rem, 4vw, 1.5rem);
+
+$primary-gradient: linear-gradient(136deg, rgb(138, 35, 135) 0%, rgb(233, 64, 87) 50%, rgb(242, 113, 33) 100%);
+$height-bottom-navigation: 127px;
+$height-bottom-navigation-without-search: 56px;
+$height-navbar: 60px;
+$height-info-sidebar: 129px;
+$height-info: 70px;
+$width-side-bar: 250px;
+$width-side-bar-mobile: 274px;
+$reduce-sidebar-width: 70px;
+$primary-border: 1px #F2F2F2 solid;
+$secondary-border: 1px solid #ebebeb;
+
+:export {
+    primary-color: $primary-color;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    font-color: $font-color;
+    
+    // Breakpoints
+    breakpoint-xs: $breakpoint-xs;
+    breakpoint-sm: $breakpoint-sm;
+    breakpoint-md: $breakpoint-md;
+    breakpoint-lg: $breakpoint-lg;
+    breakpoint-xl: $breakpoint-xl;
+    breakpoint-xxl: $breakpoint-xxl;
+    breakpoint-mobile: $breakpoint-mobile;
+    breakpoint-tablet: $breakpoint-tablet;
+    breakpoint-desktop: $breakpoint-desktop;
+    
+    // Otros valores
+    height-info-sidebar: $height-info-sidebar;
+    primary-gradient: $primary-gradient;
+    height-bottom-navigation: $height-bottom-navigation;
+    height-navbar: $height-navbar;
+    height-info: $height-info;
+    light-font-color: $light-font-color;
+    light-background-color: $light-background-color;
+    width-side-bar: $width-side-bar;
+    reduce-sidebar-width: $reduce-sidebar-width;
+    primary-border: $primary-border;
+    secondary-border: $secondary-border;
+    height-bottom-navigation-without-search: $height-bottom-navigation-without-search;
+    height-info: $height-info;
+    width-side-bar-mobile: $width-side-bar-mobile;
+    
+    // Tamaños responsivos
+    font-size-xs: $font-size-xs;
+    font-size-sm: $font-size-sm;
+    font-size-base: $font-size-base;
+    font-size-lg: $font-size-lg;
+    font-size-xl: $font-size-xl;
+    font-size-xxl: $font-size-xxl;
+    
+    icon-size-xs: $icon-size-xs;
+    icon-size-sm: $icon-size-sm;
+    icon-size-md: $icon-size-md;
+    icon-size-lg: $icon-size-lg;
+    icon-size-xl: $icon-size-xl;
+    icon-size-xxl: $icon-size-xxl;
+    
+    spacing-xs: $spacing-xs;
+    spacing-sm: $spacing-sm;
+    spacing-md: $spacing-md;
+    spacing-lg: $spacing-lg;
+    spacing-xl: $spacing-xl;
+}

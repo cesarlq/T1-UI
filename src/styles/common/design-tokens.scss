@@ -1,0 +1,309 @@
+// ========================================================================
+// DESIGN TOKENS SYSTEM - Professional Grade
+// Inspirado en Stripe, Linear, Apple Design System
+// ========================================================================
+
+// ========================================================================
+// COLOR PALETTE - Manteniendo paleta actual con mejoras semánticas
+// ========================================================================
+
+// Primary Brand Colors (manteniendo el rojo actual)
+$brand-primary: #db3b2b;
+$brand-primary-hover: #c73529;
+$brand-primary-active: #b32f25;
+$brand-primary-light: rgba(#db3b2b, 0.1);
+$brand-primary-lighter: rgba(#db3b2b, 0.05);
+
+// Neutral Palette - Professional Grade
+$neutral-0: #ffffff;
+$neutral-50: #fafafa;
+$neutral-100: #f5f5f5;
+$neutral-200: #e5e5e5;
+$neutral-300: #d4d4d4;
+$neutral-400: #a3a3a3;
+$neutral-500: #737373;
+$neutral-600: #525252;
+$neutral-700: #404040;
+$neutral-800: #262626;
+$neutral-900: #171717;
+
+// Semantic Colors
+$surface-primary: $neutral-0;
+$surface-secondary: $neutral-50;
+$surface-tertiary: $neutral-100;
+$surface-hover: rgba(#db3b2b, 0.02);
+$surface-active: rgba(#db3b2b, 0.04);
+$surface-selected: rgba(#db3b2b, 0.08);
+
+$border-subtle: $neutral-200;
+$border-default: $neutral-300;
+$border-strong: $neutral-400;
+$border-accent: $brand-primary;
+
+$text-primary: $neutral-900;
+$text-secondary: $neutral-600;
+$text-tertiary: $neutral-500;
+$text-accent: $brand-primary;
+$text-inverse: $neutral-0;
+
+// ========================================================================
+// SPACING SYSTEM - 8pt Grid
+// ========================================================================
+
+$space-0: 0;
+$space-1: 0.25rem;  // 4px
+$space-2: 0.5rem;   // 8px
+$space-3: 0.75rem;  // 12px
+$space-4: 1rem;     // 16px
+$space-5: 1.25rem;  // 20px
+$space-6: 1.5rem;   // 24px
+$space-8: 2rem;     // 32px
+$space-10: 2.5rem;  // 40px
+$space-12: 3rem;    // 48px
+$space-16: 4rem;    // 64px
+
+
+// Font Sizes - Fluid Scale
+$text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.8rem);    // 12-13px
+$text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 0.95rem);  // 14-15px
+$text-base: clamp(1rem, 0.9rem + 0.4vw, 1.1rem);     // 16-18px
+$text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);    // 18-20px
+$text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.4rem);    // 20-22px
+
+// Font Weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// ========================================================================
+// ELEVATION SYSTEM - Apple/Material Inspired
+// ========================================================================
+
+$shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Focus Shadows
+$shadow-focus: 0 0 0 3px rgba(#db3b2b, 0.1), 0 0 0 1px $brand-primary;
+$shadow-focus-ring: 0 0 0 2px $surface-primary, 0 0 0 4px $brand-primary;
+
+// ========================================================================
+// BORDER RADIUS SYSTEM
+// ========================================================================
+
+$radius-none: 0;
+$radius-sm: 0.25rem;   // 4px
+$radius-md: 0.375rem;  // 6px
+$radius-lg: 0.5rem;    // 8px
+$radius-xl: 0.75rem;   // 12px
+$radius-2xl: 1rem;     // 16px
+$radius-full: 9999px;
+
+// ========================================================================
+// ANIMATION SYSTEM - Premium Easing
+// ========================================================================
+
+// Durations
+$duration-fast: 150ms;
+$duration-normal: 250ms;
+$duration-slow: 350ms;
+$duration-slower: 500ms;
+
+// Easing Functions - Apple/Linear Style
+$ease-linear: linear;
+$ease-in: cubic-bezier(0.4, 0, 1, 1);
+$ease-out: cubic-bezier(0, 0, 0.2, 1);
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Premium Easing
+$ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
+
+// ========================================================================
+// BREAKPOINTS SYSTEM
+// ========================================================================
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Menu Specific
+$breakpoint-menu-mobile: 750px;
+$breakpoint-menu-tablet: 1110px;
+
+// ========================================================================
+// Z-INDEX SYSTEM
+// ========================================================================
+
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+$z-toast: 1080;
+
+// ========================================================================
+// COMPONENT SPECIFIC TOKENS
+// ========================================================================
+
+// Menu Dimensions
+$menu-sidebar-width: 280px;
+$menu-sidebar-width-reduced: 70px;
+$menu-sidebar-width-mobile: 280px;
+$menu-navbar-height: 60px;
+$menu-item-height: 48px;
+$menu-item-height-mobile: 52px;
+
+// Menu Colors
+$menu-item-hover: $surface-hover;
+$menu-item-active: $surface-selected;
+$menu-item-focus: rgba(#db3b2b, 0.1);
+
+// ========================================================================
+// MIXINS - Professional Grade
+// ========================================================================
+
+// Glassmorphism Effect
+@mixin glass-effect($opacity: 0.05, $blur: 20px) {
+  backdrop-filter: blur($blur) saturate(180%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, $opacity) 0%,
+    rgba(255, 255, 255, $opacity * 0.5) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+// Focus Ring - Linear Style
+@mixin focus-ring-premium {
+  &:focus-visible {
+    outline: none;
+    box-shadow: $shadow-focus-ring;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 2px solid rgba(#db3b2b, 0.3);
+      border-radius: inherit;
+      animation: focus-pulse 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+// Hover Glow Effect
+@mixin hover-glow($color: $brand-primary, $intensity: 0.1) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($color, $intensity),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity $duration-normal $ease-smooth;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+}
+
+// Responsive Typography
+@mixin text-responsive($size) {
+  font-size: $size;
+  line-height: $line-height-normal;
+}
+
+// Touch Target
+@mixin touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  
+  @media (hover: none) and (pointer: coarse) {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+// GPU Acceleration
+@mixin gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+// ========================================================================
+// KEYFRAMES
+// ========================================================================
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+@keyframes focus-pulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.5;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(#db3b2b, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(#db3b2b, 0.8);
+  }
+}

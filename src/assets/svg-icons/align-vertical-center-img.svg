@@ -1,0 +1,21 @@
+<svg width="128" height="100" viewBox="0 0 128 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 2461">
+<g id="Rectangle 2029" filter="url(#filter0_d_6_66955)">
+<rect x="122" y="94" width="116" height="88" rx="10" transform="rotate(180 122 94)" fill="white"/>
+<rect x="121.5" y="93.5" width="115" height="87" rx="9.5" transform="rotate(180 121.5 93.5)" stroke="#DB3B2B"/>
+</g>
+<rect id="Rectangle 2034" x="20" y="43" width="88" height="15" rx="4" fill="#E7E7E7"/>
+</g>
+<defs>
+<filter id="filter0_d_6_66955" x="0.587235" y="0.587235" width="126.826" height="98.8255" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="0.902128" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_6_66955"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="2.25532"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.976471 0 0 0 0 0.823529 0 0 0 0 0.823529 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_6_66955"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_6_66955" result="shape"/>
+</filter>
+</defs>
+</svg>
