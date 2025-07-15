@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "types": ["vite-plugin-svgr/client"],
+
     // Compatibilidad máxima
     "target": "ES2015",
     "module": "ESNext",
@@ -8,7 +10,6 @@
     // React
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["@emotion/react/types/css-prop"],
     
     // Módulos
     "moduleResolution": "node",

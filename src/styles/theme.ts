@@ -7,7 +7,7 @@ import UnCheckboxIcon from '../assets/icons/UnCheckboxIcon';
 import IndeterminateCheckboxIcon from '../assets/icons/IndeterminateCheckboxIcon';
 import UnCheckRadioIcon from '../assets/icons/UnCheckRadio';
 import CheckRadio from '../assets/icons/CheckRadio';
-import ChevronDown from '../assets/svg-icons/chevron-down-icon.svg';
+import ChevronDown from '../assets/svg-icons/chevron-down-icon.svg?react';
 
 
 const theme = createTheme({
@@ -480,7 +480,7 @@ const theme = createTheme({
         }
       },
       defaultProps: {
-        IconComponent: (props) => React.createElement("span", props, React.createElement(ChevronDown, { width: 16, height: 16 }))
+        IconComponent: () => React.createElement(ChevronDown, { width: 16, height: 16 })
       }
     },
     MuiInputLabel: {

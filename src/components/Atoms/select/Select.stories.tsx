@@ -4,7 +4,7 @@ import SelectAtom from './Select';
 import { MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 
 const meta: Meta<typeof SelectAtom> = {
-  title: 'Atom/Select',
+  title: 'Atoms/Select',
   component: SelectAtom,
   parameters: {
     layout: 'centered',

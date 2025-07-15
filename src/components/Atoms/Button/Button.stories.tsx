@@ -4,7 +4,7 @@ import ButtonAtom from './Button'
 import {ArrowForwardIos, AutoFixHighOutlined} from '@mui/icons-material';
 
 const meta: Meta<typeof ButtonAtom> = {
-  title: 'Atom/Button',
+  title: 'Atoms/Button',
   component: ButtonAtom,
   parameters: {
     layout: 'centered',
