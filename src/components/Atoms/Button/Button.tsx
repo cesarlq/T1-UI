@@ -1,12 +1,8 @@
 import React from 'react';
 import { Button, ButtonProps, CircularProgress } from '@mui/material';
 import styles from '@/styles/common/Button.module.scss';
+import { ButtonAtomProps } from './Button.types';
 
-export interface ButtonAtomProps extends ButtonProps {
-  loading?: boolean;
-  children: React.ReactNode;
-  className?: string;
-}
 
 const ButtonAtom: React.FC<ButtonAtomProps> = ({
   children,
@@ -18,6 +14,12 @@ const ButtonAtom: React.FC<ButtonAtomProps> = ({
   variant,
   ...rest
 }) => {
+
+  const getLoadingColor = (variant?: ButtonProps['variant']): 'inherit' | 'primary' => {
+    if (variant === 'outlined') return 'primary';
+    return 'inherit';
+  };
+
   return (
     <Button
       endIcon={loading ? undefined : endIcon}
@@ -28,7 +30,7 @@ const ButtonAtom: React.FC<ButtonAtomProps> = ({
       disabled={loading || disabled}
       {...rest}
     >
-      {loading ? <CircularProgress size={18} color={variant == 'contained' ? 'inherit' : variant == 'outlined' ? 'primary': 'inherit'} /> : children}
+      {loading ? <CircularProgress size={18} color={getLoadingColor(variant)} /> : children}
     </Button>
   );
 };

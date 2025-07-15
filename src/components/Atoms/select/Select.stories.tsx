@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import SelectAtom from '@/Components/Atoms/Select';
+import SelectAtom from './Select';
 import { MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 
 const meta: Meta<typeof SelectAtom> = {

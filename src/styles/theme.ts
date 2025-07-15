@@ -111,6 +111,7 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: {
+          textTransform: 'none', 
           height:'2.5rem',
           display: 'flex',
           padding: '9px',
@@ -123,8 +124,7 @@ const theme = createTheme({
           fontSize: '12px',
           fontStyle: 'normal',
           fontWeight: 700,
-          lineHeight: 'normal',
-          textTransform: 'none'
+          lineHeight: 'normal'
         },
         colorInherit: {
           backgroundColor: 'white'
