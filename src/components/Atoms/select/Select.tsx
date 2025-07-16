@@ -1,10 +1,7 @@
-import { SelectProps, Select } from '@mui/material';
+import { Select } from '@mui/material';
 import React from 'react';
+import { SelectAtomProps } from './Select.types';
 
-export interface SelectAtomProps extends Omit<SelectProps, 'children'> {
-  children: React.ReactNode;
-  className?: string;
-}
 
 const SelectAtom: React.FC<SelectAtomProps> = ({ 
   children, 

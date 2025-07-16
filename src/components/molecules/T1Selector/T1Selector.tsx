@@ -1,38 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Image from 'next/image';
-import GridIcon from '../../assets/menus/grid-icon.svg';
-import T1Logo from '../../assets/T1.svg';
-import Store from '../../assets/menus/t1-selector/store.svg';
-import Shipping from '../../assets/menus/t1-selector/shipping.svg';
-import Pay from '../../assets/menus/t1-selector/pay.svg';
-import CloseButtonT1 from '../CloseButtonT1';
-import styles from '../../styles/common/T1Selector.module.scss';
+import GridIcon from '@/assets/logos/t1-selector/grid-icon.svg?react';
+import T1Logo from '@/assets/logos/T1.svg?react';
+import Store from '@/assets/logos/t1-selector/store.svg?react';
+import Shipping from '@/assets/logos/t1-selector/shipping.svg?react';
+import Pay from '@/assets/logos/t1-selector/pay.svg?react';
+import styles from './T1Selector.module.scss';
+import { CloseButton } from '@/components/Atoms/CloseButton';
+import { T1ItemType, T1SelectorProps } from './T1Selector.types';
 
-// Tipo para identificar los items
-export type T1ItemType = 'store' | 'shipping' | 'payment';
 
-export interface T1SelectorProps {
-  className?: string;
-  // URLs base para construir links
-  storeBaseUrl?: string;
-  shippingBaseUrl?: string;
-  paymentBaseUrl?: string;
-
-  // Configuración de qué se muestra
-  shipping?: boolean;
-  payment?: boolean;
-  store?: boolean;
-  
-  // ID del usuario/tienda para construir URLs
-  storeId?: string;
-  
-  // Configuración visual
-  ecosystemTitle?: string;
-  
-  // NUEVO: Orden de los items
-  itemsOrder?: ('store' | 'shipping' | 'payment')[];
-}
 
 // Componente Portal para renderizar fuera del navbar
 const Portal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -176,7 +153,7 @@ export function T1Selector({
             ref={modalRef}
           >
             {/* Botón cerrar en móvil */}
-            <CloseButtonT1
+            <CloseButton
               className={styles.closeButton}
               onClick={() => setIsOpen(false)}
             />

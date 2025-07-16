@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import ButtonAtom from './Button'
 import {ArrowForwardIos, AutoFixHighOutlined} from '@mui/icons-material';

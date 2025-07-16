@@ -1,34 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Image from 'next/image';
-import Link from 'next/link';
-import DoubleArrowIcon from '../../assets/inputs/double-arrow.svg';
-import Search from '../../assets/search-input.svg';
-import CheckIcon from '../../assets/CheckIcon.svg';
-import PlusIconBlack from '../../assets/buttonIcons/plus-icon-black.svg';
-import CustomInput from '../CustomInput';
-import styles from '../../styles/common/StoreSelector.module.scss';
-
-// Interfaces (mantener las mismas)
-export interface Store {
-  id: number;
-  name: string;
-}
-
-export interface StoreSelectorProps {
-  className?: string;
-  stores?: Store[];
-  currentStore?: Store;
-  onStoreChange?: (storeId: number) => void;
-  title?: string;
-  searchPlaceholder?: string;
-  newStoreText?: string;
-  showNewStoreLink?: boolean;
-  createStoreUrl: string;
-  closeOnOutsideClick?: boolean;
-  closeOnStoreSelect?: boolean;
-  storeColors?: string[];
-}
+import DoubleArrowIcon from '@/assets/inputs/double-arrow.svg?react';
+import Search from '@/assets/svg-icons/search-input.svg?react';
+import CheckIcon from '@/assets/svg-icons/CheckIcon.svg?react';
+import PlusIconBlack from '@/assets/buttonIcons/plus-icon-black.svg?react';
+import CustomInput from '../CustomInput/CustomInput';
+import styles from './StoreSelector.module.scss';
+import { StoreSelectorProps } from './StoreSelector.type';
+import { getLetters } from '@/utils/storeSelector/storeSelector';
 
 // Componente Portal para renderizar fuera del navbar
 const Portal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -38,6 +17,7 @@ const Portal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     setMounted(true);
     return () => setMounted(false);
   }, []);
+
 
   if (!mounted) return null;
   
@@ -55,7 +35,6 @@ export function StoreSelector({
   title = 'Mis tiendas',
   searchPlaceholder = '',
   newStoreText = 'Crear tienda',
-  showNewStoreLink = true,
   createStoreUrl = '',
   closeOnOutsideClick = true,
   closeOnStoreSelect = true,
@@ -101,15 +80,6 @@ export function StoreSelector({
     return `${text.substring(0, maxLength)}...`;
   };
 
-  const getLetters = (label: string): string => {
-    if (!label) label = 'Sin nombre';
-    const labelArrayPerSpaces = label.split(' ');
-    if (labelArrayPerSpaces.length >= 2 && labelArrayPerSpaces[0][0] && labelArrayPerSpaces[1][0]) {
-      return `${labelArrayPerSpaces[0][0].toUpperCase()}${labelArrayPerSpaces[1][0].toUpperCase()}`;
-    } else {
-      return `${label[0].toUpperCase()}${label[1] ? label[1].toUpperCase() : ''}`;
-    }
-  };
 
   const handleStoreSelect = (storeId: number) => {
     onStoreChange(storeId);
@@ -121,9 +91,6 @@ export function StoreSelector({
   const filteredStores = stores.filter(store => 
     store.name.toLowerCase().includes(search.toLowerCase())
   );
-
-  // Detectar si es mobile
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   return (
     <>
@@ -232,7 +199,7 @@ export function StoreSelector({
                 )}
               </section>
               
-              <Link
+              <a
                 href={createStoreUrl}
                 target='_blank'
                 className={styles.newStoreLink}
@@ -242,7 +209,7 @@ export function StoreSelector({
                   height={16}
                 />
                 <span>{newStoreText}</span>
-              </Link>
+              </a>
             </div>
           </div>
         )}

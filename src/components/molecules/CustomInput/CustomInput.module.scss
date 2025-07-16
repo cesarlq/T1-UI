@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+
+    .label {
+        color: #000;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .error-message {
+        position: absolute;
+        left: 0;
+        bottom: -20px;
+    }
+
+    .error-with-helper {
+        bottom: 1px;
+    }
+}
+
+.container[data-disabled=true]{
+    .label {
+        color: #C3C3C3;
+    }
+}
+
+.container[data-flex-direction=true] {
+    gap: 16px;
+    flex-direction: row;
+    align-items: center;
+
+    .label {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+}

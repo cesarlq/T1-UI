@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import DoubleArrowIcon from '../../assets/inputs/double-arrow.svg';
-import Search from '../../assets/search-input.svg';
-import CheckIcon from '../../assets/CheckIcon.svg';
-import PlusIconBlack from '../../assets/buttonIcons/plus-icon-black.svg';
-import CustomInput from '../CustomInput';
-import styles from '../../styles/common/StoreSelectorOnSidebar.module.scss';
+import DoubleArrowIcon from '@/assets/inputs/double-arrow.svg?react';
+import Search from '@/assets/svg-icons/search-input.svg?react';
+import CheckIcon from '@/assets/svg-icons/CheckIcon.svg?react';
+import PlusIconBlack from '@/assets/buttonIcons/plus-icon-black.svg?react';
+import styles from './StoreSelectorOnSidebar.module.scss';
+import CustomInput from '../CustomInput/CustomInput';
 
 // Interfaces
 export interface Store {
@@ -42,7 +40,6 @@ export function StoreSelectorOnSidebar({
   title = 'Mis tiendas',
   searchPlaceholder = '',
   newStoreText = 'Crear tienda',
-  showNewStoreLink = true,
   createStoreUrl = '',
   closeOnOutsideClick = true,
   closeOnStoreSelect = true,
@@ -96,8 +93,6 @@ export function StoreSelectorOnSidebar({
     if (text.length <= maxLength) return text;
     return `${text.substring(0, maxLength)}...`;
   };
-
-  const hasStores = stores.length > 0;
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -203,7 +198,7 @@ export function StoreSelectorOnSidebar({
           </section>
           
           {/* Link para crear nueva tienda */}
-            <Link
+            <a
               href={createStoreUrl}
               target='_blank'
               className={styles.newStoreLink}
@@ -213,7 +208,7 @@ export function StoreSelectorOnSidebar({
                 height={16}
               />
               <span>{newStoreText}</span>
-            </Link>
+            </a>
         </div>
       </div>
     </div>
