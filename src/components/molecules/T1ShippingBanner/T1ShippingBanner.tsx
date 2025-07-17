@@ -1,48 +1,20 @@
 import React, { memo, useCallback, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
-// Assets
-import T1Logo from '../../assets/T1.svg';
-import ReduceIcon from '../../assets/reduce-icon.svg';
-import EnlargeIcon from '../../assets/enlarge-icon.svg';
+import T1Logo from '@/assets/logos/T1.svg?react';
+import ReduceIcon from '@/assets/svg-icons/reduce-icon.svg?react';
+import EnlargeIcon from '@/assets/svg-icons/enlarge-icon.svg?react';
 
-// Estilos
-import styles from '../../styles/common/T1ShippingBanner.module.scss';
-
-// =============================================================================
-// TYPES & INTERFACES
-// =============================================================================
-
-export interface T1ShippingBannerProps {
-  className?: string;
-  brandText?: string;
-  isMobile?: boolean;
-  
-  // Comportamiento
-  onNavigate?: () => void;
-  onToggleReduce?: () => void;
-  onToggleOpen?: () => void;
-  
-  // Estado
-  isReduced?: boolean;
-  isOpen?: boolean;
-  
-  // Props legacy para compatibilidad
-  onReducerHandle?: () => void;
-  sidebarReduce?: boolean;
-}
-
-// =============================================================================
-// MAIN COMPONENT
-// =============================================================================
+import styles from './T1ShippingBanner.module.scss';
+import { T1ShippingBannerProps } from './T1ShippingBanner.types';
 
 export const T1ShippingBanner = memo<T1ShippingBannerProps>(({
   className = '',
   brandText = 'envíos',
   isMobile = false,
   onNavigate,
+  navigationPath = '/',
   onToggleReduce,
   onToggleOpen,
   isReduced = false,
@@ -53,40 +25,21 @@ export const T1ShippingBanner = memo<T1ShippingBannerProps>(({
 }) => {
   const [isNavigating, setIsNavigating] = useState(false);
   const [isHoveringToggle, setIsHoveringToggle] = useState(false);
-  const [isHoveringLogo, setIsHoveringLogo] = useState(false);
-  
-  // Router con fallback para Storybook
-  let router;
-  try {
-    router = useRouter();
-  } catch (error) {
-    router = {
-      push: (path: string) => {
-        console.log('Navigate to:', path);
-        return Promise.resolve(true);
-      }
-    };
-  }
   
   // Handler para navegación con loading state
   const handleNavigate = useCallback(async (e: React.MouseEvent) => {
     e.preventDefault();
-    
     setIsNavigating(true);
     
-    // Vibración sutil en móviles
     if ('vibrate' in navigator && isMobile) {
       navigator.vibrate(10);
     }
     
-    // Callback externo
-    onNavigate?.();
-    
-    // Pequeño delay para mostrar animación
-    await new Promise(resolve => setTimeout(resolve, 300));
+    // Delegar la navegación al consumidor
+    await onNavigate?.(navigationPath);
     
     setIsNavigating(false);
-  }, [onNavigate, isMobile]);
+  }, [onNavigate, navigationPath, isMobile]);
   
   // Handler para toggle con microinteracciones
   const handleToggleClick = useCallback(() => {
@@ -183,8 +136,6 @@ export const T1ShippingBanner = memo<T1ShippingBannerProps>(({
           [styles.navigating]: isNavigating
         })}
         onClick={handleNavigate}
-        onMouseEnter={() => setIsHoveringLogo(true)}
-        onMouseLeave={() => setIsHoveringLogo(false)}
         type="button"
         aria-label={`Ir al dashboard de ${brandText}`}
         whileHover={{ scale: 1.02 }}
@@ -233,41 +184,3 @@ export const T1ShippingBanner = memo<T1ShippingBannerProps>(({
 });
 
 T1ShippingBanner.displayName = 'T1ShippingBanner';
-
-// =============================================================================
-// SIMPLE VERSION
-// =============================================================================
-
-export const SimpleT1Banner = memo<Pick<T1ShippingBannerProps, 'className' | 'brandText' | 'onNavigate'>>(({
-  className = '',
-  brandText = 'envíos',
-  onNavigate,
-}) => {
-  const handleNavigate = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    onNavigate?.();
-  }, [onNavigate]);
-  
-  return (
-    <button
-      className={clsx(styles.simpleBanner, className)}
-      onClick={handleNavigate}
-      type="button"
-      aria-label={`Ir al dashboard de ${brandText}`}
-    >
-      <div className={styles.logoWrapper}>
-        <T1Logo
-          width={27}
-          height={25}
-          className={styles.logo}
-          style={{ minHeight: '25px', maxWidth: '27px', flexShrink: 0 }}
-        />
-      </div>
-      <span className={styles.brandText}>
-        {brandText}
-      </span>
-    </button>
-  );
-});
-
-SimpleT1Banner.displayName = 'SimpleT1Banner';

@@ -1,50 +1,12 @@
 import React, { useEffect, useCallback, useMemo, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { MenuProvider, useMenu } from './menuContext';
-import { Sidebar, SidebarPropsI } from './Sidebar';
-import { Navbar } from './Navbar';
-import { NavbarPropsI } from '@/interfaces/menu';
-import { T1ShippingBanner } from '../molecules/T1ShippingBanner/T1ShippingBanner';
+import { Sidebar } from '../Sidebar/Sidebar';
+import { Navbar } from '../Navbar/Navbar';
+import { T1ShippingBanner } from '../../molecules/T1ShippingBanner/T1ShippingBanner';
 import { useMediaQuery } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// ============================================================================
-// TYPES & INTERFACES
-// ============================================================================
-
-export interface MenuState {
-  isOpen: boolean;
-  isReduced: boolean;
-  viewport: 'mobile' | 'tablet' | 'desktop';
-  width: number;
-  height: number;
-}
-
-export interface MenuCallbacks {
-  onMenuStateChange?: (state: MenuState) => void;
-  onToggleOpen?: (isOpen: boolean) => void;
-  onToggleReduced?: (isReduced: boolean) => void;
-  onViewportChange?: (viewport: MenuState['viewport']) => void;
-}
-
-export interface LayoutMenuProps {
-  navBarProps: Omit<NavbarPropsI, 'onReducerHandle' | 'sidebarReduce' | 'isMobile'>;
-  sideBarProps: Omit<SidebarPropsI, 'onToggleOpen' | 'onToggleReduce' | 'isOpen' | 'isReduced' | 'isMobile'>;
-  menuCallbacks?: MenuCallbacks;
-  children?: React.ReactNode;
-  config?: {
-    animations?: boolean;
-    persistPreferences?: boolean;
-    customBreakpoints?: {
-      mobile?: number;
-      tablet?: number;
-    };
-  };
-}
-
-// ============================================================================
-// CONSTANTS
-// ============================================================================
+import { MenuProvider, useMenu } from '@/utils/menu/menuContext';
+import { LayoutMenuProps, MenuState } from './layoutMenu.types';
 
 const ANIMATION_DURATION = 300;
 const STORAGE_KEY = 't1-menu-preferences';

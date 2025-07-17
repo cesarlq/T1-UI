@@ -1,0 +1,1 @@
+export {T1ShippingBanner} from './T1ShippingBanner'

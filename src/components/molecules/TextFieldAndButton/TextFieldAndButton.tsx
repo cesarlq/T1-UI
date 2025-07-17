@@ -1,17 +1,10 @@
-import { TextField, TextFieldProps } from '@mui/material';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import Search from '../../assets/search-input.svg';
-import styles from '../../styles/common/TextFieldAndButton.module.scss';
+import { TextField } from '@mui/material';
+import { useEffect } from 'react';
+import Search from '@/assets/svg-icons/search-input.svg?react';
+import styles from './TextFieldAndButton.module.scss';
 import { useForm } from 'react-hook-form';
+import { TextFieldAndButtonI } from './TextFieldAndButton.types';
 
-export interface TextFieldAndButtonI {
-    className?: string
-    textFieldClassName?: string
-    buttonClassName?: string
-    onSubmit: (data: { search: string }) => void
-    textFieldProps?: TextFieldProps
-}
 
 export default function TextFieldAndButton({
     className,

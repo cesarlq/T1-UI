@@ -9,8 +9,6 @@ import styles from './T1Selector.module.scss';
 import { CloseButton } from '@/components/Atoms/CloseButton';
 import { T1ItemType, T1SelectorProps } from './T1Selector.types';
 
-
-
 // Componente Portal para renderizar fuera del navbar
 const Portal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mounted, setMounted] = useState(false);

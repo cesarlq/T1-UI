@@ -5,32 +5,8 @@ import CheckIcon from '@/assets/svg-icons/CheckIcon.svg?react';
 import PlusIconBlack from '@/assets/buttonIcons/plus-icon-black.svg?react';
 import styles from './StoreSelectorOnSidebar.module.scss';
 import CustomInput from '../CustomInput/CustomInput';
+import { StoreSelectorProps } from './StoreSelectorOnSidebar.type';
 
-// Interfaces
-export interface Store {
-  id: number;
-  name: string;
-}
-
-export interface StoreSelectorProps {
-  className?: string;
-  stores?: Store[];
-  currentStore?: Store;
-  // Event handlers
-  onStoreChange?: (storeId: number) => void;
-  // Visual configuration
-  title?: string;
-  searchPlaceholder?: string;
-  newStoreText?: string;
-  showNewStoreLink?: boolean;
-  // URLs
-  createStoreUrl: string;
-  // Behavior
-  closeOnOutsideClick?: boolean;
-  closeOnStoreSelect?: boolean;
-  // Colors for store avatars
-  storeColors?: string[];
-}
 
 export function StoreSelectorOnSidebar({
   className = '',

@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { StoreSelector } from '../molecules/StoreSelector/StoreSelector';
-import { T1ShippingBanner } from '../molecules/T1ShippingBanner/T1ShippingBanner';
-import { NavbarPropsI } from '@/interfaces/menu';
-import styles from '../../styles/common/Navbar.module.scss';
-import { T1Selector } from '../molecules/T1Selector/T1Selector';
-import { MenuProfile } from '../molecules/Profile/Profile';
-import TextFieldAndButton from '../molecules/TextFieldAndButton/TextFieldAndButton';
-import Image from 'next/image';
-import MenuInActive from '../../assets/menus/inactive/menu-inactive.svg';
-import BalanceBanner from '../molecules/BalanceBanner/BalanceBanner';
+import { useState } from 'react';
+import { StoreSelector } from '../../molecules/StoreSelector/StoreSelector';
+import { T1ShippingBanner } from '../../molecules/T1ShippingBanner/T1ShippingBanner';
+import styles from './Navbar.module.scss';
+import { T1Selector } from '../../molecules/T1Selector/T1Selector';
+import TextFieldAndButton from '../../molecules/TextFieldAndButton/TextFieldAndButton';
+import MenuInActive from '@/assets/menus/inactive/menu-inactive.svg?react';
+import BalanceBanner from '../../molecules/BalanceBanner/BalanceBanner';
+import { NavbarPropsI } from './Navbar.types';
+import MenuProfile from '../../molecules/Profile/MenuProfile';
 
 export function Navbar({
   className = '',
