@@ -1,1 +1,1 @@
-export {default as layoutMenu} from './layoutMenu'
+export {default as LayoutMenu} from './LayoutMenu'

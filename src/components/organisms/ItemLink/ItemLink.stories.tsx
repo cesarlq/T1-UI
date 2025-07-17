@@ -23,13 +23,6 @@ import {
 } from 'lucide-react';
 import { ItemLink } from './ItemLink';
 
-// Decorator para envolver en Router
-const RouterDecorator = (Story: any) => (
-  <MemoryRouter initialEntries={['/']}>
-    <Story />
-  </MemoryRouter>
-);
-
 // Styles para el preview
 const styles = `
   .sidebar-container {
@@ -94,7 +87,6 @@ const meta: Meta<typeof ItemLink> = {
       }
     }
   },
-  decorators: [RouterDecorator],
   tags: ['autodocs'],
 };
 

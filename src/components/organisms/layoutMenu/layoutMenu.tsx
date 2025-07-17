@@ -2,11 +2,11 @@ import React, { useEffect, useCallback, useMemo, useRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { Navbar } from '../Navbar/Navbar';
-import { T1ShippingBanner } from '../../molecules/T1ShippingBanner/T1ShippingBanner';
+import { T1ShippingBanner } from '../../molecules/T1ShippingBanner';
 import { useMediaQuery } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MenuProvider, useMenu } from '@/utils/menu/menuContext';
-import { LayoutMenuProps, MenuState } from './layoutMenu.types';
+import { LayoutMenuProps, MenuState } from './LayoutMenu.types';
 
 const ANIMATION_DURATION = 300;
 const STORAGE_KEY = 't1-menu-preferences';
