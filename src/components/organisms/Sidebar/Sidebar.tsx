@@ -1,14 +1,12 @@
-'use client';
+'use client'; // Remover esta línea para Vite
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import styles from '../../styles/common/Sidebar.module.scss';
-import BalanceBanner from '../../molecules/BalanceBanner/BalanceBanner';
+import styles from './Sidebar.module.scss';
 import { ItemLink } from '../ItemLink';
-import { SidebarPropsI } from './Sidebar.types';
-
+import { MenuPath, SidebarPropsI } from './Sidebar.types';
+import BalanceBanner from '@/components/molecules/BalanceBanner';
 
 export function Sidebar({
   className = '',
@@ -40,39 +38,45 @@ export function Sidebar({
   onToggleOpen,
   onToggleReduce,
   onCreateClick,
-  onNavigate
+  onNavigate,
+  
+  // NUEVAS PROPS para reemplazar Next.js
+  currentPath = '/', // Reemplaza usePathname
+  onPathChange, // Callback cuando se necesita cambiar la ruta
 }: SidebarPropsI) {
   
-  // Router hooks
-  let router;
-  let pathname;
-  let isStorybook = false;
+  // Detectar si estamos en Storybook
+  const isStorybook = typeof window !== 'undefined' && 
+                     (window.location.href.includes('storybook') || 
+                      window.parent !== window);
   
-  try {
-    router = useRouter();
-    pathname = usePathname();
-    
-    isStorybook = typeof window !== 'undefined' && 
-                  (window.location.href.includes('storybook') || 
-                   window.parent !== window);
-  } catch (error) {
-    // Mock para Storybook
-    router = {
-      push: (path: string) => {
-        if (typeof window !== 'undefined') {
-          window.history.pushState({}, '', `${window.location.pathname}?story-path=${encodeURIComponent(path)}`);
-        }
-        return Promise.resolve(true);
-      },
-      refresh: () => {
-        if (typeof window !== 'undefined') {
-          window.location.reload();
-        }
+  // Mock de router para desarrollo/Storybook
+  const mockRouter = {
+    push: (path: string) => {
+      if (onPathChange) {
+        onPathChange(path);
+      } else if (isStorybook) {
+        // En Storybook, actualizar la URL para demo
+        window.history.pushState({}, '', `${window.location.pathname}?story-path=${encodeURIComponent(path)}`);
+        console.log('[Storybook] Navegación a:', path);
       }
-    };
-    pathname = '/';
-    isStorybook = true;
-  }
+      // Trigger callback de navegación
+      onNavigate?.(path);
+      return Promise.resolve(true);
+    },
+    refresh: () => {
+      if (isStorybook) {
+        window.location.reload();
+      } else {
+        // En producción, el consumer debería manejar esto
+        console.warn('Router refresh requested. Please handle this in your app.');
+      }
+    }
+  };
+  
+  // Usar el currentPath prop en lugar de usePathname
+  const pathname = currentPath;
+  const router = mockRouter;
   
   const refSideBar = useRef<HTMLDivElement>(null);
   
@@ -300,7 +304,6 @@ export function Sidebar({
         router.refresh();
       } else {
         router.push(createButtonPath);
-        onNavigate?.(createButtonPath);
       }
     }
     
@@ -313,11 +316,11 @@ export function Sidebar({
 
   const handleExternalComponent = () => {
     if (isMobile) {
-    setTimeout(() => {
-      handleToggleOpen(false);
-    }, 100);
-  }
-  }
+      setTimeout(() => {
+        handleToggleOpen(false);
+      }, 100);
+    }
+  };
 
   // Función para manejar navegación inmediata con limpieza de estado
   const handleInternalNavigation = (path: string) => {
@@ -336,7 +339,6 @@ export function Sidebar({
     
     // Realizar la navegación
     router.push(path);
-    onNavigate?.(path);
     
     // Limpiar el estado pendiente después de un breve delay
     setTimeout(() => {
@@ -347,6 +349,7 @@ export function Sidebar({
       setTimeout(() => handleToggleOpen(false), 100);
     }
   };
+
   // Función para manejar el cambio de activePath con limpieza inmediata
   const handleSetActivePath = (path: string) => {
     // Limpiar estados anteriores inmediatamente
@@ -391,7 +394,6 @@ export function Sidebar({
 
   // Función para renderizar elementos del menú
   const renderMenuItem = (item: MenuPath, index: number) => {
-
     const itemType = typeof item.type === 'string' ? item.type : item.type?.toString();
     
     if (itemType === '0' || itemType === 'STATIC_TITLE') {
@@ -438,16 +440,14 @@ export function Sidebar({
     }
 
     if(itemType === 'INFORMATIVE_TEXT'){
-      return(<>
-        {isReduced ?
-          <></>:
-          <p className={styles.informativeText} key={index}>
-            {item.text ? item.text : 'Configuración de tienda únicamente disponible para administradores.'}
-          </p>
-        }
-        
-      </>
-        
+      return (
+        <>
+          {!shouldShowReduced && (
+            <p className={styles.informativeText} key={index}>
+              {item.text ? item.text : 'Configuración de tienda únicamente disponible para administradores.'}
+            </p>
+          )}
+        </>
       );
     }
 
@@ -493,9 +493,7 @@ export function Sidebar({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <section
-        className={styles.sideBar}
-      >
+      <section className={styles.sideBar}>
         {/* Top Banner */}
         {TopBanner && (
           <div className={`${styles.topBanner} ${shouldShowReduced ? styles.bannerReduced : ''}`}>
@@ -517,13 +515,16 @@ export function Sidebar({
         {/* Balance Banner */}
         {BalanceBannerComponent && showBalance && !shouldShowReduced && (
           <div onClick={handleExternalComponent} className={styles.balanceBanner}>
-            <BalanceBannerComponent/>
+            <BalanceBannerComponent />
           </div>
         )}
         
         {showBalance && !shouldShowReduced && balanceBannerConfig?.balance && (
           <div onClick={handleExternalComponent} className={styles.balanceBanner}>
-            <BalanceBanner balance={balanceBannerConfig.balance} BALLANCE_PATH={balanceBannerConfig.BALLANCE_PATH}/>
+            <BalanceBanner 
+              balance={balanceBannerConfig.balance} 
+              BALLANCE_PATH={balanceBannerConfig.BALLANCE_PATH}
+            />
           </div>
         )}
 

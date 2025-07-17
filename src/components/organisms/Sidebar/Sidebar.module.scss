@@ -1,0 +1,469 @@
+// Sidebar.module.scss - Inspirado en Google, Amazon, MercadoLibre
+@use '../../../styles/common/design-tokens.scss' as tokens;
+
+.container {
+  transition: all tokens.$duration-normal tokens.$ease-smooth;
+  width: 280px;
+  margin-top: tokens.$menu-navbar-height;
+  padding-top: tokens.$space-4;
+  padding-bottom: tokens.$space-4;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-left: tokens.$space-4;
+  padding-right: tokens.$space-4;
+  height: 100%;
+  background: linear-gradient(180deg, tokens.$surface-primary 0%, tokens.$surface-secondary 100%);
+  border-right: 1px solid tokens.$border-subtle;
+  font-size: tokens.$text-sm;
+  overflow-y: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: tokens.$space-3;
+  z-index: tokens.$z-fixed;
+  box-shadow: tokens.$shadow-lg;
+  backdrop-filter: blur(20px) saturate(180%);
+
+  // Glassmorphism border
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  // Estado con info band
+  &[data-show-info-band="true"] {
+    margin-top: tokens.$menu-navbar-height;
+  }
+
+  // Estado reducido - Premium Google Style
+  &[data-reduce="true"] {
+    width: tokens.$menu-sidebar-width-reduced;
+    z-index: tokens.$z-sticky;
+    overflow-x: hidden;
+    padding-left: tokens.$space-4;
+    padding-right: tokens.$space-4;
+    background: linear-gradient(180deg, tokens.$surface-primary 0%, rgba(tokens.$surface-secondary, 0.8) 100%);
+
+    .sideBar {
+      align-items: center;
+      gap: tokens.$space-3;
+    }
+
+    .paths {
+      align-items: center;
+      // gap: tokens.$space-5;
+    }
+  }
+
+  // Hover effect cuando está reducido - Amazon Style
+  &[data-enlarge-by-hover="true"] {
+    width: tokens.$menu-sidebar-width;
+    box-shadow: 
+      tokens.$shadow-xl, 
+      0 0 0 100vmax rgba(0, 0, 0, 0.4),
+      inset 0 0 100px rgba(tokens.$brand-primary, 0.05);
+    z-index: tokens.$z-modal;
+    background: linear-gradient(180deg, tokens.$surface-primary 0%, tokens.$surface-secondary 100%);
+    
+    .sideBar {
+      align-items: flex-start;
+    }
+    
+    .paths {
+      align-items: stretch;
+    }
+
+    // Animación de expansión suave
+    animation: expandSidebar 0.3s tokens.$ease-bounce;
+  }
+
+  // Media query para móvil - MercadoLibre Style
+  @media (max-width: tokens.$breakpoint-menu-mobile) {
+    margin-top: 0;
+    padding: 1rem 1rem 0;
+    width: 280px;
+    border-radius: 0 tokens.$radius-2xl tokens.$radius-2xl 0;
+    left: -100%;
+    z-index: tokens.$z-modal;
+    backdrop-filter: blur(20px) saturate(180%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    &[data-open-side-bar="true"] {
+      box-shadow: 
+        tokens.$shadow-xl, 
+        0 0 0 100vmax rgba(0, 0, 0, 0.5),
+        inset 0 0 50px rgba(tokens.$brand-primary, 0.1);
+      left: 0;
+      animation: slideInFromLeft 0.4s tokens.$ease-bounce;
+    }
+
+    &[data-show-info-band="true"] {
+      margin-top: 0;
+    }
+
+    .sideBar {
+      gap: tokens.$space-3;
+    }
+  }
+
+  // Media query para pantallas bajas
+  @media (max-height: 668px) {
+    .sideBar {
+      .paths {
+        .linkContainer {
+          min-height: auto;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    width: 280px;
+  }
+
+  @media (min-width: 1920px) and (max-width: 2559px) {
+    width: 300px;
+  }
+
+  @media (min-width: 2560px) {
+    width: 300px;
+  }
+}
+
+.topBanner {
+  padding: .5rem;
+  border-radius: tokens.$radius-xl;
+  
+  @media (min-width: tokens.$breakpoint-lg) {
+    margin-left: 0;
+  }
+}
+
+.balanceBanner {
+  @media (min-width: tokens.$breakpoint-lg) {
+    display: none !important;
+  }
+}
+
+.sideBar {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$space-3;
+}
+
+.bannerReduced {
+  opacity: 0.8;
+  transform: scale(0.95);
+  transition: all tokens.$duration-normal tokens.$ease-smooth;
+}
+
+.informativeText {
+  font-size: tokens.$text-xs;
+  font-weight: tokens.$font-weight-normal;
+  text-align: center;
+  padding: tokens.$space-6 tokens.$space-4;
+  color: tokens.$text-secondary;
+  background: linear-gradient(135deg, tokens.$surface-tertiary 0%, tokens.$surface-secondary 100%);
+  border-radius: tokens.$radius-lg;
+  border: 1px solid tokens.$border-subtle;
+  margin: tokens.$space-4 0;
+}
+
+.callToActionCreateGuide {
+  transition: all tokens.$duration-normal tokens.$ease-smooth !important;
+  flex-shrink: 0 !important;
+  height: 48px !important;
+  color: tokens.$text-inverse !important;
+  background: linear-gradient(135deg, tokens.$brand-primary 0%, tokens.$brand-primary-hover 100%) !important;
+  border-radius: tokens.$radius-xl !important;
+  font-weight: tokens.$font-weight-bold !important;
+  font-size: tokens.$text-sm !important;
+  text-transform: none !important;
+  padding: 0 tokens.$space-6 !important;
+  box-shadow: 
+    tokens.$shadow-md,
+    0 0 20px rgba(tokens.$brand-primary, 0.3) !important;
+  border: none !important;
+  position: relative !important;
+  overflow: hidden !important;
+
+  // Glassmorphism effect
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  // Shimmer effect
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+  }
+  
+  &:hover {
+    background: linear-gradient(135deg, tokens.$brand-primary-hover 0%, tokens.$brand-primary-active 100%) !important;
+    box-shadow: 
+      tokens.$shadow-lg,
+      0 0 30px rgba(tokens.$brand-primary, 0.5) !important;
+    transform: translateY(-2px) scale(1.02) !important;
+
+    &::after {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.98) !important;
+  }
+  
+  @media (max-width: tokens.$breakpoint-menu-mobile) {
+    margin-bottom: tokens.$space-4 !important;
+    margin-top: tokens.$space-4 !important;
+    height: 52px !important;
+  }
+
+  &[data-reduce="true"] {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 0 !important;
+    border-radius: tokens.$radius-xl !important;
+    padding: 0 !important;
+    
+    .MuiSvgIcon-root {
+      font-size: 24px;
+    }
+  }
+}
+
+.paths {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  // gap: tokens.$space-2;
+  
+  @media (max-width: tokens.$breakpoint-menu-mobile) {
+    // gap: tokens.$space-3;
+  }
+}
+
+// Estilos para títulos estáticos - Google Style
+.staticTitle {
+  margin: .5rem 0 0rem!important;
+  transition: all tokens.$duration-normal tokens.$ease-smooth;
+  display: block !important;
+  position: relative;
+  
+  .titleText {
+    font-size: tokens.$text-xs;
+    font-weight: tokens.$font-weight-bold;
+    color: tokens.$text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: tokens.$line-height-tight;
+    display: block !important;
+    margin: 0;
+    padding: tokens.$space-2 tokens.$space-4;
+    border-radius: tokens.$radius-lg;
+    position: relative;
+    overflow: hidden;
+
+    // Accent line
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   left: 0;
+    //   top: 0;
+    //   bottom: 0;
+    //   width: 3px;
+    //   background: linear-gradient(180deg, tokens.$brand-primary 0%, tokens.$brand-primary-hover 100%);
+    //   border-radius: 0 tokens.$radius-sm tokens.$radius-sm 0;
+    // }
+  }
+  
+  // Línea divisoria para modo reducido
+  .titleDivider {
+    width: 40px !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, tokens.$brand-primary 0%, tokens.$brand-primary-hover 100%) !important;
+    margin: tokens.$space-3 auto !important;
+    display: block !important;
+    border-radius: tokens.$radius-full;
+    box-shadow: 0 2px 8px rgba(tokens.$brand-primary, 0.3);
+  }
+  
+  // En modo reducido
+  &[data-reduce="true"] {
+    margin: tokens.$space-4 0 tokens.$space-3 0 !important;
+    
+    .titleText {
+      display: none !important;
+    }
+    
+    .titleDivider {
+      display: block !important;
+    }
+  }
+}
+
+// Estilos para componentes React - Amazon Style
+.reactComponent {
+  margin: 0 0 !important;
+  transition: all tokens.$duration-normal tokens.$ease-smooth;
+  display: block !important;
+  min-height: tokens.$space-12;
+  padding: tokens.$space-4;
+  
+  &[data-reduce="true"] {
+    display: none !important;
+  }
+}
+
+// Espaciado adicional después de títulos
+.staticTitle + .itemLink,
+.staticTitle + .reactComponent {
+  margin-top: tokens.$space-3;
+}
+
+// Espaciado adicional después de componentes
+.reactComponent + .itemLink {
+  margin-top: tokens.$space-3;
+}
+
+// Grouping visual - línea separadora mejorada
+.staticTitle {
+  position: relative;
+  
+  &:not(:first-child) {
+    padding-top: tokens.$space-4;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: tokens.$space-4;
+      right: tokens.$space-4;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        tokens.$border-subtle 20%,
+        tokens.$border-default 50%,
+        tokens.$border-subtle 80%,
+        transparent 100%
+      );
+    }
+  }
+}
+
+.bottomBanner {
+  margin-top: auto;
+  padding-top: tokens.$space-6;
+  border-top: 1px solid tokens.$border-subtle;
+  background: linear-gradient(135deg, tokens.$surface-secondary 0%, tokens.$surface-tertiary 100%);
+  border-radius: tokens.$radius-xl;
+  margin-left: -#{tokens.$space-6};
+  margin-right: -#{tokens.$space-6};
+  margin-bottom: -#{tokens.$space-6};
+  padding-left: tokens.$space-6;
+  padding-right: tokens.$space-6;
+  padding-bottom: tokens.$space-6;
+}
+
+// Media queries específicas para elementos especiales
+@media (max-width: tokens.$breakpoint-menu-mobile) {
+  .staticTitle {
+    margin: tokens.$space-6 0 tokens.$space-3 0;
+    
+    .titleText {
+      font-size: tokens.$text-sm;
+      padding: tokens.$space-3 tokens.$space-4;
+    }
+  }
+  
+  .reactComponent {
+    margin: tokens.$space-4 0;
+    padding: tokens.$space-5;
+  }
+}
+
+// Performance optimizations
+.container,
+.sideBar,
+.paths {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+// Animaciones keyframes
+@keyframes expandSidebar {
+  from {
+    width: tokens.$menu-sidebar-width-reduced;
+  }
+  to {
+    width: tokens.$menu-sidebar-width;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .callToActionCreateGuide,
+  .staticTitle,
+  .reactComponent {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+}
+
+// High contrast support
+@media (prefers-contrast: high) {
+  .container {
+    border: 2px solid tokens.$border-strong;
+    background: tokens.$surface-primary;
+  }
+  
+  .staticTitle .titleText {
+    color: tokens.$text-primary;
+    font-weight: tokens.$font-weight-bold;
+  }
+}

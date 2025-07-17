@@ -1,6 +1,5 @@
-
-import { SidebarPropsI } from "../Sidebar/Sidebar";
 import { NavbarPropsI } from "../Navbar/Navbar.types";
+import { SidebarPropsI } from "../Sidebar/Sidebar.types";
 
 export interface MenuCallbacks {
   onMenuStateChange?: (state: MenuState) => void;

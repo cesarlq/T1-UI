@@ -1,4 +1,3 @@
-// .storybook/preview.tsx
 import React from 'react';
 import type { Preview } from '@storybook/react';
 import { ThemeProvider } from '@mui/material/styles';
@@ -8,6 +7,18 @@ import theme from '../src/styles/theme';
 
 // Importar estilos globales si los tienes
 import '../src/styles/globals.css';
+import { BrowserRouter } from 'react-router-dom';
+
+// Mock Router para componentes que aún usan React Router
+const MockRouter = ({ children }: { children: React.ReactNode }) => {
+  // Solo usar BrowserRouter si react-router-dom está disponible
+  try {
+    return <BrowserRouter>{children}</BrowserRouter>;
+  } catch {
+    // Si no está disponible, renderizar children directamente
+    return <>{children}</>;
+  }
+};
 
 const preview: Preview = {
   parameters: {
@@ -37,7 +48,9 @@ const preview: Preview = {
     // Decorator adicional para centrar componentes
     (Story) => (
       <div style={{ padding: '1rem' }}>
-        <Story />
+        <MockRouter>
+          <Story />
+        </MockRouter>
       </div>
     ),
   ],

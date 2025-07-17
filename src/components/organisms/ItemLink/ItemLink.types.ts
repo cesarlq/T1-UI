@@ -28,7 +28,7 @@ export interface ItemLinkProps {
   activeSubPath?: string;
   setActiveSubPath: (path: string) => void;
   mobile?: boolean;
-  currentUserId?: string;
+  currentUserId?: string | number;
   restrictedPaths?: string[];
   onNavigate?: (path: string) => void;
   onToggleOpen?: (open: boolean) => void;
