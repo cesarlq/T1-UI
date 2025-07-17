@@ -4,7 +4,7 @@ import Search from '@/assets/svg-icons/search-input.svg?react';
 import CheckIcon from '@/assets/svg-icons/CheckIcon.svg?react';
 import PlusIconBlack from '@/assets/buttonIcons/plus-icon-black.svg?react';
 import styles from './StoreSelectorOnSidebar.module.scss';
-import CustomInput from '../CustomInput/CustomInput';
+import CustomInput from '../../Atoms/CustomInput/CustomInput';
 import { StoreSelectorProps } from './StoreSelectorOnSidebar.type';
 
 

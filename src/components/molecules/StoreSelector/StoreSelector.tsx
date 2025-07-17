@@ -4,7 +4,7 @@ import DoubleArrowIcon from '@/assets/inputs/double-arrow.svg?react';
 import Search from '@/assets/svg-icons/search-input.svg?react';
 import CheckIcon from '@/assets/svg-icons/CheckIcon.svg?react';
 import PlusIconBlack from '@/assets/buttonIcons/plus-icon-black.svg?react';
-import CustomInput from '../CustomInput/CustomInput';
+import CustomInput from '../../Atoms/CustomInput/CustomInput';
 import styles from './StoreSelector.module.scss';
 import { StoreSelectorProps } from './StoreSelector.type';
 import { getLetters } from '@/utils/storeSelector/storeSelector';

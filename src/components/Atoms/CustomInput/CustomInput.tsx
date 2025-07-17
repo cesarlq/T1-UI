@@ -1,19 +1,8 @@
-import React from "react";
 import styles from './CustomInput.module.scss';
-import { TextField, TextFieldProps } from "@mui/material";
+import { TextField } from "@mui/material";
 import ErrorMessage from "./ErrorMessage";
-import DirtyIndicator from './dot-for-dirty-field-indicator.svg';
-
-export interface CustomInputI {
-    label?: string
-    className?: string
-    flexDirectionRow?: boolean
-    textFieldProps: TextFieldProps
-    children?: React.ReactNode
-    style?: React.CSSProperties
-    errorMessage?: string
-    hasChange?: boolean
-}
+import DirtyIndicator from '@/assets/svg-icons/dot-for-dirty-field-indicator.svg?react';
+import { CustomInputI } from './CustomInput.types';
 
 export default function CustomInput({
     label,
