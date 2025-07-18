@@ -302,7 +302,14 @@ const Table = <T extends Record<string, any>>({
   const visibleColumns = columns.filter(column => !column.hidden);
 
   return (
-    <Box sx={{ width: '100%', ...containerSx }}>
+    <Box 
+      sx={{ 
+        width: '100%',
+        position: 'relative',
+        zIndex: 1, // Establecer z-index base
+        ...containerSx 
+      }}
+    >
       {/* TableMui header area */}
       {(searchable || renderTableHeader) && (
         <Box sx={{ 
@@ -311,7 +318,9 @@ const Table = <T extends Record<string, any>>({
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: 2
+          gap: 2,
+          position: 'relative',
+          zIndex: 2, // Z-index más alto para el header
         }}>
           {renderTableHeader ? (
             renderTableHeader()
@@ -333,14 +342,45 @@ const Table = <T extends Record<string, any>>({
       <TableContainer 
         component={Paper} 
         sx={{ 
-          maxHeight: stickyHeader ? 600 : undefined,
-          boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.05)',
-          borderRadius: '8px',
-          overflow: 'hidden',
-        }}
+            maxHeight: {
+              xs: 'calc(100vh - 300px)', // Responsivo basado en viewport
+              sm: 'calc(100vh - 250px)',
+              md: stickyHeader ? 600 : undefined
+            },
+            overflow: 'auto', // Cambiado de 'hidden' a 'auto'
+            overflowX: 'auto', // Asegurar scroll horizontal en móvil
+            position: 'relative',
+            boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.05)',
+            borderRadius: '8px',
+            // Mejoras para el scroll en dispositivos táctiles
+            WebkitOverflowScrolling: 'touch',
+            '&::-webkit-scrollbar': {
+              width: '8px',
+              height: '8px',
+            },
+            '&::-webkit-scrollbar-track': {
+              backgroundColor: 'rgba(0,0,0,0.05)',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: 'rgba(0,0,0,0.2)',
+              borderRadius: '4px',
+              '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.3)',
+              }
+            },
+            ...containerSx // Mantener las props personalizadas
+          }}
       >
         <TableMui 
-          sx={{ minWidth: 750, ...tableSx }} 
+          sx={{ 
+            minWidth: {
+              xs: 500, // Ancho mínimo más pequeño para móvil
+              sm: 650,
+              md: 750
+            },
+            ...tableSx 
+          }} 
+
           aria-labelledby="tableTitle"
           size="medium"
           stickyHeader={stickyHeader}

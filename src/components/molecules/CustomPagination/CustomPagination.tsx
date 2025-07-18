@@ -218,15 +218,28 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         sx={{ 
           display: 'flex', 
           alignItems: 'center', 
-          flexWrap: 'wrap',
-          justifyContent: 'center',
+          flexDirection: {
+            xs: 'column',  // En móvil: columna para separar paginación del input
+            sm: 'row'      // En desktop: todo en fila
+          },
           gap: {
-            xs: 1,
+            xs: 2,  // Más espacio entre paginación e input en móvil
             sm: 2
           }
         }}
       >
-        {/* Flechas y números de página */}
+        {/* Contenedor de flechas y números - siempre en fila */}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: {
+            xs: 0.5,
+            sm: 1
+          }
+        }}
+      >
+        {/* Flecha izquierda */}
         <IconButton 
           onClick={handlePreviousPage} 
           disabled={page === 0}
@@ -235,18 +248,21 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           <KeyboardArrowLeftIcon />
         </IconButton>
         
+        {/* Números de página */}
         <Box 
           sx={{ 
-            display: { 
-              xs: 'none', // Oculto en pantallas muy pequeñas
-              sm: 'flex'  // Visible desde pantallas pequeñas
-            }, 
-            alignItems: 'center' 
+            display: 'flex',
+            alignItems: 'center',
+            gap: {
+              xs: 0.5,
+              sm: 1
+            }
           }}
         >
           {renderPageNumbers()}
         </Box>
         
+        {/* Flecha derecha */}
         <IconButton 
           onClick={handleNextPage} 
           disabled={page >= totalPages - 1}
@@ -254,7 +270,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         >
           <KeyboardArrowRightIcon />
         </IconButton>
-        
+      </Box>
         
         {/* Campo para ir a una página específica */}
         <Box 
@@ -294,16 +310,16 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
             }}
             InputProps={{
               endAdornment: (
-                <InputAdornment sx={{ marginLeft: '0px' }} position="end">
-                  <Divider orientation="vertical" flexItem />
+                <InputAdornment sx={{ marginLeft: '0px', marginRight: '-8px' }} position="end">
+                  <Divider orientation="vertical" flexItem sx={{ marginRight: '4px' }} />
                   <IconButton
                     onClick={handleGoToPageButtonClick}
                     size="small"
                     sx={{
-                      padding: '2px',
+                      padding: '4px', // Aumentar padding
                       '& .MuiSvgIcon-root': {
                         fontSize: {
-                          xs: '16px',
+                          xs: '18px', // Tamaño consistente
                           sm: '18px'
                         }
                       }
@@ -318,29 +334,28 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
               borderRadius: '8px',
               padding: 0,
               width: {
-                xs: '55px', // Ancho más grande para acomodar el botón
-                sm: '55px'  // Ancho estándar ajustado
+                xs: '85px', // ✅ CAMBIO PRINCIPAL: Aumentar de 55px a 85px
+                sm: '90px'  // ✅ CAMBIO PRINCIPAL: Aumentar de 55px a 90px
               },
               '& .MuiInputBase-root': {
                 height: {
-                  xs: '35px', // Altura más pequeña en pantallas muy pequeñas
-                  sm: '40px'  // Altura estándar en pantallas pequeñas y superiores
+                  xs: '35px',
+                  sm: '40px'
                 },
-                paddingRight: 0,
+                paddingRight: '4px', // Agregar espacio para el botón
                 borderRadius: '8px',
-
               },
               '& .MuiInputBase-input': {
                 py: 1,
-                px: 1.5,
+                px: 0.5, // Reducir padding horizontal del input
                 padding: 0,
                 textAlign: 'center',
                 appearance: 'textfield',
                 MozAppearance: 'textfield',
                 WebkitAppearance: 'textfield',
                 fontSize: {
-                  xs: '0.75rem', // Fuente más pequeña en pantallas muy pequeñas
-                  sm: '0.875rem' // Tamaño de fuente estándar en pantallas pequeñas y superiores
+                  xs: '0.75rem',
+                  sm: '0.875rem'
                 }
               },
               '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
