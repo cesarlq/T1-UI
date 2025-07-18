@@ -7,10 +7,10 @@ export { CheckBox, type ExtendedCheckBoxProps } from '@/components/Atoms/CheckBo
 export { Chip, type ExtendedChipProps, type ChipColorDefinition } from '@/components/Atoms/Chip';
 export { CloseButton, type CloseButtonProps } from '@/components/Atoms/CloseButton';
 export { CustomInput, type CustomInputI } from '@/components/Atoms/CustomInput';
-export { DynamicSelector, type DynamicSelectorProps } from '@/components/Atoms/DynamicSelector';
+export { DynamicSelector, type DynamicSelectorI } from '@/components/Atoms/DynamicSelector';
 export { Radio, RadioGroup, FormRadio, type RadioProps, type RadioGroupProps, type FormRadioProps, } from '@/components/Atoms/Radio';
 export { SearchInput, type SearchInputI } from '@/components/Atoms/Searchinput';
-export { Select } from '@/components/Atoms/select';
+export { Select } from '@/components/Atoms/Select';
 export { Switch, FormSwitch, type SwitchProps, type FormSwitchProps, } from '@/components/Atoms/Switch';
 
 // Molecules
@@ -27,7 +27,7 @@ export { TextFieldAndButton, } from '@/components/molecules/TextFieldAndButton';
 // Organisms
 export { ItemLink, type ItemLinkProps } from '@/components/organisms/ItemLink';
 export { Navbar } from '@/components/organisms/Navbar';
-export { Sidebar, type SidebarProps } from '@/components/organisms/Sidebar';
+export { Sidebar, type SidebarPropsI } from '@/components/organisms/Sidebar';
 export { LayoutMenu } from '@/components/organisms/layoutMenu';
 
 // Icons
@@ -43,12 +43,9 @@ export * from './types/commonInterfaces';
 export * from './types/guide';
 export * from './types/incidence';
 export * from './types/orders';
-export * from './types/parcels';
-export * from './types/props';
 export * from './types/redux';
 export * from './types/response';
 export * from './types/responseIdentity';
-export * from './types/responseIntegrations';
 export * from './types/responseKidal';
 export * from './types/responseShippings';
 export * from './types/responseShopify';
