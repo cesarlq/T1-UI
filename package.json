@@ -94,6 +94,7 @@
     "framer-motion": "^12.23.6",
     "lucide-react": "^0.525.0",
     "react-hook-form": "^7.60.0",
+    "react-number-format": "^5.4.4",
     "react-router-dom": "^7.6.3"
   }
 }

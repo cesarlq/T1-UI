@@ -432,13 +432,13 @@ const theme = createTheme({
                             borderRadius: 3,
                             '& g': {
                                 '& path': {
-                                    fill: '#f3f3f3',
+                                    fill: '#F8F8F8',
                                     color: '#C3C3C3',
                                     backgroundColor: '#f3f3f3',
-                                    stroke: '#d3d3d3',
+                                    stroke: '#CFCFCF',
                                 },
                                 '& rect': {
-                                    fill: '#f3f3f3',
+                                    fill: '#F8F8F8',
                                 },
                             },
                         },
