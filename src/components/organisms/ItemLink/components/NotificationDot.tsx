@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from '@/styles/common/ItemLink.module.scss';
-import Ellipse from '@/assets/svg-icons/Ellipse55.svg?react';
+import Ellipse from '@/assets/svg-icons/Ellipse55.svg';
 
 const springConfig = {
   type: "spring" as const,
