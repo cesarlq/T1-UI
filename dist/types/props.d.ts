@@ -1,18 +1,15 @@
 import { Control, FieldErrors, FieldPath, FieldValues, UseControllerProps, UseFieldArrayUpdate, UseFormClearErrors, UseFormRegister, UseFormReset, UseFormSetError, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { AddressForGuideOrderI, DimensionsForGuideOrderI, GeneratedGuideI, GuideI, GuideOrderI, OauthParcelApiFormI, ParcelInfoI, ParcelSelectedI, ShippingHistoryI } from './guide';
-import { AutocompleteRenderInputParams, ButtonProps, StandardTextFieldProps, TextFieldProps } from '@mui/material';
-import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from 'react';
+import { AutocompleteRenderInputParams, StandardTextFieldProps, TextFieldProps } from '@mui/material';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { AddBalanceFormI } from './user';
-import { StaticImageData } from 'next/image';
 import { PurchaseDataI } from './orders';
 import { GeneralResponseI } from './response';
 import { ZoneDataForFormI, ZoneI } from './zone';
 import { UserProductTemplateI } from './templates';
-import { PaginationOptionsI } from './layout';
 import { RuleI, ElkNode as ElkNodeType } from './rules';
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 import { Edge } from '@xyflow/react';
-import { SurveyFormI, SurveyTemplateI } from './survey';
 import { Dayjs } from 'dayjs';
 import { IncidenceAddressI, IncidenceFormI, IncidenceItemI, SelectedInfoFromMapDataI, ShippingDataItemI, TimelineEventI } from './incidence';
 export interface LayoutI {
@@ -214,16 +211,6 @@ export interface SectionPaymentI {
     setAddNewPaymentCard: Dispatch<SetStateAction<boolean>>;
     errorCarNumberByIssuer?: string;
 }
-export interface OptionModeI {
-    onClick?: () => void;
-    selected: boolean;
-    image: StaticImageData;
-    title: string;
-    description: string;
-    showOptionMenu?: boolean;
-    onClickEdit?: () => void;
-    oneItemMode?: boolean;
-}
 export interface CustomAmountInputI<T extends FieldValues> extends UseControllerProps<T> {
     currency?: string;
     format?: 'currency' | 'phone' | 'normal' | 'zip' | 'interbankKey' | 'CVV' | 'creditMaster' | 'creditAmex' | 'expireDate' | 'CVVAmex' | 'currencyWithoutPrefix';
@@ -288,13 +275,6 @@ export interface DimensionsFormI {
     defaultValues?: DimensionsForGuideOrderI;
     mode?: 'edit' | 'create';
 }
-export interface ResponseAlertI {
-    title: string;
-    description: string;
-    textButton: string;
-    onClickButton: () => void;
-    iconAlert: StaticImageData;
-}
 export interface TextFieldAndButtonI {
     className?: string;
     textFieldClassName?: string;
@@ -313,15 +293,6 @@ export interface CancelShippingFormI {
     item: PurchaseDataI;
     openModal: boolean;
     setOpenModal: Dispatch<SetStateAction<boolean>>;
-}
-export interface CustomPaginationI {
-    onChangePagination: (event: ChangeEvent<unknown> | undefined, page: number) => void;
-    countPagination: number;
-    currentPagePagination?: number;
-    pageSizeSelect: number;
-    onChangePageSizeSelect: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    totalCount: number;
-    defaultPagesSizes?: PaginationOptionsI[];
 }
 export interface PageInputWithButtonI {
     inputValue: number;
@@ -374,15 +345,6 @@ export interface RuleParcelsFormI {
     defaultValuesCouriers?: RuleI['couriers'];
     hasChange: (changed: boolean) => void;
 }
-export interface ToggleButtonI {
-    mode: string;
-    modeLeft: string;
-    modeRight: string;
-    logoLeft: StaticImageData;
-    logoRight: StaticImageData;
-    onChange: (value: string) => void;
-    className?: string;
-}
 export interface TemplateItemI {
     data: UserProductTemplateI;
     mode: 'grid' | 'column';
@@ -401,10 +363,6 @@ export interface InActiveIntegrationI {
     marketplace: string;
     channelId: string;
     href: string;
-}
-export interface NextIntegrationI {
-    image: StaticImageData;
-    name: string;
 }
 export interface RowZoneI {
     setZoneSelectedSet: Dispatch<SetStateAction<Set<string>>>;
@@ -437,44 +395,8 @@ export interface SearchPopupI {
 export interface InitialBannerI {
     onClickButton: () => void;
 }
-export interface SelectableButtonI {
-    selected: boolean;
-    onClick: () => void;
-    content: string | number;
-    align?: 'end' | 'start' | 'center';
-    extraText?: string;
-    endAdornment?: StaticImageData;
-    loading?: boolean;
-}
-export interface SelectableContentI {
-    onChange: (value: string | number | (string | number)[]) => void;
-    content: SurveyTemplateI;
-    gap?: number;
-    value: string | number | (string | number)[];
-    register: UseFormRegister<SurveyFormI>;
-    index: number;
-    setValue: UseFormSetValue<SurveyFormI>;
-    watch: UseFormWatch<SurveyFormI>;
-    errors: FieldErrors<SurveyFormI>;
-    clearErrors: UseFormClearErrors<SurveyFormI>;
-    endAdornment?: StaticImageData;
-    loading?: boolean;
-}
 export interface ConfettiI {
     play: boolean;
-}
-export interface OptionsButtonI {
-    options: (MenuItemI | undefined)[];
-    closeWhenSelect?: boolean;
-    className?: string;
-}
-export interface MenuItemI {
-    onClick: () => void;
-    label: string;
-    loading?: boolean;
-    disabled?: boolean;
-    disableCloseWhenSelect?: boolean;
-    icon?: StaticImageData;
 }
 export interface DynamicSelectorI {
     typeAdornment: 'checkbox' | 'radio';
@@ -538,14 +460,6 @@ export interface CustomRuleFieldsI {
     setValue: UseFormSetValue<RuleI>;
     register: UseFormRegister<RuleI>;
     watch: UseFormWatch<RuleI>;
-}
-export interface ButtonWithMenuI {
-    buttonProps: ButtonProps;
-    menuItems: (MenuItemI | undefined)[];
-    children: ReactNode;
-    clickInBoth?: boolean;
-    className?: string;
-    extraItem?: ReactNode;
 }
 export interface HistoryGuidesI {
     renderInModal?: boolean;

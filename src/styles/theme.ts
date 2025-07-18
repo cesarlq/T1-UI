@@ -1,7 +1,6 @@
 import React from 'react';
 import { createTheme } from '@mui/material/styles';
 import { statusColors } from '../utils/staticData'
-import type { } from '@mui/lab/themeAugmentation';
 import CheckboxIcon from '../assets/icons/CheckboxIcon';
 import UnCheckboxIcon from '../assets/icons/UnCheckboxIcon';
 import IndeterminateCheckboxIcon from '../assets/icons/IndeterminateCheckboxIcon';
@@ -129,53 +128,6 @@ const theme = createTheme({
         colorInherit: {
           backgroundColor: 'white'
         }
-      }
-    },
-    MuiLoadingButton: {
-      variants: [
-        {
-          props: { variant: 'outlined' },
-          style: {
-            border: 'none',
-            boxShadow: '0 0 4px 0 rgba(0, 0, 0, 0.14)',
-            fontWeight: 'normal'
-          }
-        },
-        {
-          props: { variant: 'text' },
-          style: {
-            fontWeight: '600'
-          }
-        },
-        {
-          props: { variant: 'contained' },
-          style: {
-            borderRadius: '10px',
-            background: '#DB3B2B',
-            ':disabled': {
-              background: '#DB3B2B',
-              color: '#fff'
-            },
-          }
-        }
-      ],
-      defaultProps: {
-        variant: 'contained'
-      },
-      styleOverrides: {
-        root: {
-          display: 'flex',
-          mniWidth: '236px',
-          padding: '9px',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '9px',
-        },
-        loadingIndicator: {
-          color: '#fff',
-        },
-
-
       }
     },
     MuiInputBase: {

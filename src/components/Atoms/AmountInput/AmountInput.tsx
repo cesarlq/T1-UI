@@ -1,6 +1,6 @@
 
 import { forwardRef } from 'react';
-import { NumericFormat } from 'react-number-format';
+import { NumberFormatValues, NumericFormat } from 'react-number-format';
 import { Icons } from "../../../index";
 import { AmountInputI, NumericFormatProps } from './AmountInput.types';
 
@@ -22,7 +22,7 @@ export const CurrencyNumericFormat = forwardRef<unknown, NumericFormatProps>(
             <NumericFormat
                 {...other}
                 getInputRef={ref}
-                onValueChange={(values) => {
+                onValueChange={(values: NumberFormatValues) => {
                     const value = values.floatValue !== undefined && min !== undefined
                         ? Math.max(values.floatValue, min)
                         : values.floatValue;

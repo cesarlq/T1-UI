@@ -1,7 +1,6 @@
 import { ChipProps, CheckboxProps, ButtonProps, TextFieldProps, StandardTextFieldProps, Theme, SxProps, SelectChangeEvent, TypographyProps, OutlinedTextFieldProps } from "@mui/material";
 import { JSX, ReactNode, SetStateAction, Dispatch } from "react";
 import { FieldValues, UseControllerProps } from "react-hook-form";
-import { ProfileMenuItem } from "./Profile.interface";
 
 export interface AuthContentI {
   setOpenModal: Dispatch<SetStateAction<boolean>>
@@ -141,77 +140,6 @@ export interface ProfileUser {
   name?: string;
   email: string;
   avatar?: string;
-}
-
-export interface ProfileAvatarMenuProps {
-  /**
-   * User data to display
-   */
-  user: ProfileUser;
-  
-  /**
-   * Menu items to display in the dropdown
-   */
-  menuItems: ProfileMenuItem[];
-  
-  /**
-   * Whether to show the user name in header (next to avatar)
-   * @default true
-   */
-  showNameInHeader?: boolean;
-  
-  /**
-   * Whether to show user details at top of menu
-   * @default true
-   */
-  showUserInMenu?: boolean;
-  
-  /**
-   * Custom avatar component
-   */
-  customAvatar?: ReactNode;
-  
-  /**
-   * Size of avatar in header
-   * @default 40
-   */
-  avatarSize?: number;
-  
-  /**
-   * Size of avatar in menu
-   * @default 50
-   */
-  menuAvatarSize?: number;
-  
-  /**
-   * Primary color for avatar background
-   * @default '#db3b2b'
-   */
-  avatarBgColor?: string;
-  
-  /**
-   * CSS class names for styling
-   */
-  className?: {
-    container?: string;
-    name?: string;
-    avatarButton?: string;
-    menu?: string;
-    menuUserInfo?: string;
-    menuUsername?: string;
-    menuEmail?: string;
-    menuItem?: string;
-  };
-  
-  /**
-   * Additional styles using MUI sx prop
-   */
-  sx?: {
-    container?: SxProps<Theme>;
-    avatar?: SxProps<Theme>;
-    menuAvatar?: SxProps<Theme>;
-    menu?: SxProps<Theme>;
-  };
 }
 
 export interface TableColumnT1<T = any> {

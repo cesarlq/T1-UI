@@ -3,12 +3,10 @@ import { AddressForGuideOrderI, DimensionsForGuideOrderI, GeneratedGuideI, Guide
 import { AutocompleteRenderInputParams, ButtonProps, StandardTextFieldProps, TextFieldProps } from '@mui/material';
 import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from 'react';
 import { AddBalanceFormI } from './user';
-import { StaticImageData } from 'next/image';
 import { PurchaseDataI } from './orders';
 import { GeneralResponseI } from './response';
 import { ZoneDataForFormI, ZoneI } from './zone';
 import { UserProductTemplateI } from './templates';
-import { PaginationOptionsI } from './layout';
 import { RuleI } from './rules';
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 import { ElkNode as ElkNodeType } from "./rules";
@@ -216,17 +214,6 @@ export interface SectionPaymentI {
     errorCarNumberByIssuer?: string
 }
 
-export interface OptionModeI {
-    onClick?: () => void
-    selected: boolean
-    image: StaticImageData
-    title: string
-    description: string
-    showOptionMenu?: boolean
-    onClickEdit?: () => void
-    oneItemMode?: boolean
-}
-
 export interface CustomAmountInputI<T extends FieldValues>
     extends UseControllerProps<T> {
     currency?: string;
@@ -285,13 +272,6 @@ export interface DimensionsFormI {
     mode?: 'edit' | 'create'
 }
 
-export interface ResponseAlertI {
-    title: string
-    description: string
-    textButton: string
-    onClickButton: () => void
-    iconAlert: StaticImageData
-}
 
 export interface TextFieldAndButtonI {
     className?: string
@@ -313,15 +293,6 @@ export interface CancelShippingFormI {
     setOpenModal: Dispatch<SetStateAction<boolean>>
 }
 
-export interface CustomPaginationI {
-    onChangePagination: (event: ChangeEvent<unknown> | undefined, page: number) => void
-    countPagination: number
-    currentPagePagination?: number
-    pageSizeSelect: number
-    onChangePageSizeSelect: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-    totalCount: number
-    defaultPagesSizes?: PaginationOptionsI[]
-}
 
 export interface PageInputWithButtonI {
     inputValue: number
@@ -383,15 +354,7 @@ export interface RuleParcelsFormI {
     defaultValuesCouriers?: RuleI['couriers']
     hasChange: (changed: boolean) => void
 }
-export interface ToggleButtonI {
-    mode: string
-    modeLeft: string
-    modeRight: string
-    logoLeft: StaticImageData
-    logoRight: StaticImageData
-    onChange: (value: string) => void
-    className?: string
-}
+
 
 export interface TemplateItemI {
     data: UserProductTemplateI
@@ -416,10 +379,6 @@ export interface InActiveIntegrationI {
     href: string
 }
 
-export interface NextIntegrationI {
-    image: StaticImageData
-    name: string
-}
 
 export interface RowZoneI {
     setZoneSelectedSet: Dispatch<SetStateAction<Set<string>>>
@@ -454,48 +413,10 @@ export interface InitialBannerI {
     onClickButton: () => void
 }
 
-export interface SelectableButtonI {
-    selected: boolean
-    onClick: () => void
-    content: string | number
-    align?: 'end' | 'start' | 'center'
-    extraText?: string
-    endAdornment?: StaticImageData,
-    loading?: boolean
-}
 
-export interface SelectableContentI {
-    onChange: (value: string | number | (string | number)[]) => void
-    content: SurveyTemplateI,
-    gap?: number
-    value: string | number | (string | number)[]
-    register: UseFormRegister<SurveyFormI>
-    index: number
-    setValue: UseFormSetValue<SurveyFormI>
-    watch: UseFormWatch<SurveyFormI>
-    errors: FieldErrors<SurveyFormI>
-    clearErrors: UseFormClearErrors<SurveyFormI>
-    endAdornment?: StaticImageData
-    loading?: boolean
-}
 
 export interface ConfettiI {
     play: boolean
-}
-
-export interface OptionsButtonI {
-    options: (MenuItemI | undefined)[]
-    closeWhenSelect?: boolean
-    className?: string
-}
-
-export interface MenuItemI {
-    onClick: () => void
-    label: string,
-    loading?: boolean
-    disabled?: boolean
-    disableCloseWhenSelect?: boolean
-    icon?: StaticImageData
 }
 
 export interface DynamicSelectorI {
@@ -568,15 +489,6 @@ export interface CustomRuleFieldsI {
     setValue: UseFormSetValue<RuleI>
     register: UseFormRegister<RuleI>
     watch: UseFormWatch<RuleI>,
-}
-
-export interface ButtonWithMenuI {
-    buttonProps: ButtonProps
-    menuItems: (MenuItemI | undefined)[]
-    children: ReactNode
-    clickInBoth?: boolean
-    className?: string
-    extraItem?: ReactNode
 }
 
 export interface HistoryGuidesI {

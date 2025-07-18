@@ -35,8 +35,8 @@
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@mui/material": "^5.0.0 || ^6.0.0 || ^7.0.0",
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "peerDependenciesMeta": {
     "react-dom": {
@@ -47,34 +47,44 @@
     }
   },
   "dependencies": {
-    "clsx": "^2.1.1"
+    "@xyflow/react": "^12.8.2",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "framer-motion": "^12.23.6",
+    "lucide-react": "^0.525.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-hook-form": "^7.60.0",
+    "react-number-format": "^5.4.4",
+    "react-router-dom": "^7.7.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.2.0",
     "@mui/material": "^7.2.0",
-    "@storybook/addon-docs": "^9.0.17",
-    "@storybook/addon-essentials": "^9.0.17",
-    "@storybook/addon-themes": "^9.0.17",
-    "@storybook/react-vite": "^9.0.17",
-    "@types/node": "^24.0.14",
-    "@types/react": "^18.3.23",
-    "@types/react-dom": "^18.3.7",
+    "@storybook/addon-docs": "^8.0.6",
+    "@storybook/addon-essentials": "^8.0.6",
+    "@storybook/addon-themes": "^8.0.6",
+    "@storybook/react-vite": "^8.0.6",
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.70",
+    "@types/react-beautiful-dnd": "^13.1.8",
+    "@types/react-dom": "^18.2.23",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
     "@vitejs/plugin-react": "^4.6.0",
     "@vitest/coverage-v8": "^3.0.0",
     "@vitest/ui": "^3.0.0",
-    "eslint": "^9.19.0",
+    "eslint": "^9.0.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "glob": "^11.0.0",
-    "postcss": "^8.4.57",
-    "postcss-modules": "^6.0.2",
+    "postcss": "^8.4.38",
+    "postcss-modules": "^4.3.1",
     "sass": "^1.89.2",
-    "storybook": "^9.0.17",
-    "typescript": "^5.8.3",
+    "storybook": "^8.0.6",
+    "typescript": "^5.4.5",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^4.5.0",
     "vite-plugin-lib-inject-css": "^2.1.1",
@@ -102,6 +112,6 @@
     "material-ui",
     "design-system"
   ],
-  "author": "Your Name",
+  "author": "Cesar",
   "license": "MIT"
 }
