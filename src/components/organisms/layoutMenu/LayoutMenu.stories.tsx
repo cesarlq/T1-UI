@@ -132,7 +132,7 @@ const menuPaths: MenuPath[] = [
         href: '/orders/pending', 
         text: 'Pendientes',
         hasNotification: true,
-        endAdornmentSubPath: <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">12</span>
+        endAdornmentSubPath: 12
       },
       { href: '/orders/processing', text: 'En Proceso' },
       { href: '/orders/completed', text: 'Completadas' },

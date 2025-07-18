@@ -1,10 +1,10 @@
 import { TextFieldProps } from "@mui/material"
 
-export interface CustomInputI {
+export interface CustomInputI extends Omit<TextFieldProps, 'children'> {
     label?: string
     className?: string
     flexDirectionRow?: boolean
-    textFieldProps: TextFieldProps
+    textFieldProps?: Partial<TextFieldProps> // Ahora opcional para props adicionales
     children?: React.ReactNode
     style?: React.CSSProperties
     errorMessage?: string

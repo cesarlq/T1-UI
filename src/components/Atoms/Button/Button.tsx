@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, ButtonProps, CircularProgress } from '@mui/material';
-import styles from '@/styles/common/Button.module.scss';
+import styles from './Button.module.scss';
 import { ButtonAtomProps } from './Button.types';
 
 

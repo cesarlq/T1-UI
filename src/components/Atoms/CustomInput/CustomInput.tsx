@@ -12,36 +12,41 @@ export default function CustomInput({
     className,
     flexDirectionRow,
     errorMessage,
-    hasChange
+    hasChange,
+    ...textFieldPropsRest
 }: CustomInputI) {
+    
+    const combinedTextFieldProps = {
+        ...textFieldPropsRest,
+        ...textFieldProps,
+    };
+
     return (
         <div
-            className={`${styles.container} ${textFieldProps.className} ${className}`}
-            style={textFieldProps.fullWidth ? { width: '100%', ...style } : style}
+            className={`${styles.container} ${className || ''}`}
+            style={combinedTextFieldProps.fullWidth ? { width: '100%', ...style } : style}
             data-flex-direction={flexDirectionRow}
-            data-disabled={textFieldProps.disabled}
+            data-disabled={combinedTextFieldProps.disabled}
         >
-            {
-                label && <span className={styles.label}>{label}</span>
-            }
+            {label && <span className={styles.label}>{label}</span>}
+            
             <TextField
-                {...textFieldProps}
+                {...combinedTextFieldProps}
                 InputProps={{
-                    ...textFieldProps.InputProps,
+                    ...combinedTextFieldProps.InputProps,
                     endAdornment: hasChange
                         ? <DirtyIndicator
-                            data-select={textFieldProps.select}
+                            data-select={combinedTextFieldProps.select}
                             className="data-[select=true]:mr-4" />
-                        :textFieldProps.InputProps?.endAdornment
+                        : combinedTextFieldProps.InputProps?.endAdornment
                 }}
             >
-                {
-                    textFieldProps.select && children
-                }
+                {combinedTextFieldProps.select && children}
             </TextField>
+            
             <ErrorMessage
                 text={errorMessage}
-                className={`${styles['error-message']} ${textFieldProps.helperText && styles['error-with-helper']}`}
+                className={`${styles['error-message']} ${combinedTextFieldProps.helperText && styles['error-with-helper']}`}
             />
         </div>
     );

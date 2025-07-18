@@ -2,9 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from '@/styles/common/ItemLink.module.scss';
-
-// Si tienes el SVG Ellipse, impórtalo aquí
-// import Ellipse from '../../../assets/Ellipse55.svg';
+import Ellipse from '@/assets/svg-icons/Ellipse55.svg?react';
 
 const springConfig = {
   type: "spring" as const,
@@ -21,10 +19,10 @@ export const NotificationDot = React.memo(() => (
     transition={springConfig}
   >
     {/* Si tienes el componente Ellipse */}
-    {/* <Ellipse height={4} width={4} /> */}
+    <Ellipse height={4} width={4} />
     
     {/* O usa un div simple */}
-    <div style={{ width: 4, height: 4, borderRadius: '50%', backgroundColor: 'currentColor' }} />
+    {/* <div style={{ width: 4, height: 4, borderRadius: '50%', backgroundColor: 'currentColor' }} /> */}
   </motion.div>
 ));
 

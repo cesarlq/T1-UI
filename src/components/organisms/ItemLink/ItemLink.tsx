@@ -67,7 +67,7 @@ export const ItemLink = React.memo(function ItemLink({
   activeSubPath,
   setActiveSubPath,
   mobile,
-  currentUserId = '',
+  currentUserId,
   restrictedPaths = [],
   onNavigate = () => {},
   onToggleOpen = () => {},
@@ -185,20 +185,12 @@ export const ItemLink = React.memo(function ItemLink({
   }, [mouseX, mouseY]);
 
   // Ripple effect handler
-  const handleRipple = useCallback((e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    dispatch({ type: 'ADD_RIPPLE', payload: { x, y } });
-    triggerHaptic(5);
-  }, [triggerHaptic]);
 
   // Click handlers
   const handleItemClick = useCallback(async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    handleRipple(e);
     
     if (state.isNavigating) return;
 
@@ -239,13 +231,12 @@ export const ItemLink = React.memo(function ItemLink({
         setTimeout(() => setShowSuccess(false), 600);
       }
     }
-  }, [state.isNavigating, handleRipple, setActivePath, safeHref, onClickPath, index, subPaths, autoNavigateToFirstSubPath, mobile, filteredSubPaths, pathname, setActiveSubPath, handleNavigation, triggerHaptic, openSubMenu]);
+  }, [state.isNavigating, setActivePath, safeHref, onClickPath, index, subPaths, autoNavigateToFirstSubPath, mobile, filteredSubPaths, pathname, setActiveSubPath, handleNavigation, triggerHaptic, openSubMenu]);
 
   const handleSubPathClick = useCallback(async (e: React.MouseEvent, subHref: string) => {
     e.preventDefault();
     e.stopPropagation();
     
-    handleRipple(e);
     
     if (!state.isNavigating) {
       const success = await handleNavigation(subHref);
@@ -254,7 +245,7 @@ export const ItemLink = React.memo(function ItemLink({
         setTimeout(() => setShowSuccess(false), 600);
       }
     }
-  }, [state.isNavigating, handleRipple, handleNavigation]);
+  }, [state.isNavigating, handleNavigation]);
 
   // Keyboard navigation
   const { handleKeyDown } = useKeyboardNavigation({
@@ -343,19 +334,6 @@ export const ItemLink = React.memo(function ItemLink({
           variants={itemVariants}
           transition={springConfig}
         >
-          <div className={styles.rippleContainer}>
-            <AnimatePresence>
-              {state.ripples.map(ripple => (
-                <RippleEffect
-                  key={ripple.id}
-                  x={ripple.x}
-                  y={ripple.y}
-                  id={ripple.id}
-                  onComplete={(id) => dispatch({ type: 'REMOVE_RIPPLE', payload: id })}
-                />
-              ))}
-            </AnimatePresence>
-          </div>
 
           <AnimatePresence>
             {showSuccess && <NavigationSuccess />}
@@ -486,19 +464,6 @@ export const ItemLink = React.memo(function ItemLink({
       variants={itemVariants}
       transition={springConfig}
     >
-      <div className={styles.rippleContainer}>
-        <AnimatePresence>
-          {state.ripples.map(ripple => (
-            <RippleEffect
-              key={ripple.id}
-              x={ripple.x}
-              y={ripple.y}
-              id={ripple.id}
-              onComplete={(id) => dispatch({ type: 'REMOVE_RIPPLE', payload: id })}
-            />
-          ))}
-        </AnimatePresence>
-      </div>
 
       <AnimatePresence>
         {showSuccess && <NavigationSuccess />}
