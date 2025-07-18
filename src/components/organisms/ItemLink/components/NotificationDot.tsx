@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import styles from '@/styles/common/ItemLink.module.scss';
 
 // Si tienes el SVG Ellipse, impórtalo aquí
-import Ellipse from '@/assets/svg-icons/Ellipse55.svg';
+import Ellipse from '@/assets/svg-icons/Ellipse55.svg?react';
 
 const springConfig = {
   type: "spring" as const,
