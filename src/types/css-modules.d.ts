@@ -1,25 +1,27 @@
+// src/types/css-modules.d.ts
+declare module '*.module.css' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
+}
+
 declare module '*.module.scss' {
-  const classes: { [key: string]: string };
+  const classes: { readonly [key: string]: string };
   export default classes;
 }
 
 declare module '*.module.sass' {
-  const classes: { [key: string]: string };
+  const classes: { readonly [key: string]: string };
   export default classes;
 }
 
-declare module '*.module.css' {
-  const classes: { [key: string]: string };
-  export default classes;
-}
-
-// Si también usas SCSS normales
-declare module '*.scss' {
-  const content: { [key: string]: string };
+// Para SVGs importados como componentes React
+declare module '*.svg?react' {
+  import { FC, SVGProps } from 'react';
+  const content: FC<SVGProps<SVGElement>>;
   export default content;
 }
 
-declare module '*.sass' {
-  const content: { [key: string]: string };
+declare module '*.svg' {
+  const content: string;
   export default content;
 }
