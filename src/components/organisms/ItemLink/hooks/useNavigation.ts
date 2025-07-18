@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 interface UseNavigationProps {
   dispatch: any;
   concatStoreId?: boolean;
-  currentUserId?: string;
+  currentUserId?: string | number;
   setActiveSubPath: (path: string) => void;
   onNavigate?: (path: string) => void;
   mobile?: boolean;
