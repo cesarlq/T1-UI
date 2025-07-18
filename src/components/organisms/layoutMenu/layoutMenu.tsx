@@ -102,7 +102,7 @@ function LayoutMenuContent({
 }: LayoutMenuProps) {
   const theme = useTheme();
   const { isOpen, isReduced, setOpen, setReduced, toggleOpen, toggleReduced } = useMenu();
-  const { viewport, isMobile, isTablet, isDesktop, dimensions } = useViewport(config.customBreakpoints);
+  const { viewport, isMobile, dimensions } = useViewport(config.customBreakpoints);
   const { preferences, savePreferences } = useMenuPreferences(config.persistPreferences ?? true);
   
   // Referencias para evitar re-renderizados innecesarios

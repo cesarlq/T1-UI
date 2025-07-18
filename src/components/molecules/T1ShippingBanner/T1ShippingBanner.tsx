@@ -18,7 +18,6 @@ export const T1ShippingBanner = memo<T1ShippingBannerProps>(({
   onToggleReduce,
   onToggleOpen,
   isReduced = false,
-  isOpen = false,
   // Props legacy
   onReducerHandle,
   sidebarReduce = false

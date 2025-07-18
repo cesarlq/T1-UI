@@ -1,0 +1,3 @@
+import { NavbarPropsI } from './Navbar.types';
+export declare function Navbar({ className, showInfoBand, showBalance, showSearchInput, user, stores, currentStore, shippingBannerTitle, profileMenuItems, BalanceBannerComponent, balanceBannerConfig, searchPlaceholder, trackingUrl, accountUrl, t1SelectorConfig, texts, iconProfile, colorProfile, onLogout, onSearch, onStoreChange, onNavigate, onReducerHandle, sidebarReduce, isMobile }: NavbarPropsI): import("react/jsx-runtime").JSX.Element;
+//# sourceMappingURL=Navbar.d.ts.map

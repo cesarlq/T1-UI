@@ -1,0 +1,1 @@
+{"version":3,"file":"useScreenDimensions.d.ts","sourceRoot":"","sources":["../../src/hooks/useScreenDimensions.tsx"],"names":[],"mappings":"AAEA,MAAM,WAAW,oBAAoB;IACjC,KAAK,EAAE,MAAM,GAAG,IAAI,CAAA;IACpB,MAAM,EAAE,MAAM,GAAG,IAAI,CAAA;CACxB;AAED,eAAO,MAAM,mBAAmB,4BA8B/B,CAAC;AAEF,eAAe,mBAAmB,CAAC"}

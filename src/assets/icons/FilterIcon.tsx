@@ -1,4 +1,3 @@
-import * as React from "react";
 import { SVGProps } from "react";
 const FilterIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={22} height={14} {...props}>

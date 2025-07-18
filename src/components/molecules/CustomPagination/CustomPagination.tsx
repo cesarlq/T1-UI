@@ -18,13 +18,11 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   rowsPerPage,
   page,
   onPageChange,
-  onRowsPerPageChange,
   rowsPerPageOptions = [5, 10, 25]
 }) => {
   rowsPerPage = rowsPerPage ?? rowsPerPageOptions[0];
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   const totalPages = Math.ceil(count / rowsPerPage);
   const [goToPage, setGoToPage] = React.useState<string>((page + 1).toString());

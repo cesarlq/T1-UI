@@ -8,7 +8,6 @@ import { ChevronDown } from 'lucide-react'; // Usando lucide-react como alternat
 import styles from '@/styles/common/ItemLink.module.scss';
 
 // Componentes
-import { RippleEffect } from './components/RippleEffect';
 import { NotificationDot } from './components/NotificationDot';
 import { NavigationSuccess } from './components/NavigationSuccess';
 import { SubMenuItem } from './components/SubMenuItem';
@@ -62,7 +61,6 @@ export const ItemLink = React.memo(function ItemLink({
   enlargeByHover = false,
   onClickPath,
   openSubMenu,
-  activePath,
   setActivePath,
   activeSubPath,
   setActiveSubPath,

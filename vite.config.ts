@@ -38,7 +38,8 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/variables" as *;`,
+        // Eliminamos additionalData para evitar problemas
+        // Los componentes importarán las variables manualmente cuando las necesiten
       },
     },
   },

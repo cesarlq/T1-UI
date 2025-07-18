@@ -29,7 +29,7 @@ const CustomSearchField = styled('div')(({ theme }) => ({
 	}
 }));
 
-const SearchInput: React.FC<SearchInputI> = ({ textFieldProps, defaultValue, onChange, onClickButton,className }) => {
+const SearchInput: React.FC<SearchInputI> = ({ textFieldProps, defaultValue, onChange,className }) => {
 	const [valueInput, setValueInput] = useState<string>('');
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

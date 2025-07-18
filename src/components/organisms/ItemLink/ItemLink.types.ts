@@ -1,5 +1,5 @@
 // components/ItemLink/ItemLink.types.ts
-import { ReactNode, MouseEvent } from 'react';
+import { ReactNode } from 'react';
 
 export interface SubPathItem {
   href: string;

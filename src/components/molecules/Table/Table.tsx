@@ -107,7 +107,7 @@ const Table = <T extends Record<string, any>>({
 
     const searchTermLower = searchTerm.toLowerCase();
     const filtered = data.filter(row => {
-      return Object.entries(row).some(([key, value]) => {
+      return Object.entries(row).some(([value]) => {
         // Only search through string or number values
         if (typeof value === 'string' || typeof value === 'number') {
           return String(value).toLowerCase().includes(searchTermLower);

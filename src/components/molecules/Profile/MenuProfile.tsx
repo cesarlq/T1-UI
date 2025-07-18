@@ -46,7 +46,7 @@ export default function MenuProfile({
     }
   };
 
-    const renderProfileMenuItem = (item: ProfileMenuItem, index: number) => {
+    const renderProfileMenuItem = (item: ProfileMenuItem) => {
     return (
       <React.Fragment key={item.id}>
         <MuiMenuItem
@@ -137,7 +137,7 @@ export default function MenuProfile({
       />
       
       {/* Renderizar items configurables */}
-      {profileMenuItems && profileMenuItems.map((item, index) => renderProfileMenuItem(item, index))}
+      {profileMenuItems && profileMenuItems.map((item) => renderProfileMenuItem(item))}
       
       {/* Separador antes del logout si hay items personalizados */}
       {/* {profileMenuItems.length > 0 && <Divider />} */}

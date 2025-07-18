@@ -1,5 +1,4 @@
 import { 
-  Switch as MuiSwitch, 
   SwitchProps as MuiSwitchProps, 
   FormControlLabelProps
 } from '@mui/material';
