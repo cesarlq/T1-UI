@@ -1,0 +1,71 @@
+import { balanceI } from '../../molecules/BalanceBanner';
+import { ReactNode, ComponentType } from 'react';
+export interface SubPath {
+    href: string;
+    text: string;
+    hasNotification?: boolean;
+    endAdornmentSubPath?: ReactNode | string;
+}
+export interface MenuPath {
+    href?: string;
+    text?: string;
+    icon?: any;
+    activeIcon?: any;
+    subPaths?: SubPath[];
+    concatStoreId?: boolean;
+    endAdornment?: ReactNode;
+    type?: string | any | 'INFORMATIVE_TEXT';
+    component?: ComponentType<any>;
+    hasNotification?: boolean;
+    autoNavigateToFirstSubPath?: boolean;
+    dataTourTarget?: string;
+}
+export interface SidebarPropsI {
+    shippingBannerTitle?: string;
+    className?: string;
+    menuPaths?: MenuPath[];
+    TopBanner?: ComponentType;
+    BottomBanner?: ComponentType<{
+        className?: string;
+    }> | ReactNode;
+    BalanceBannerComponent?: ComponentType<{
+        className?: string;
+    }>;
+    showCreateButton?: boolean;
+    showInfoBand?: boolean;
+    showBalance?: boolean;
+    balanceBannerConfig?: {
+        balance: balanceI;
+        BALLANCE_PATH: string;
+    };
+    createButtonText?: string;
+    createButtonPath?: string;
+    breakpointReduce?: number;
+    breakpointMobile?: number;
+    currentUserId?: string | number;
+    restrictedPaths?: string[];
+    stores?: any[];
+    currentStore?: any;
+    onStoreChange?: (storeId: number) => void;
+    createStoreUrl?: string;
+    defaultAutoNavigateToFirstSubPath?: boolean;
+    isOpen?: boolean;
+    isReduced?: boolean;
+    isMobile?: boolean;
+    onToggleOpen?: (isOpen: boolean) => void;
+    onToggleReduce?: (isReduced: boolean) => void;
+    onCreateClick?: () => void;
+    onNavigate?: (path: string) => void;
+    /**
+     * La ruta actual de la aplicación. Reemplaza el uso de usePathname() de Next.js
+     * @default '/'
+     */
+    currentPath?: string;
+    /**
+     * Callback que se ejecuta cuando el Sidebar necesita cambiar la ruta.
+     * Reemplaza el uso de router.push() de Next.js
+     * @param path - La nueva ruta a la que navegar
+     */
+    onPathChange?: (path: string) => void;
+}
+//# sourceMappingURL=Sidebar.types.d.ts.map

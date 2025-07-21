@@ -1,4 +1,3 @@
-import { StaticImageData } from "next/image";
 import { StatusAsyncThunkI } from "./redux";
 import { GeneralResponseI } from "./response";
 import { UserI } from "./user";
@@ -264,10 +263,6 @@ export interface IncidenceCountersI {
     }
 }
 
-export interface IncidenceOptionByIncidenceTypeI {
-    label: string,
-    icon: StaticImageData
-}
 
 export interface FileIncidenceErrorsI {
     type?: boolean

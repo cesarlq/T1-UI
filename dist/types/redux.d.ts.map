@@ -1,0 +1,1 @@
+{"version":3,"file":"redux.d.ts","sourceRoot":"","sources":["../../src/types/redux.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,iBAAiB,CAAC,CAAC,GAAG,SAAS;IAC5C,MAAM,EAAE,MAAM,GAAG,SAAS,GAAG,WAAW,GAAG,QAAQ,CAAC;IACpD,KAAK,EAAE,IAAI,GAAG,MAAM,CAAA;IACpB,OAAO,CAAC,EAAE,CAAC,CAAA;IACX,MAAM,CAAC,EAAE,MAAM,EAAE,CAAA;CACpB"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"responseKidal.d.ts","sourceRoot":"","sources":["../../src/types/responseKidal.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,UAAU,CAAC;AAEzC,MAAM,WAAW,cAAc,CAAC,CAAC;IAC7B,IAAI,EAAE,aAAa,EAAE,CAAC;IACtB,QAAQ,EAAE,EAAE,CAAA;IACZ,UAAU,EAAE;QACR,eAAe,EAAE,MAAM,CAAC;QACxB,SAAS,EAAE,MAAM,CAAA;KACpB,CAAC;IACF,MAAM,EAAE,MAAM,CAAA;CACjB"}

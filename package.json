@@ -6,47 +6,42 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "style": "./dist/index.css",
   "files": [
     "dist"
   ],
   "sideEffects": [
     "**/*.css",
-    "**/*.scss"
+    "./dist/index.js",
+    "./dist/index.cjs"
   ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "style": "./dist/index.css",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./styles": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
-    },
-    "./dist/lib/styles.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
-    },
-    "./dist/index.css": "./dist/index.css",
-    "./*.css": "./dist/*.css"
+    "./styles": "./dist/index.css",
+    "./dist/index.css": "./dist/index.css"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "type-check": "tsc --noEmit",
-    "clean": "rm -rf dist",
-    "post-build": "echo 'Build completed successfully!'",
-    "prepublishOnly": "npm run clean && npm run build",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "prebuild": "rimraf dist",
+    "build": "tsc --noEmit && vite build",
+    "postbuild": "npm run verify-build",
+    "verify-build": "ls -la dist/ && echo '✅ Build files:' && find dist -name '*.css' -o -name '*.js' -o -name '*.d.ts' | sort",
+    "build:watch": "vite build --watch",
+    "types": "tsc --emitDeclarationOnly --declaration --declarationDir dist",
+    "dev": "vite build --watch",
+    "link:local": "npm link",
+    "unlink:local": "npm unlink"
   },
   "peerDependencies": {
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
-    "@mui/material": "^5.0.0",
+    "@mui/material": "^5.0.0 || ^6.0.0 || ^7.0.0",
     "react": ">=16.8.0 || >=17.0.0 || >=18.0.0",
-    "react-dom": ">=16.8.0 || >=17.0.0 || >=18.0.0",
-    "react-router-dom": "^6.0.0 || ^7.0.0"
+    "react-dom": ">=16.8.0 || >=17.0.0 || >=18.0.0"
   },
   "peerDependenciesMeta": {
     "react-dom": {
@@ -67,46 +62,30 @@
     "@mui/material": "^7.2.0",
     "@mui/system": "^7.2.0",
     "@mui/x-date-pickers": "^8.8.0",
-    "@storybook/addon-docs": "^9.0.17",
-    "@storybook/addon-onboarding": "^9.0.17",
-    "@storybook/addon-themes": "^9.0.17",
-    "@storybook/addons": "^7.6.17",
-    "@storybook/react-vite": "^9.0.17",
-    "@storybook/theming": "^9.0.0-alpha.1",
     "@types/node": "^24.0.14",
     "@types/react": "^18.3.23",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.6.0",
-    "css-loader": "^7.1.2",
-    "esbuild-sass-plugin": "^3.3.1",
-    "sass": "^1.89.2",
-    "sass-loader": "^16.0.5",
-    "storybook": "^9.0.17",
-    "style-loader": "^4.0.0",
-    "tsup": "^8.5.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "rimraf": "^5.0.7",
     "typescript": "^5.8.3",
     "vite": "^5.0.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
     "vite-plugin-svgr": "^4.3.0"
   },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "react",
-    "components",
-    "ui",
-    "library",
-    "typescript"
-  ],
   "dependencies": {
-    "@storybook/testing-library": "^0.2.1",
+    "@xyflow/react": "^12.8.2",
+    "clsx": "^2.1.1",
     "country-flag-icons": "^1.5.19",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "framer-motion": "^12.23.6",
     "lucide-react": "^0.525.0",
-    "react-hook-form": "^7.60.0"
+    "react-beautiful-dnd": "^13.1.1",
+    "react-hook-form": "^7.60.0",
+    "tailwind-merge": "^2.3.0"
   }
 }
