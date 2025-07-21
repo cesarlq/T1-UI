@@ -183,6 +183,9 @@ export function Sidebar({
   useEffect(() => {
     if (!pathname) return;
 
+    // Limpiar pendingNavigation cuando cambia el pathname
+    setPendingNavigation('');
+
     // Buscar el item que coincide con la ruta actual
     let matchFound = false;
 
@@ -326,20 +329,10 @@ export function Sidebar({
     }
   };
 
-  // Función para manejar navegación inmediata con limpieza de estado
+  // Función para manejar navegación - simplificada para evitar conflictos de estado
   const handleInternalNavigation = (path: string) => {
-    // Limpiar inmediatamente el estado visual anterior
-    setPendingNavigation(path);
-    setActiveSubPath(path);
-    
-    // Cerrar cualquier submenú abierto cuando se navega a un item sin subpaths con animación
+    // Solo realizar la navegación, dejar que el useEffect maneje los estados activos
     const targetItem = menuPaths.find(item => item.href === path);
-    if (targetItem && (!targetItem.subPaths || targetItem.subPaths.length === 0)) {
-      // Delay para permitir que la animación de cierre se complete
-      setTimeout(() => {
-        setCurrentSubmenuOpen(-1);
-      }, 150); // 150ms para una animación suave
-    }
     
     // Realizar la navegación con contexto
     handleNavigation(path, { 
@@ -348,37 +341,19 @@ export function Sidebar({
       fromMobile: isMobile 
     });
     
-    // Limpiar el estado pendiente después de un breve delay
-    setTimeout(() => {
-      setPendingNavigation('');
-    }, 500);
-    
     if (isMobile) {
       setTimeout(() => handleToggleOpen(false), 100);
     }
   };
 
-  // Función para manejar el cambio de activePath con limpieza inmediata
+  // Función para manejar el cambio de activePath - simplificada
   const handleSetActivePath = (path: string) => {
-    // Limpiar estados anteriores inmediatamente
     setActivePath(path);
-    setPendingNavigation(path);
-    
-    // Cerrar cualquier submenú abierto cuando se selecciona un item sin subpaths con animación
-    const targetItem = menuPaths.find(item => item.href === path);
-    if (targetItem && (!targetItem.subPaths || targetItem.subPaths.length === 0)) {
-      // Delay para permitir que la animación de cierre se complete
-      setTimeout(() => {
-        setCurrentSubmenuOpen(-1);
-      }, 150); // 150ms para una animación suave
-    }
   };
 
-  // Función para manejar el cambio de activeSubPath con limpieza inmediata
+  // Función para manejar el cambio de activeSubPath - simplificada
   const handleSetActiveSubPath = (path: string) => {
-    // Limpiar estados anteriores inmediatamente
     setActiveSubPath(path);
-    setPendingNavigation(path);
   };
 
   const handleMouseEnter = () => {

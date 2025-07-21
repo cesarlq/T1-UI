@@ -1,7 +1,6 @@
 // components/ItemLink/ItemLink.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { 
   Home, 
   Settings, 
@@ -31,7 +30,6 @@ const styles = `
     width: 280px;
     min-height: 400px;
     border-radius: 8px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
   
   .sidebar-container.dark {

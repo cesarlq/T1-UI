@@ -95,9 +95,9 @@ export const ItemLink = React.memo(function ItemLink({
   pendingNavigation = ''
 }: ItemLinkProps) {
   
-  // React Router hooks (reemplazando useSmartRouter)
-  const location = useSafeLocation();
-  const pathname = location.pathname;
+  // Usar currentPath del Sidebar en lugar de location.pathname para evitar conflictos
+  // El Sidebar ya maneja la sincronización con el router
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '/';
   
   // State & Refs
   const itemRef = useRef<HTMLLIElement>(null);
@@ -210,7 +210,7 @@ export const ItemLink = React.memo(function ItemLink({
     triggerHaptic(5);
   }, [triggerHaptic]);
 
-  // Click handlers
+  // Click handlers - simplificado para evitar conflictos de estado
   const handleItemClick = useCallback(async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -225,16 +225,10 @@ export const ItemLink = React.memo(function ItemLink({
         if (openSubMenu) {
           onClickPath(-1);
         } else {
-          setActivePath(safeHref);
           onClickPath(index);
-        }
-        
-        if (subPaths.some(subPath => subPath.href === pathname)) {
-          setActiveSubPath(pathname);
         }
         return;
       } else {
-        setActivePath(safeHref);
         onClickPath(index);
         
         if (autoNavigateToFirstSubPath && filteredSubPaths[0]) {
@@ -248,7 +242,7 @@ export const ItemLink = React.memo(function ItemLink({
       return;
     }
 
-    setActivePath(safeHref);
+    // Solo navegar, dejar que el Sidebar maneje los estados activos
     if (safeHref) {
       const success = await handleNavigation(safeHref);
       if (success) {
@@ -256,7 +250,7 @@ export const ItemLink = React.memo(function ItemLink({
         setTimeout(() => setShowSuccess(false), 600);
       }
     }
-  }, [state.isNavigating, handleRipple, setActivePath, safeHref, onClickPath, index, subPaths, autoNavigateToFirstSubPath, mobile, filteredSubPaths, pathname, setActiveSubPath, handleNavigation, triggerHaptic, openSubMenu]);
+  }, [state.isNavigating, handleRipple, safeHref, onClickPath, index, subPaths, autoNavigateToFirstSubPath, mobile, filteredSubPaths, handleNavigation, triggerHaptic, openSubMenu]);
 
   const handleSubPathClick = useCallback(async (e: React.MouseEvent, subHref: string) => {
     e.preventDefault();

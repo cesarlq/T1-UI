@@ -107,7 +107,8 @@ export const useNavigation = ({
 
       dispatch({ type: "SET_PROGRESS", payload: 100 });
 
-      setActiveSubPath(finalHref);
+      // No actualizar setActiveSubPath aquí, dejar que el Sidebar lo maneje
+      // setActiveSubPath(finalHref);
 
       triggerHaptic([10, 50]);
 
