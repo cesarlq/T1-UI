@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useEffect, useCallback, useMemo, useRef, useLayoutEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { Navbar } from '../Navbar/Navbar';
@@ -56,35 +56,53 @@ const useViewport = (customBreakpoints?: { mobile?: number; tablet?: number }) =
   return { viewport, isMobile, isTablet, isDesktop, dimensions };
 };
 
-// Hook para persistir preferencias del usuario
+// Hook optimizado para persistir preferencias
 const useMenuPreferences = (enabled: boolean = true) => {
+  // 🔥 Inicializar con el valor correcto desde el principio
   const [preferences, setPreferences] = React.useState<{
     isReduced?: boolean;
     lastViewport?: MenuState['viewport'];
-  }>({});
-  
-  useEffect(() => {
-    if (!enabled || typeof window === 'undefined') return;
+  }>(() => {
+    if (!enabled || typeof window === 'undefined') return {};
     
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        setPreferences(JSON.parse(stored));
-      }
+      return stored ? JSON.parse(stored) : {};
     } catch (error) {
       console.warn('Failed to load menu preferences:', error);
+      return {};
     }
-  }, [enabled]);
+  });
   
-  const savePreferences = useCallback((prefs: typeof preferences) => {
+  // 🔥 Usar useRef para savePreferences para evitar re-renders
+  const savePreferencesRef = useRef((prefs: typeof preferences) => {
     if (!enabled || typeof window === 'undefined') return;
     
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+      setPreferences(prefs);
     } catch (error) {
       console.warn('Failed to save menu preferences:', error);
     }
+  });
+  
+  // Actualizar la referencia cuando enabled cambie
+  useEffect(() => {
+    savePreferencesRef.current = (prefs: typeof preferences) => {
+      if (!enabled || typeof window === 'undefined') return;
+      
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+        setPreferences(prefs);
+      } catch (error) {
+        console.warn('Failed to save menu preferences:', error);
+      }
+    };
   }, [enabled]);
+  
+  const savePreferences = useCallback((prefs: typeof preferences) => {
+    savePreferencesRef.current(prefs);
+  }, []);
   
   return { preferences, savePreferences };
 };
@@ -106,9 +124,22 @@ function LayoutMenuContent({
   const { preferences, savePreferences } = useMenuPreferences(config.persistPreferences ?? true);
   
   // Referencias para evitar re-renderizados innecesarios
-  const isInitialized = useRef(false);
-  const userHasInteracted = useRef(false);
-  const lastViewport = useRef(viewport);
+  const isInitializedRef = useRef(false);
+  const userHasInteractedRef = useRef(false);
+  const lastViewportRef = useRef<MenuState['viewport'] | null>(null);
+  
+  // 🔥 IMPORTANTE: Usar refs para valores que necesitamos en callbacks
+  const preferencesRef = useRef(preferences);
+  const viewportRef = useRef(viewport);
+  
+  // Actualizar refs cuando cambien los valores
+  useEffect(() => {
+    preferencesRef.current = preferences;
+  }, [preferences]);
+  
+  useEffect(() => {
+    viewportRef.current = viewport;
+  }, [viewport]);
   
   // Estado del menú para callbacks
   const menuState: MenuState = useMemo(() => ({
@@ -119,88 +150,125 @@ function LayoutMenuContent({
     height: dimensions.height,
   }), [isOpen, isReduced, viewport, dimensions]);
   
-  // Notificar cambios de estado
+  // 🔥 SOLUCIÓN: Usar ref para menuCallbacks para evitar re-renders
+  const menuCallbacksRef = useRef(menuCallbacks);
+  menuCallbacksRef.current = menuCallbacks;
+
+  // Notificar cambios de estado SIN incluir menuCallbacks en dependencias
   useEffect(() => {
-    menuCallbacks?.onMenuStateChange?.(menuState);
-  }, [menuState, menuCallbacks]);
+    menuCallbacksRef.current?.onMenuStateChange?.(menuState);
+  }, [menuState]);
   
-  // Inicialización y cambios de viewport
-  useEffect(() => {
+  // 🔥 SOLUCIÓN: Usar useLayoutEffect para la inicialización
+  useLayoutEffect(() => {
+    // Solo ejecutar una vez
+    if (isInitializedRef.current) return;
+    isInitializedRef.current = true;
+    
+    // Verificar si el usuario cerró manualmente
     if (sessionStorage.getItem('t1-sidebar-manually-closed') === 'true') {
       return;
     }
-    // Solo ejecutar si:
-    // 1. No se ha inicializado aún
-    // 2. El viewport cambió Y el usuario no ha interactuado recientemente
-    if (!isInitialized.current || (lastViewport.current !== viewport && !userHasInteracted.current)) {
-      
-      // Aplicar estado por defecto según viewport
-      switch (viewport) {
-        case 'mobile':
-          setOpen(false);
-          setReduced(false);
-          break;
-        case 'tablet':
-          setOpen(true);
-          // Usar preferencia guardada si existe, sino usar default
-          setReduced(preferences.isReduced ?? true);
-          break;
-        case 'desktop':
-          setOpen(true);
-          // Usar preferencia guardada si existe, sino usar default
-          setReduced(preferences.isReduced ?? false);
-          break;
-      }
-      
-      isInitialized.current = true;
-      lastViewport.current = viewport;
+    
+    // Configuración inicial basada en viewport actual
+    const currentViewport = viewportRef.current;
+    const currentPreferences = preferencesRef.current;
+    
+    switch (currentViewport) {
+      case 'mobile':
+        setOpen(false);
+        setReduced(false);
+        break;
+      case 'tablet':
+        setOpen(true);
+        setReduced(currentPreferences.isReduced ?? true);
+        break;
+      case 'desktop':
+        setOpen(true);
+        setReduced(currentPreferences.isReduced ?? false);
+        break;
     }
     
-    // Reset el flag de interacción después de un tiempo
-    if (userHasInteracted.current) {
-      const timer = setTimeout(() => {
-        userHasInteracted.current = false;
-      }, 1000); // 1 segundo de "gracia" después de la interacción
-      
-      return () => clearTimeout(timer);
-    }
-  }, [viewport, setOpen, setReduced, preferences.isReduced]);
+    lastViewportRef.current = currentViewport;
+  }, []); // Sin dependencias, solo se ejecuta una vez
   
-  // Guardar preferencias cuando cambie isReduced
+  // 🔥 SOLUCIÓN: Manejar cambios de viewport SIN incluir setOpen y setReduced en dependencias
   useEffect(() => {
-    if (userHasInteracted.current && !isMobile) {
+    // Skip si no está inicializado
+    if (!isInitializedRef.current) return;
+    
+    // Skip si el usuario acaba de interactuar
+    if (userHasInteractedRef.current) return;
+    
+    // Skip si el viewport no cambió
+    if (lastViewportRef.current === viewport) return;
+    
+    // Verificar si el usuario cerró manualmente
+    if (sessionStorage.getItem('t1-sidebar-manually-closed') === 'true') {
+      return;
+    }
+    
+    // Actualizar basado en el nuevo viewport
+    switch (viewport) {
+      case 'mobile':
+        setOpen(false);
+        setReduced(false);
+        break;
+      case 'tablet':
+        setOpen(true);
+        setReduced(preferences.isReduced ?? true);
+        break;
+      case 'desktop':
+        setOpen(true);
+        setReduced(preferences.isReduced ?? false);
+        break;
+    }
+    
+    lastViewportRef.current = viewport;
+  }, [viewport]); // Solo viewport como dependencia
+  
+  // Resetear el flag de interacción del usuario
+  useEffect(() => {
+    if (!userHasInteractedRef.current) return;
+    
+    const timer = setTimeout(() => {
+      userHasInteractedRef.current = false;
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [isReduced, isOpen]);
+  
+  // Guardar preferencias cuando cambie isReduced manualmente
+  useEffect(() => {
+    if (userHasInteractedRef.current && !isMobile) {
       savePreferences({
         isReduced,
         lastViewport: viewport,
       });
     }
-  }, [isReduced, viewport, isMobile, savePreferences]);
+  }, [isReduced, viewport, isMobile]); // Remover savePreferences de dependencias
   
-  // Handlers con callbacks
-const handleToggleOpen = useCallback(() => {
-  userHasInteracted.current = true;
-  
-  // NUEVO: Marcar específicamente que fue una acción de cierre manual
-  if (isOpen) {
-    // Si estamos cerrando, marcar que fue intencional
-    sessionStorage.setItem('t1-sidebar-manually-closed', 'true');
-    // Remover la marca después de 2 segundos
-    setTimeout(() => {
-      sessionStorage.removeItem('t1-sidebar-manually-closed');
-    }, 2000);
-  }
-  
-  toggleOpen();
-  menuCallbacks?.onToggleOpen?.(!isOpen);
-}, [toggleOpen, isOpen, menuCallbacks]);
+  // 🔥 IMPORTANTE: Memoizar handlers para evitar re-renders en Navbar
+  const handleToggleOpen = useCallback(() => {
+    userHasInteractedRef.current = true;
+    
+    if (isOpen) {
+      sessionStorage.setItem('t1-sidebar-manually-closed', 'true');
+      setTimeout(() => {
+        sessionStorage.removeItem('t1-sidebar-manually-closed');
+      }, 2000);
+    }
+    
+    toggleOpen();
+    menuCallbacksRef.current?.onToggleOpen?.(!isOpen);
+  }, [toggleOpen, isOpen]); // Remover menuCallbacks de dependencias
   
   const handleToggleReduce = useCallback(() => {
-    userHasInteracted.current = true;
+    userHasInteractedRef.current = true;
     toggleReduced();
-    menuCallbacks?.onToggleReduced?.(!isReduced);
-  }, [toggleReduced, isReduced, menuCallbacks]);
+    menuCallbacksRef.current?.onToggleReduced?.(!isReduced);
+  }, [toggleReduced, isReduced]); // Remover menuCallbacks de dependencias
   
-  // Handler para el toggle desde navbar/sidebar
   const handleToggleWithAnimation = useCallback(() => {
     if (isMobile) {
       handleToggleOpen();
@@ -209,23 +277,53 @@ const handleToggleOpen = useCallback(() => {
     }
   }, [isMobile, handleToggleOpen, handleToggleReduce]);
   
-  // TopBanner para móvil
-  const MobileTopBanner: React.FC<{ className?: string }> = ({ className = '' }) => (
-    <motion.div
-      className={`${className} mt-3`}
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={TRANSITIONS.content}
-    >
-      <T1ShippingBanner
-        brandText={sideBarProps.shippingBannerTitle || navBarProps.shippingBannerTitle}
-        isMobile={true}
-        isReduced={isReduced}
-        isOpen={isOpen}
-        onToggleOpen={handleToggleOpen}
-      />
-    </motion.div>
+  // 🔥 IMPORTANTE: Memoizar el componente MobileTopBanner
+  const MobileTopBanner = useCallback<React.FC<{ className?: string }>>(
+    ({ className = '' }) => (
+      <motion.div
+        className={`${className} mt-3`}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={TRANSITIONS.content}
+      >
+        <T1ShippingBanner
+          brandText={sideBarProps.shippingBannerTitle || navBarProps.shippingBannerTitle}
+          isMobile={true}
+          isReduced={isReduced}
+          isOpen={isOpen}
+          onToggleOpen={handleToggleOpen}
+        />
+      </motion.div>
+    ),
+    [sideBarProps.shippingBannerTitle, navBarProps.shippingBannerTitle, isReduced, isOpen, handleToggleOpen]
   );
+  
+  // 🔥 IMPORTANTE: Usar useRef para handleToggleWithAnimation para evitar re-renders
+  const handleToggleWithAnimationRef = useRef(handleToggleWithAnimation);
+  
+  // Actualizar la referencia cuando cambie la función
+  useEffect(() => {
+    handleToggleWithAnimationRef.current = handleToggleWithAnimation;
+  }, [handleToggleWithAnimation]);
+  
+  // Función estable que usa la referencia
+  const stableHandleToggleWithAnimation = useCallback(() => {
+    handleToggleWithAnimationRef.current();
+  }, []);
+  
+  // 🔥 IMPORTANTE: Memoizar las props del Navbar para evitar re-renders
+  const navbarProps = useMemo(() => ({
+    ...navBarProps,
+    className: "navbar-fixed",
+    shippingBannerTitle: navBarProps.shippingBannerTitle,
+    isMobile,
+    texts: {
+      logout: "Cerrar sesión",
+      ...navBarProps.texts
+    },
+    onReducerHandle: stableHandleToggleWithAnimation,
+    sidebarReduce: isReduced,
+  }), [navBarProps, isMobile, isReduced, stableHandleToggleWithAnimation]);
   
   return (
     <div className="layout-menu-container">
@@ -285,24 +383,13 @@ const handleToggleOpen = useCallback(() => {
           justifyItems: 'center'
         }}
       >
-        <Navbar
-          {...navBarProps}
-          className="navbar-fixed"
-          shippingBannerTitle={navBarProps.shippingBannerTitle}
-          isMobile={isMobile}
-          texts={{
-            logout: "Cerrar sesión",
-            ...navBarProps.texts
-          }}
-          onReducerHandle={handleToggleWithAnimation}
-          sidebarReduce={isReduced}
-        />
+        <Navbar {...navbarProps} />
         
         {/* Área de contenido */}
         <div className="content-area" style={{ 
-          paddingTop: `calc(${theme.spacing(3)} + 60px)`, // Height del navbar
-          paddingLeft: theme.spacing(3) ,
-          paddingRight: theme.spacing(3) ,
+          paddingTop: `calc(${theme.spacing(3)} + 60px)`,
+          paddingLeft: theme.spacing(3),
+          paddingRight: theme.spacing(3),
           maxHeight: '100vh',
           maxWidth: '100%',
           width: '100%'
@@ -321,7 +408,6 @@ const handleToggleOpen = useCallback(() => {
 export default function LayoutMenu(props: LayoutMenuProps) {
   const { config = {} } = props;
   
-  // Wrapper con AnimatePresence si las animaciones están habilitadas
   const content = (
     <MenuProvider>
       <LayoutMenuContent {...props} />

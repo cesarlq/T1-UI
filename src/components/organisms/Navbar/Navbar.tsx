@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import { StoreSelector } from '../../molecules/StoreSelector/StoreSelector';
 import { T1ShippingBanner } from '../../molecules/T1ShippingBanner/T1ShippingBanner';
 import styles from './Navbar.module.scss';
@@ -9,7 +9,8 @@ import BalanceBanner from '../../molecules/BalanceBanner/BalanceBanner';
 import { NavbarPropsI } from './Navbar.types';
 import MenuProfile from '../../molecules/Profile/MenuProfile';
 
-export function Navbar({
+// 🔥 MEMOIZAR EL COMPONENTE PARA EVITAR RE-RENDERS INNECESARIOS
+export const Navbar = memo(function Navbar({
   className = '',
   showInfoBand = false,
   showBalance = false,
@@ -53,14 +54,26 @@ export function Navbar({
   const [profileAnchor, setProfileAnchor] = useState<null | HTMLElement>(null);
   const profileOpen = Boolean(profileAnchor);
 
+  // 🔥 REMOVER COMPLETAMENTE EL CONSOLE.LOG PARA EVITAR RE-RENDERS
+  // useEffect(() => {
+  //   if (process.env.NODE_ENV === 'development') {
+  //     console.log('Navbar props:', {
+  //       showBalance,
+  //       isMobile,
+  //       balanceBannerConfig,
+  //       shouldShowBalance: showBalance && !isMobile && !balanceBannerConfig
+  //     });
+  //   }
+  // }, [showBalance, isMobile, balanceBannerConfig]);
+
   // Handler interno para búsqueda
-  const handleSearch = (data: { search: string }) => {
+  const handleSearch = useCallback((data: { search: string }) => {
     if (trackingUrl) {
       window.open(`${trackingUrl}=${data.search}`, '_blank');
     }
     // Llamar callback externo si existe
     onSearch?.(data);
-  };
+  }, [trackingUrl, onSearch]);
 
   // Handler interno para cambio de tienda
   const handleStoreChange = (storeId: number) => {
@@ -86,7 +99,15 @@ export function Navbar({
     onReducerHandle?.();
   };
 
-console.log(showBalance && !isMobile && !balanceBannerConfig);
+  // 🔥 CALCULAR CONDICIONES DE RENDERIZADO FUERA DEL JSX
+  const shouldShowDefaultBalance = showBalance && !isMobile && !balanceBannerConfig;
+  const shouldShowConfiguredBalance = showBalance && !isMobile && balanceBannerConfig;
+
+  // 🔥 MEMOIZAR textFieldProps para evitar re-renders
+  const memoizedTextFieldProps = useMemo(() => ({
+    placeholder: texts.searchPlaceholder || searchPlaceholder,
+  }), [texts.searchPlaceholder, searchPlaceholder]);
+
   return (
     <nav
       className={`${className} ${styles.container}`}
@@ -129,20 +150,20 @@ console.log(showBalance && !isMobile && !balanceBannerConfig);
           onSubmit={handleSearch}
           textFieldClassName={styles.search}
           className={styles['search-section']}
-          textFieldProps={{
-            placeholder: texts.searchPlaceholder || searchPlaceholder,
-          }}
+          textFieldProps={memoizedTextFieldProps}
         />
       )}
       
       <div className={styles['user-info-container']}>
-
-        {showBalance && !isMobile && !balanceBannerConfig &&(
+        {shouldShowDefaultBalance && (
           <BalanceBannerComponent className={styles['balance-banner-desktop']} />
         )}
 
-        {showBalance && !isMobile && balanceBannerConfig && (
-            <BalanceBanner balance={balanceBannerConfig.balance} BALLANCE_PATH={balanceBannerConfig.BALLANCE_PATH}/>
+        {shouldShowConfiguredBalance && (
+          <BalanceBanner 
+            balance={balanceBannerConfig.balance} 
+            BALLANCE_PATH={balanceBannerConfig.BALLANCE_PATH}
+          />
         )}
         
         {t1SelectorConfig && 
@@ -183,4 +204,4 @@ console.log(showBalance && !isMobile && !balanceBannerConfig);
       </div>
     </nav>
   );
-}
+});
