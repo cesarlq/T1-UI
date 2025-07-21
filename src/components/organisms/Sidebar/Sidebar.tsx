@@ -405,58 +405,55 @@ export function Sidebar({
     const itemType = typeof item.type === 'string' ? item.type : item.type?.toString();
     
     if (itemType === '0' || itemType === 'STATIC_TITLE') {
-      return (
-        <>
-          {!shouldShowReduced && (
-            <div 
-              key={`title-${index}`}
-              className={styles.staticTitle}
-              data-reduce={shouldShowReduced}
-            >
-              <span className={styles.titleText}>{item.text}</span>
-            </div>
-          )}
-        </>
-      );
+      if (!shouldShowReduced) {
+        return (
+          <div 
+            key={`title-${index}`}
+            className={styles.staticTitle}
+            data-reduce={shouldShowReduced}
+          >
+            <span className={styles.titleText}>{item.text}</span>
+          </div>
+        );
+      }
+      return null;
     }
 
     if ((itemType === '3' || itemType === 'REACT_TSX') && item.component) {
       const Component = item.component;
-      return (
-        <>
-          {!shouldShowReduced && (
-            <div 
-              key={`component-${index}`}
-              className={styles.reactComponent}
-              data-reduce={shouldShowReduced}
-            >
-              <Component 
-                currentUserId={currentUserId}
-                onNavigate={handleInternalNavigation}
-                stores={stores?.map(store => ({ id: store.id, name: store.name }))}
-                currentStore={currentStore ? { id: currentStore.id, name: currentStore.name } : undefined}
-                onStoreChange={onStoreChange}
-                createStoreUrl={createStoreUrl}
-                searchPlaceholder="Buscar tienda..."
-                isMobile={isMobile}
-                className="sidebar-store-selector"
-              />
-            </div>
-          )}
-        </>
-      );
+      if (!shouldShowReduced) {
+        return (
+          <div 
+            key={`component-${index}`}
+            className={styles.reactComponent}
+            data-reduce={shouldShowReduced}
+          >
+            <Component 
+              currentUserId={currentUserId}
+              onNavigate={handleInternalNavigation}
+              stores={stores?.map(store => ({ id: store.id, name: store.name }))}
+              currentStore={currentStore ? { id: currentStore.id, name: currentStore.name } : undefined}
+              onStoreChange={onStoreChange}
+              createStoreUrl={createStoreUrl}
+              searchPlaceholder="Buscar tienda..."
+              isMobile={isMobile}
+              className="sidebar-store-selector"
+            />
+          </div>
+        );
+      }
+      return null;
     }
 
     if(itemType === 'INFORMATIVE_TEXT'){
-      return (
-        <>
-          {!shouldShowReduced && (
-            <p className={styles.informativeText} key={index}>
-              {item.text ? item.text : 'Configuración de tienda únicamente disponible para administradores.'}
-            </p>
-          )}
-        </>
-      );
+      if (!shouldShowReduced) {
+        return (
+          <p className={styles.informativeText} key={`informative-${index}`}>
+            {item.text ? item.text : 'Configuración de tienda únicamente disponible para administradores.'}
+          </p>
+        );
+      }
+      return null;
     }
 
     if ((itemType === '1' || itemType === 'LINK') && item.href && item.href.trim() !== '') {
