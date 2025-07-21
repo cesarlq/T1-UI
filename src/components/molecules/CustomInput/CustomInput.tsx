@@ -2,7 +2,8 @@ import React from "react";
 import styles from './CustomInput.module.scss';
 import { TextField, TextFieldProps } from "@mui/material";
 import ErrorMessage from "./ErrorMessage";
-import DirtyIndicator from './dot-for-dirty-field-indicator.svg';
+// Inline SVG as data URL to avoid build issues
+const DirtyIndicatorSrc = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 25 25' fill='none'%3e%3ccircle cx='12.416' cy='12.5' r='6' fill='%232180FF'/%3e%3c/svg%3e";
 
 export interface CustomInputI {
     label?: string
@@ -40,9 +41,12 @@ export default function CustomInput({
                 InputProps={{
                     ...textFieldProps.InputProps,
                     endAdornment: hasChange
-                        ? <DirtyIndicator
+                        ? <img
+                            src={DirtyIndicatorSrc}
+                            alt="Dirty indicator"
                             data-select={textFieldProps.select}
-                            className="data-[select=true]:mr-4" />
+                            className="data-[select=true]:mr-4"
+                            style={{ width: '16px', height: '16px' }} />
                         :textFieldProps.InputProps?.endAdornment
                 }}
             >

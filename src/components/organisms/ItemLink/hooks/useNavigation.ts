@@ -7,8 +7,7 @@ const useSafeNavigate = () => {
     const { useNavigate } = require("react-router-dom");
     return useNavigate();
   } catch (error) {
-    // Fallback when React Router is not available
-    console.warn("React Router not available, using fallback navigation");
+    // Fallback when React Router is not available (silently)
     return (path: string) => {
       if (typeof window !== "undefined") {
         window.location.href = path;
@@ -96,14 +95,19 @@ export const useNavigation = ({
 
       if (isNavigationCancelledRef.current) return;
 
-      navigate(finalHref);
+      // Usar onNavigate si está disponible (viene del Sidebar y maneja onCustomNavigate)
+      if (onNavigate) {
+        onNavigate(finalHref);
+      } else {
+        // Fallback a navegación directa
+        navigate(finalHref);
+      }
 
       if (isNavigationCancelledRef.current) return;
 
       dispatch({ type: "SET_PROGRESS", payload: 100 });
 
       setActiveSubPath(finalHref);
-      if (onNavigate) onNavigate(finalHref);
 
       triggerHaptic([10, 50]);
 

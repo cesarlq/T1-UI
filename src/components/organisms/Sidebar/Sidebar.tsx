@@ -43,6 +43,7 @@ export function Sidebar({
   // NUEVAS PROPS para reemplazar Next.js
   currentPath = '/', // Reemplaza usePathname
   onPathChange, // Callback cuando se necesita cambiar la ruta
+  onCustomNavigate, // Función personalizada de navegación
 }: SidebarPropsI) {
   
   // Detectar si estamos en Storybook
@@ -50,20 +51,36 @@ export function Sidebar({
                      (window.location.href.includes('storybook') || 
                       window.parent !== window);
   
+  // Función centralizada para manejar navegación
+  const handleNavigation = (path: string, context?: { 
+    isCreateButton?: boolean; 
+    isMenuItem?: boolean; 
+    menuItem?: MenuPath;
+    fromMobile?: boolean;
+  }) => {
+    // Si hay función personalizada, usarla en lugar de las otras
+    if (onCustomNavigate) {
+      onCustomNavigate(path, context);
+      return Promise.resolve(true);
+    }
+    
+    // Usar onPathChange si está disponible
+    if (onPathChange) {
+      onPathChange(path);
+    } else if (isStorybook) {
+      // En Storybook, actualizar la URL para demo
+      window.history.pushState({}, '', `${window.location.pathname}?story-path=${encodeURIComponent(path)}`);
+      console.log('[Storybook] Navegación a:', path);
+    }
+    
+    // Trigger callback de navegación
+    onNavigate?.(path);
+    return Promise.resolve(true);
+  };
+
   // Mock de router para desarrollo/Storybook
   const mockRouter = {
-    push: (path: string) => {
-      if (onPathChange) {
-        onPathChange(path);
-      } else if (isStorybook) {
-        // En Storybook, actualizar la URL para demo
-        window.history.pushState({}, '', `${window.location.pathname}?story-path=${encodeURIComponent(path)}`);
-        console.log('[Storybook] Navegación a:', path);
-      }
-      // Trigger callback de navegación
-      onNavigate?.(path);
-      return Promise.resolve(true);
-    },
+    push: (path: string, context?: any) => handleNavigation(path, context),
     refresh: () => {
       if (isStorybook) {
         window.location.reload();
@@ -195,8 +212,8 @@ export function Sidebar({
       }
     });
 
-    // PASO 2: Si no hay match exacto, buscar matches parciales (excluyendo raíz)
-    if (!matchFound) {
+    // PASO 2: Si no hay match exacto y NO es la ruta raíz, buscar matches parciales
+    if (!matchFound && pathname !== '/') {
       // Ordenar por longitud de href descendente para priorizar rutas más específicas
       const sortedMenuPaths = [...menuPaths].map((item, originalIndex) => ({ ...item, originalIndex }))
         .sort((a, b) => {
@@ -214,6 +231,17 @@ export function Sidebar({
       sortedMenuPaths.forEach((item) => {
         if (matchFound) return;
 
+        // Verificar match parcial en item principal (excluyendo raíz)
+        if (item.href && item.href !== '/' && pathname.startsWith(item.href) && 
+            (pathname.length === item.href.length || pathname[item.href.length] === '/')) {
+          setActivePath(item.href);
+          setActiveSubPath(pathname);
+          setCurrentSubmenuOpen(item.originalIndex);
+          matchFound = true;
+          return;
+        }
+
+        // Verificar match parcial en subPaths (excluyendo raíz)
         if (item.subPaths) {
           const partialMatch = item.subPaths.find(subPath => {
             // Excluir explícitamente la ruta raíz de matches parciales
@@ -232,33 +260,6 @@ export function Sidebar({
             setActivePath(item.href || '');
             setActiveSubPath(pathname);
             setCurrentSubmenuOpen(item.originalIndex);
-            matchFound = true;
-          }
-        }
-      });
-    }
-
-    // PASO 3: Si aún no hay match y pathname es exactamente '/', buscar la ruta raíz
-    if (!matchFound && pathname === '/') {
-      menuPaths.forEach((item, index) => {
-        if (matchFound) return;
-
-        // Buscar item principal con href='/'
-        if (item.href === '/') {
-          setActivePath('/');
-          setActiveSubPath('/');
-          setCurrentSubmenuOpen(index);
-          matchFound = true;
-          return;
-        }
-
-        // Buscar subPath con href='/'
-        if (item.subPaths) {
-          const rootSubPath = item.subPaths.find(subPath => subPath.href === '/');
-          if (rootSubPath) {
-            setActivePath(item.href || '');
-            setActiveSubPath('/');
-            setCurrentSubmenuOpen(index);
             matchFound = true;
           }
         }
@@ -303,7 +304,10 @@ export function Sidebar({
       if (pathname === createButtonPath) {
         router.refresh();
       } else {
-        router.push(createButtonPath);
+        handleNavigation(createButtonPath, { 
+          isCreateButton: true, 
+          fromMobile: isMobile 
+        });
       }
     }
     
@@ -337,8 +341,12 @@ export function Sidebar({
       }, 150); // 150ms para una animación suave
     }
     
-    // Realizar la navegación
-    router.push(path);
+    // Realizar la navegación con contexto
+    handleNavigation(path, { 
+      isMenuItem: true, 
+      menuItem: targetItem,
+      fromMobile: isMobile 
+    });
     
     // Limpiar el estado pendiente después de un breve delay
     setTimeout(() => {

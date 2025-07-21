@@ -67,5 +67,18 @@ export interface SidebarPropsI {
      * @param path - La nueva ruta a la que navegar
      */
     onPathChange?: (path: string) => void;
+    /**
+     * Función personalizada para manejar la navegación.
+     * Si se proporciona, se usará en lugar de onPathChange para todas las navegaciones.
+     * Útil para implementar lógica de navegación personalizada (ej: validaciones, confirmaciones, etc.)
+     * @param path - La nueva ruta a la que navegar
+     * @param context - Contexto adicional sobre la navegación
+     */
+    onCustomNavigate?: (path: string, context?: {
+        isCreateButton?: boolean;
+        isMenuItem?: boolean;
+        menuItem?: MenuPath;
+        fromMobile?: boolean;
+    }) => void;
 }
 //# sourceMappingURL=Sidebar.types.d.ts.map

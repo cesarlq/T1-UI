@@ -11,7 +11,14 @@ export default defineConfig({
   plugins: [
     react(),
     svgr({
-      include: '**/*.svg',
+      include: '**/*.svg?react',
+      svgrOptions: {
+        exportType: 'default',
+        ref: true,
+        svgo: false,
+        titleProp: true,
+        plugins: ['@svgr/plugin-jsx'],
+      },
     }),
     // IMPORTANTE: Este plugin inyecta CSS automáticamente
     libInjectCss(),
@@ -64,6 +71,8 @@ export default defineConfig({
         }
       }
     },
+    // Configuración para manejar assets correctamente
+    assetsInlineLimit: 0,
     // Generar sourcemaps para debugging
     sourcemap: true,
     // Configurar el directorio de salida

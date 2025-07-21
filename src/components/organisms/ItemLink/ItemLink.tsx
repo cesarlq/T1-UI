@@ -13,8 +13,7 @@ const useSafeLocation = () => {
     const { useLocation } = require('react-router-dom');
     return useLocation();
   } catch (error) {
-    // Fallback when React Router is not available
-    console.warn('React Router not available, using fallback location');
+    // Fallback when React Router is not available (silently)
     return {
       pathname: typeof window !== 'undefined' ? window.location.pathname : '/',
       search: typeof window !== 'undefined' ? window.location.search : '',
