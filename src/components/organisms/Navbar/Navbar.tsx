@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, useCallback, useMemo } from 'react';
+import { useState, memo, useCallback, useMemo } from 'react';
 import { StoreSelector } from '../../molecules/StoreSelector/StoreSelector';
 import { T1ShippingBanner } from '../../molecules/T1ShippingBanner/T1ShippingBanner';
 import styles from './Navbar.module.scss';
@@ -51,7 +51,7 @@ export const Navbar = memo(function Navbar({
   isMobile
 }: NavbarPropsI) {
 
-  const [profileAnchor, setProfileAnchor] = useState<null | HTMLElement>(null);
+  const [profileAnchor, _setProfileAnchor] = useState<null | HTMLElement>(null);
   const profileOpen = Boolean(profileAnchor);
 
   // 🔥 REMOVER COMPLETAMENTE EL CONSOLE.LOG PARA EVITAR RE-RENDERS

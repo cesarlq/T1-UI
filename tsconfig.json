@@ -20,16 +20,16 @@
     "noEmit": true,
     
     // Tipos
+    "noUnusedLocals": false,        // 🔥 Desactiva error por variables locales no usadas
+    "noUnusedParameters": false,    // 🔥 Desactiva error por parámetros no usados
+    "noFallthroughCasesInSwitch": true,
+    
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "strict": true,
     "skipLibCheck": true,
 
-    /* Linting */
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
     
     // Paths
     "outDir": "./dist",

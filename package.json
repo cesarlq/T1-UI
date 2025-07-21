@@ -1,6 +1,6 @@
 {
-  "name": "t1-ui",
-  "version": "0.1.0",
+  "name": "@t1-org/t1components",
+  "version": "4.4.0",
   "description": "Universal React Component Library",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -22,13 +22,21 @@
     "./styles": {
       "import": "./dist/index.css",
       "require": "./dist/index.css"
-    }
+    },
+    "./dist/lib/styles.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    },
+    "./dist/index.css": "./dist/index.css",
+    "./*.css": "./dist/*.css"
   },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
+    "post-build": "echo 'Build completed successfully!'",
+    "prepublishOnly": "npm run clean && npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -37,13 +45,17 @@
     "@emotion/styled": "^11.0.0",
     "@mui/material": "^5.0.0",
     "react": ">=16.8.0 || >=17.0.0 || >=18.0.0",
-    "react-dom": ">=16.8.0 || >=17.0.0 || >=18.0.0"
+    "react-dom": ">=16.8.0 || >=17.0.0 || >=18.0.0",
+    "react-router-dom": "^6.0.0 || ^7.0.0"
   },
   "peerDependenciesMeta": {
     "react-dom": {
       "optional": true
     },
     "@mui/icons-material": {
+      "optional": true
+    },
+    "react-router-dom": {
       "optional": true
     }
   },
@@ -66,6 +78,7 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.6.0",
     "css-loader": "^7.1.2",
+    "esbuild-sass-plugin": "^3.3.1",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "storybook": "^9.0.17",
@@ -90,10 +103,10 @@
   ],
   "dependencies": {
     "@storybook/testing-library": "^0.2.1",
+    "country-flag-icons": "^1.5.19",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.6",
     "lucide-react": "^0.525.0",
-    "react-hook-form": "^7.60.0",
-    "react-router-dom": "^7.6.3"
+    "react-hook-form": "^7.60.0"
   }
 }

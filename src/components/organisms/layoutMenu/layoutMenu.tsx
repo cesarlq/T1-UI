@@ -311,7 +311,6 @@ function LayoutMenuContent({
     handleToggleWithAnimationRef.current();
   }, []);
   
-  // 🔥 IMPORTANTE: Memoizar las props del Navbar para evitar re-renders
   const navbarProps = useMemo(() => ({
     ...navBarProps,
     className: "navbar-fixed",
