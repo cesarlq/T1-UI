@@ -385,7 +385,7 @@ function LayoutMenuContent({
         <Navbar {...navbarProps} />
         
         {/* Área de contenido */}
-        <div className={"content-area" + config.className} style={{
+        <div className={"content-area" + " " + config.className} style={{
           maxHeight: '100vh',
           maxWidth: '100%',
           width: '100%'

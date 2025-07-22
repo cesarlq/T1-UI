@@ -18146,7 +18146,7 @@ function uu({
         },
         children: [
           /* @__PURE__ */ Q(gB, { ...X }),
-          /* @__PURE__ */ Q("div", { className: "content-area" + i.className, style: {
+          /* @__PURE__ */ Q("div", { className: "content-area " + i.className, style: {
             maxHeight: "100vh",
             maxWidth: "100%",
             width: "100%"
