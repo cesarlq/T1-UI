@@ -20,7 +20,6 @@ export default defineConfig({
         plugins: ['@svgr/plugin-jsx'],
       },
     }),
-    // IMPORTANTE: Este plugin inyecta CSS automáticamente
     libInjectCss(),
     dts({
       insertTypesEntry: true,
@@ -32,6 +31,11 @@ export default defineConfig({
     postcss: {
       plugins: [autoprefixer()],
     },
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ["legacy-js-api"]
+      }
+    }
   },
   build: {
     lib: {

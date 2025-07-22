@@ -12,6 +12,7 @@ export interface LayoutMenuProps {
     menuCallbacks?: MenuCallbacks;
     children?: React.ReactNode;
     config?: {
+        className?: string;
         animations?: boolean;
         persistPreferences?: boolean;
         customBreakpoints?: {

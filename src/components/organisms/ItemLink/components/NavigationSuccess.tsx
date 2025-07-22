@@ -1,7 +1,7 @@
 // components/ItemLink/components/NavigationSuccess.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import styles from '@/styles/common/ItemLink.module.scss';
+import styles from '@/components/organisms/ItemLink/ItemLink.module.scss';
 
 export const NavigationSuccess = React.memo(() => (
   <motion.div 

@@ -4,25 +4,7 @@ import React, { useEffect, useState, useMemo, useCallback, useRef, useReducer } 
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion';
 // import ArrowMenu from '../../assets/arrow-menu.svg';
 import { ChevronDown } from 'lucide-react'; // Usando lucide-react como alternativa
-import styles from '@/styles/common/ItemLink.module.scss';
-
-// Safe hook for React Router compatibility
-const useSafeLocation = () => {
-  try {
-    // Try to import and use React Router's useLocation
-    const { useLocation } = require('react-router-dom');
-    return useLocation();
-  } catch (error) {
-    // Fallback when React Router is not available (silently)
-    return {
-      pathname: typeof window !== 'undefined' ? window.location.pathname : '/',
-      search: typeof window !== 'undefined' ? window.location.search : '',
-      hash: typeof window !== 'undefined' ? window.location.hash : '',
-      state: null,
-      key: 'default'
-    };
-  }
-};
+import styles from './ItemLink.module.scss';
 
 // Componentes
 import { RippleEffect } from './components/RippleEffect';

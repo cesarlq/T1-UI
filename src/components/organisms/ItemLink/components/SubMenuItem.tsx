@@ -3,7 +3,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NotificationDot } from './NotificationDot';
 import { RippleEffect } from './RippleEffect';
-import styles from '@/styles/common/ItemLink.module.scss';
+import styles from '@/components/organisms/ItemLink/ItemLink.module.scss';
 import type { SubPathItem, RippleType } from '../ItemLink.types';
 
 interface SubMenuItemProps {

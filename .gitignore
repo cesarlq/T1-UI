@@ -1,3 +1,4 @@
 node_modules/*
 
 *.patch
+.DS_Store

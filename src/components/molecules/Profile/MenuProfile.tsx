@@ -3,7 +3,7 @@ import { MenuProfileI, ProfileMenuItem } from "./Profile.type";
 import { IconButton, ListItemText, Menu, MenuItem as MuiMenuItem, Divider } from '@mui/material';
 import React from "react";
 import { getInitials } from "@/utils/Porfile/getInitials";
-import styles from '@/styles/common/Navbar.module.scss';
+import styles from '@/components/organisms/Navbar/Navbar.module.scss';
 import Profile from "./Profile";
 
 
