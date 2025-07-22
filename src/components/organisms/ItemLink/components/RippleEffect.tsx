@@ -1,7 +1,6 @@
-// components/ItemLink/components/RippleEffect.tsx
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import styles from '@/styles/common/ItemLink.module.scss';
+import styles from '@/components/organisms/ItemLink/ItemLink.module.scss';
 
 interface RippleEffectProps {
   x: number;

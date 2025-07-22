@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 // import Image from 'next/image'; // Comentado para Vite
-import styles from '@/styles/common/ItemLink.module.scss';
+import styles from '@/components/organisms/ItemLink/ItemLink.module.scss';
 
 interface MenuIconProps {
   icon: any;

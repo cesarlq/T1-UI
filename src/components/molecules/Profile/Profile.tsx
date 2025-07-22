@@ -1,6 +1,6 @@
 import { Tooltip } from '@mui/material';
-import stylesProfile from '@/styles/common/Profile.module.scss';
-import styles from '@/styles/common/Navbar.module.scss';
+import stylesProfile from './Profile.module.scss';
+import styles from '@/components/organisms/Navbar/Navbar.module.scss';
 import { ProfileProps } from './Profile.type';
 import { getInitials } from '@/utils/Porfile/getInitials';
 
