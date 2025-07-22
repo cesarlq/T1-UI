@@ -13,7 +13,9 @@ export interface LayoutMenuProps {
   sideBarProps: Omit<SidebarPropsI, 'onToggleOpen' | 'onToggleReduce' | 'isOpen' | 'isReduced' | 'isMobile'>;
   menuCallbacks?: MenuCallbacks;
   children?: React.ReactNode;
+  
   config?: {
+    className?: string;
     animations?: boolean;
     persistPreferences?: boolean;
     customBreakpoints?: {

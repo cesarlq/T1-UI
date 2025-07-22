@@ -385,10 +385,7 @@ function LayoutMenuContent({
         <Navbar {...navbarProps} />
         
         {/* Área de contenido */}
-        <div className="content-area" style={{ 
-          paddingTop: `calc(${theme.spacing(3)} + 60px)`,
-          paddingLeft: theme.spacing(3),
-          paddingRight: theme.spacing(3),
+        <div className={"content-area" + config.className} style={{
           maxHeight: '100vh',
           maxWidth: '100%',
           width: '100%'
