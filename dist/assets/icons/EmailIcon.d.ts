@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import { SVGProps } from '../../../node_modules/react';
 
 declare const EmailIcon: (props: SVGProps<SVGSVGElement>) => import("react/jsx-runtime").JSX.Element;
 export default EmailIcon;

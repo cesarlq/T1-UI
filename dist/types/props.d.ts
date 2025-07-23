@@ -1,7 +1,7 @@
 import { Control, FieldErrors, FieldPath, FieldValues, UseControllerProps, UseFieldArrayUpdate, UseFormClearErrors, UseFormRegister, UseFormReset, UseFormSetError, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { AddressForGuideOrderI, DimensionsForGuideOrderI, GeneratedGuideI, GuideI, GuideOrderI, OauthParcelApiFormI, ParcelInfoI, ParcelSelectedI, ShippingHistoryI } from './guide';
 import { AutocompleteRenderInputParams, StandardTextFieldProps, TextFieldProps } from '@mui/material';
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from '../../node_modules/react';
 import { AddBalanceFormI } from './user';
 import { PurchaseDataI } from './orders';
 import { GeneralResponseI } from './response';

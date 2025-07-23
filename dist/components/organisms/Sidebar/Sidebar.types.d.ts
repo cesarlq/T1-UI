@@ -1,5 +1,5 @@
 import { balanceI } from '../../molecules/BalanceBanner';
-import { ReactNode, ComponentType } from 'react';
+import { ReactNode, ComponentType } from '../../../../node_modules/react';
 
 export interface SubPath {
     href: string;

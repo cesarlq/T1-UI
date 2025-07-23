@@ -1,7 +1,7 @@
 import { StatusAsyncThunkI } from './redux';
 import { GeneralResponseI } from './response';
 import { UserI } from './user';
-import { ReactNode } from 'react';
+import { ReactNode } from '../../node_modules/react';
 
 export interface InitialStateIncidence {
     getIncidences: StatusAsyncThunkI<{

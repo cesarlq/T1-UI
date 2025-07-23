@@ -4,18 +4,12 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import svgr from 'vite-plugin-svgr';
+import path from 'node:path';
 
 export default defineConfig({
   plugins: [
     react({
-      jsxRuntime: 'classic', // IMPORTANTE: Para compatibilidad con React antiguo
-      babel: {
-        presets: [
-          ['@babel/preset-react', {
-            runtime: 'classic' // Sin automatic runtime para React < 17
-          }]
-        ]
-      }
+      jsxRuntime: 'classic'
     }),
     svgr({
       include: '**/*.svg?react',
@@ -29,9 +23,7 @@ export default defineConfig({
               name: 'preset-default',
               params: {
                 overrides: {
-                  removeViewBox: false,
-                  cleanupIds: true,
-                  removeUselessDefs: true
+                  removeViewBox: false
                 }
               }
             }
@@ -49,30 +41,27 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'legacy', // Para máxima compatibilidad
+        api: 'legacy',
         silenceDeprecations: ['legacy-js-api']
       }
     }
   },
   build: {
-    target: 'es2015', // IMPORTANTE: Target antiguo para compatibilidad
-    minify: false, // NO minificar para debugging
+    target: 'es2015',
+    minify: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'T1Components',
-      formats: ['es', 'cjs', 'umd'], // UMD para máxima compatibilidad
-      fileName: (format) => {
-        const formatNames = {
-          es: 'index.es.js',
-          cjs: 'index.cjs.js',
-          umd: 'index.umd.js'
-        };
-        return formatNames[format] || `index.${format}.js`;
-      }
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format}.js`
     },
     rollupOptions: {
-      // NO external - incluye TODO
-      external: [], // VACÍO - incluye todas las dependencias
+      // SOLUCIÓN: React y React DOM como external
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime'
+      ],
       
       output: {
         preserveModules: false,
@@ -80,15 +69,10 @@ export default defineConfig({
         assetFileNames: 'index.css',
         interop: 'auto',
         
-        // Para UMD
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
-        },
-        
-        // Compatibilidad con CommonJS
-        format: 'cjs',
-        esModule: false
+        }
       }
     },
     
@@ -99,10 +83,7 @@ export default defineConfig({
     
     sourcemap: true,
     outDir: 'dist',
-    emptyOutDir: true,
-    
-    // Sin límite de tamaño - es una solución "pesada pero funcional"
-    chunkSizeWarningLimit: Infinity
+    emptyOutDir: true
   },
   
   resolve: {
@@ -110,11 +91,14 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './src/components'),
       '@assets': resolve(__dirname, './src/assets'),
+      // IMPORTANTE: Alias para prevenir duplicación de React
+      'react': path.resolve('./node_modules/react'),
+      'react-dom': path.resolve('./node_modules/react-dom')
     }
   },
   
-  // Para compatibilidad con módulos antiguos
   optimizeDeps: {
+    include: ['react', 'react-dom'],
     esbuildOptions: {
       target: 'es2015'
     }

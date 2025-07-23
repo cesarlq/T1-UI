@@ -1,4 +1,4 @@
-import { default as React } from 'react';
+import { default as React } from '../../../../node_modules/react';
 import { FormRadioProps, RadioGroupProps, RadioProps } from './Radio.types';
 
 export declare const DESIGN_TOKENS: {

@@ -15,7 +15,7 @@ import { FormSwitchProps, SwitchProps } from './Switch.types';
  * />
  * ```
  */
-export declare const Switch: import('react').ForwardRefExoticComponent<Omit<SwitchProps, "ref"> & import('react').RefAttributes<HTMLButtonElement>>;
+export declare const Switch: import('../../../../node_modules/react').ForwardRefExoticComponent<Omit<SwitchProps, "ref"> & import('../../../../node_modules/react').RefAttributes<HTMLButtonElement>>;
 /**
  * FormSwitch Component
  *
@@ -30,5 +30,5 @@ export declare const Switch: import('react').ForwardRefExoticComponent<Omit<Swit
  * />
  * ```
  */
-export declare const FormSwitch: import('react').ForwardRefExoticComponent<Omit<FormSwitchProps, "ref"> & import('react').RefAttributes<HTMLButtonElement>>;
+export declare const FormSwitch: import('../../../../node_modules/react').ForwardRefExoticComponent<Omit<FormSwitchProps, "ref"> & import('../../../../node_modules/react').RefAttributes<HTMLButtonElement>>;
 //# sourceMappingURL=Switch.d.ts.map

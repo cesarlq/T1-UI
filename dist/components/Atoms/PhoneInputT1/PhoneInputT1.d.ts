@@ -1,4 +1,4 @@
-import { default as React } from 'react';
+import { default as React } from '../../../../node_modules/react';
 import { PhoneInputT1Props } from './PhoneInputT1.types';
 
 declare const PhoneInputT1: React.FC<PhoneInputT1Props>;

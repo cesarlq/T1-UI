@@ -1,4 +1,4 @@
-import { default as React } from 'react';
+import { default as React } from '../../../../node_modules/react';
 
 declare function Card({ children, className }: {
     children: React.ReactNode;

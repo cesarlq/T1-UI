@@ -1,4 +1,4 @@
-import { default as React } from 'react';
+import { default as React } from '../../../../node_modules/react';
 import { T1ShippingBannerProps } from './T1ShippingBanner.types';
 
 export declare const T1ShippingBanner: React.NamedExoticComponent<T1ShippingBannerProps>;
