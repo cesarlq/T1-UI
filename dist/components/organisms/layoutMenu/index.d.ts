@@ -1,2 +1,2 @@
-export { default as LayoutMenu } from './layoutMenu';
-//# sourceMappingURL=index.d.ts.map
+export { default as LayoutMenu } from './LayoutMenu';
+//# sourceMappingURL=Index.d.ts.map

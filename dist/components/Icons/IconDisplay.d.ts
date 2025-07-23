@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+
 interface IconDisplayProps {
     name: string;
     children: React.ReactNode;

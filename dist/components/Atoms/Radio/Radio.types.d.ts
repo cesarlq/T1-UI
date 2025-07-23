@@ -1,5 +1,6 @@
 import { RadioProps as MuiRadioProps, RadioGroupProps as MuiRadioGroupProps, FormControlLabelProps } from '@mui/material';
 import { DESIGN_TOKENS } from './Radio';
+
 export interface RadioProps extends Omit<MuiRadioProps, 'color' | 'size'> {
     /**
      * Variante de tamaño del radio

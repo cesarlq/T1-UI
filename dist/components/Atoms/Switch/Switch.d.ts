@@ -1,4 +1,5 @@
 import { FormSwitchProps, SwitchProps } from './Switch.types';
+
 /**
  * Switch Component
  *

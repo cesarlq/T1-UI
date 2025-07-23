@@ -12,6 +12,7 @@ import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 import { Edge } from '@xyflow/react';
 import { Dayjs } from 'dayjs';
 import { IncidenceAddressI, IncidenceFormI, IncidenceItemI, SelectedInfoFromMapDataI, ShippingDataItemI, TimelineEventI } from './incidence';
+
 export interface LayoutI {
     children: ReactNode;
 }

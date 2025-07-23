@@ -1,5 +1,6 @@
 import { StatusAsyncThunkI } from './redux';
 import { GeneralResponseI } from './response';
+
 export interface InitialStateParcelsI {
     getParcelsInfo: StatusAsyncThunkI;
     parcels: null | GeneralResponseI<CourierI[]> & MappedServicesI;

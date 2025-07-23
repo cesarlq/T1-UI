@@ -1,4 +1,5 @@
 import { ResponseIdentityI } from './responseIdentity';
+
 export interface InitialStateUserI {
     getBalance: {
         status: "idle" | "loading" | "succeeded" | "failed";

@@ -1,8 +1,17 @@
+// src/index.ts
+// Wrapper de compatibilidad para React antiguo
+
+// Polyfill para React.Fragment en versiones antiguas
+import React from 'react';
+
+if (!React.Fragment) {
+  (React as any).Fragment = ({ children }: any) => children;
+}
+
+// Import de estilos (side effect)
 import './styles/index.css';
 
-export const version = '0.1.0';
-
-// Atoms
+// Re-export de componentes con verificación de versión
 export { default as AmountInput } from '@/components/Atoms/AmountInput/AmountInput';
 export { default as Button } from '@/components/Atoms/Button/Button';
 export { default as Card } from '@/components/Atoms/Card/Card';
@@ -32,7 +41,7 @@ export { default as TextFieldAndButton } from '@/components/molecules/TextFieldA
 
 // Organisms
 export { Navbar } from '@/components/organisms/Navbar/Navbar';
-export { default as LayoutMenu } from '@/components/organisms/layoutMenu/layoutMenu';
+export { default as LayoutMenu } from '@/components/organisms/LayoutMenu/LayoutMenu';
 export { ItemLink } from '@/components/organisms/ItemLink/ItemLink';
 export { Sidebar } from '@/components/organisms/Sidebar/Sidebar';
 
@@ -62,7 +71,7 @@ export type { TextFieldAndButtonI } from '@/components/molecules/TextFieldAndBut
 
 // Types - Organisms
 export type { NavbarPropsI } from '@/components/organisms/Navbar/Navbar.types';
-export type { LayoutMenuProps, MenuState } from '@/components/organisms/layoutMenu/LayoutMenu.types';
+export type { LayoutMenuProps, MenuState } from '@/components/organisms/LayoutMenu/LayoutMenu.types';
 export type { ItemLinkProps } from '@/components/organisms/ItemLink/ItemLink.types';
 export type { SidebarPropsI } from '@/components/organisms/Sidebar/Sidebar.types';
 
@@ -78,3 +87,29 @@ export * as Logos from './assets/iconsT1/logos';
 export * as MenuIcon from './assets/iconsT1/menuIcons';
 export * as MenuIconActive from './assets/iconsT1/menuIcons/active';
 export * as MenuIconInactive from './assets/iconsT1/menuIcons/inactive';
+
+// Verificación de compatibilidad
+export const checkCompatibility = () => {
+  const reactVersion = React.version;
+  const majorVersion = parseInt(reactVersion.split('.')[0]);
+  
+  if (majorVersion < 16) {
+    console.warn(
+      `@t1-org/t1components: React ${reactVersion} detectado. ` +
+      `Esta librería está optimizada para React 16.8+. ` +
+      `Algunas funcionalidades pueden no estar disponibles.`
+    );
+  }
+  
+  return {
+    version: reactVersion,
+    isCompatible: majorVersion >= 16,
+    hasHooks: majorVersion > 16 || (majorVersion === 16 && parseInt(reactVersion.split('.')[1]) >= 8),
+    hasFragments: majorVersion > 16 || (majorVersion === 16 && parseInt(reactVersion.split('.')[1]) >= 2)
+  };
+};
+
+// Auto-check en desarrollo
+if (process.env.NODE_ENV !== 'production') {
+  checkCompatibility();
+}

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 interface MenuContextType {
     isOpen: boolean;
     isReduced: boolean;

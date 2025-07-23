@@ -4,23 +4,42 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import svgr from 'vite-plugin-svgr';
-import { libInjectCss } from 'vite-plugin-lib-inject-css';
-import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'classic', // IMPORTANTE: Para compatibilidad con React antiguo
+      babel: {
+        presets: [
+          ['@babel/preset-react', {
+            runtime: 'classic' // Sin automatic runtime para React < 17
+          }]
+        ]
+      }
+    }),
     svgr({
       include: '**/*.svg?react',
       svgrOptions: {
         exportType: 'default',
         ref: true,
-        svgo: false,
+        svgo: true,
+        svgoConfig: {
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  removeViewBox: false,
+                  cleanupIds: true,
+                  removeUselessDefs: true
+                }
+              }
+            }
+          ]
+        },
         titleProp: true,
-        plugins: ['@svgr/plugin-jsx'],
       },
     }),
-    libInjectCss(),
     dts({
       insertTypesEntry: true,
       include: ['src/**/*.{ts,tsx}'],
@@ -28,67 +47,76 @@ export default defineConfig({
     })
   ],
   css: {
-    postcss: {
-      plugins: [autoprefixer()],
-    },
     preprocessorOptions: {
       scss: {
-        silenceDeprecations: ["legacy-js-api"]
+        api: 'legacy', // Para máxima compatibilidad
+        silenceDeprecations: ['legacy-js-api']
       }
     }
   },
   build: {
+    target: 'es2015', // IMPORTANTE: Target antiguo para compatibilidad
+    minify: false, // NO minificar para debugging
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'T1Components',
-      formats: ['es', 'cjs'],
-      fileName: (format) => format === 'es' ? 'index.js' : 'index.cjs'
-    },
-    rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'react/jsx-runtime',
-        '@mui/material',
-        '@mui/icons-material',
-        '@mui/lab',
-        '@mui/system',
-        '@mui/x-date-pickers',
-        '@emotion/react',
-        '@emotion/styled',
-        'react-router-dom'
-      ],
-      output: {
-        // IMPORTANTE: Configurar el nombre del archivo CSS
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') {
-            return 'index.css';
-          }
-          return assetInfo.name;
-        },
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          '@mui/material': 'MaterialUI',
-          '@emotion/react': 'EmotionReact',
-          '@emotion/styled': 'EmotionStyled',
-        }
+      formats: ['es', 'cjs', 'umd'], // UMD para máxima compatibilidad
+      fileName: (format) => {
+        const formatNames = {
+          es: 'index.es.js',
+          cjs: 'index.cjs.js',
+          umd: 'index.umd.js'
+        };
+        return formatNames[format] || `index.${format}.js`;
       }
     },
-    // Configuración para manejar assets correctamente
-    assetsInlineLimit: 0,
-    // Generar sourcemaps para debugging
+    rollupOptions: {
+      // NO external - incluye TODO
+      external: [], // VACÍO - incluye todas las dependencias
+      
+      output: {
+        preserveModules: false,
+        exports: 'named',
+        assetFileNames: 'index.css',
+        interop: 'auto',
+        
+        // Para UMD
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        },
+        
+        // Compatibilidad con CommonJS
+        format: 'cjs',
+        esModule: false
+      }
+    },
+    
+    commonjsOptions: {
+      transformMixedEsModules: true,
+      requireReturnsDefault: 'auto'
+    },
+    
     sourcemap: true,
-    // Configurar el directorio de salida
     outDir: 'dist',
-    // Limpiar el directorio antes de construir
     emptyOutDir: true,
+    
+    // Sin límite de tamaño - es una solución "pesada pero funcional"
+    chunkSizeWarningLimit: Infinity
   },
+  
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './src/components'),
       '@assets': resolve(__dirname, './src/assets'),
+    }
+  },
+  
+  // Para compatibilidad con módulos antiguos
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2015'
     }
   }
 });

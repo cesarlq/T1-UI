@@ -126,15 +126,6 @@ export const EcommerceIcons = () => {
       <IconDisplay type={'logo'} name="T1Paginas">
         <T1IconStory icon="T1Paginas" width={24} height={24} sx={undefined} className={undefined} type={'logo'}  />
       </IconDisplay>
-      <IconDisplay type={'logo'} name="SearsLogo">
-        <T1IconStory icon="SearsLogo" width={24} height={24} sx={undefined} className={undefined} type={'logo'}  />
-      </IconDisplay>
-      <IconDisplay type={'logo'} name="SanbornsLogo">
-        <T1IconStory icon="SanbornsLogo" width={24} height={24} sx={undefined} className={undefined} type={'logo'}  />
-      </IconDisplay>
-      <IconDisplay type={'logo'} name="MercadoLibreIconLogo">
-        <T1IconStory icon="MercadoLibreIconLogo" width={24} height={24} sx={undefined} className={undefined} type={'logo'}  />
-      </IconDisplay>
       <IconDisplay type={'logo'} name="AmazonIconLogo">
         <T1IconStory icon="AmazonIconLogo" width={24} height={24} sx={undefined} className={undefined} type={'logo'}  />
       </IconDisplay>

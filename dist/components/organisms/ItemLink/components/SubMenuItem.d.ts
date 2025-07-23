@@ -1,5 +1,6 @@
 import { default as React } from 'react';
 import { SubPathItem, RippleType } from '../ItemLink.types';
+
 interface SubMenuItemProps {
     subItem: SubPathItem;
     index: number;

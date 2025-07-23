@@ -3,6 +3,7 @@ import { StatusAsyncThunkI } from './redux';
 import { GeneralResponseI, PaginationI, ResponseHudI } from './response';
 import { Node } from '@xyflow/react';
 import { UserI } from './user';
+
 export type ElkNodeData = {
     label: string;
     sourceHandles: {

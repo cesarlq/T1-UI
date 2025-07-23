@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+
 interface MenuIconProps {
     icon: any;
     isActive: boolean;

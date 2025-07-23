@@ -1,5 +1,6 @@
 import { StatusAsyncThunkI } from './redux';
 import { ResponseShippingsDataI } from './responseShippings';
+
 export interface InitialStateTemplatesI {
     getTemplates: StatusAsyncThunkI;
     templates: null | ResponseShippingsDataI<UserProductTemplateI[]>;

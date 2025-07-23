@@ -2,6 +2,7 @@ import { balanceI } from '../../molecules/BalanceBanner/BalanceBanner.type';
 import { ProfileMenuItem, User } from '../../molecules/Profile/Profile.type';
 import { Store } from '../../molecules/StoreSelector/StoreSelector.type';
 import { T1SelectorProps } from '../../molecules/T1Selector/T1Selector.types';
+
 export interface NavbarPropsI {
     className?: string;
     showInfoBand?: boolean;

@@ -1,5 +1,6 @@
 import { StatusAsyncThunkI } from './redux';
 import { PaginationI } from './response';
+
 export interface InitialStateZonesI {
     getZipsFromFile: StatusAsyncThunkI;
     zipsFromFile: SegmentObjectI[] | null;

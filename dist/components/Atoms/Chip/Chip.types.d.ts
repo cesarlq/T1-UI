@@ -1,4 +1,5 @@
 import { ChipProps } from '@mui/material';
+
 export interface ExtendedChipProps extends ChipProps {
     customColorDefinition?: Partial<ChipColorDefinition>;
     hoverEffect?: boolean;

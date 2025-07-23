@@ -1,4 +1,5 @@
 import { PurchaseDataI } from './orders';
+
 export interface ResponseKidalI<I> {
     data: PurchaseDataI[];
     metadata: {};

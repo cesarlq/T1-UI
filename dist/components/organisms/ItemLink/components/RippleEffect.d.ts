@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+
 interface RippleEffectProps {
     x: number;
     y: number;

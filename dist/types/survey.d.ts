@@ -1,4 +1,5 @@
 import { StatusAsyncThunkI } from './redux';
+
 export interface InitialStateSurvey {
     getStatusSurvey: StatusAsyncThunkI;
     statusSurvey: statusSurveyI | null;

@@ -1,4 +1,5 @@
 import { SwitchProps as MuiSwitchProps, FormControlLabelProps } from '@mui/material';
+
 export interface SwitchProps extends Omit<MuiSwitchProps, 'color' | 'size'> {
     /**
      * Callback cuando el valor cambia - API más clara

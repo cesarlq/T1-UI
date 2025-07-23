@@ -2,6 +2,7 @@ import { ProfileMenuItem } from '../components/molecules/Profile/Profile.type';
 import { ChipProps, CheckboxProps, ButtonProps, TextFieldProps, StandardTextFieldProps, Theme, SxProps, SelectChangeEvent, TypographyProps, OutlinedTextFieldProps } from '@mui/material';
 import { JSX, ReactNode, SetStateAction, Dispatch } from 'react';
 import { FieldValues, UseControllerProps } from 'react-hook-form';
+
 export interface AuthContentI {
     setOpenModal: Dispatch<SetStateAction<boolean>>;
     formData: OnBoardingFormI | null;
