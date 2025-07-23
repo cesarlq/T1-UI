@@ -4,4 +4,4 @@ import { LayoutMenuProps } from './LayoutMenu.types';
  * Provee el contexto y gestiona todo el estado del menú
  */
 export default function LayoutMenu(props: LayoutMenuProps): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=layoutMenu.d.ts.map
+//# sourceMappingURL=LayoutMenu.d.ts.map

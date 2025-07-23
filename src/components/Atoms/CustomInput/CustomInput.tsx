@@ -16,37 +16,68 @@ export default function CustomInput({
     ...textFieldPropsRest
 }: CustomInputI) {
     
+    // Combinar props manejando eventos correctamente
     const combinedTextFieldProps = {
         ...textFieldPropsRest,
         ...textFieldProps,
     };
 
+    // Manejar eventos de focus/blur para combinar handlers si existen múltiples
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+        // Llamar el onFocus de textFieldPropsRest (register) si existe
+        if (textFieldPropsRest.onFocus) {
+            textFieldPropsRest.onFocus(event);
+        }
+        // Llamar el onFocus de textFieldProps (personalizado) si existe
+        if (textFieldProps?.onFocus) {
+            textFieldProps.onFocus(event);
+        }
+    };
+
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+        // Llamar el onBlur de textFieldPropsRest (register) si existe
+        if (textFieldPropsRest.onBlur) {
+            textFieldPropsRest.onBlur(event);
+        }
+        // Llamar el onBlur de textFieldProps (personalizado) si existe
+        if (textFieldProps?.onBlur) {
+            textFieldProps.onBlur(event);
+        }
+    };
+
+    // Crear las props finales con los handlers combinados
+    const finalTextFieldProps = {
+        ...combinedTextFieldProps,
+        onFocus: (textFieldPropsRest.onFocus || textFieldProps?.onFocus) ? handleFocus : undefined,
+        onBlur: (textFieldPropsRest.onBlur || textFieldProps?.onBlur) ? handleBlur : undefined,
+    };
+
     return (
         <div
             className={`${styles.container} ${className || ''}`}
-            style={combinedTextFieldProps.fullWidth ? { width: '100%', ...style } : style}
+            style={finalTextFieldProps.fullWidth ? { width: '100%', ...style } : style}
             data-flex-direction={flexDirectionRow}
-            data-disabled={combinedTextFieldProps.disabled}
+            data-disabled={finalTextFieldProps.disabled}
         >
             {label && <span className={styles.label}>{label}</span>}
             
             <TextField
-                {...combinedTextFieldProps}
+                {...finalTextFieldProps}
                 InputProps={{
-                    ...combinedTextFieldProps.InputProps,
+                    ...finalTextFieldProps.InputProps,
                     endAdornment: hasChange
                         ? <DirtyIndicator
-                            data-select={combinedTextFieldProps.select}
+                            data-select={finalTextFieldProps.select}
                             className="data-[select=true]:mr-4" />
-                        : combinedTextFieldProps.InputProps?.endAdornment
+                        : finalTextFieldProps.InputProps?.endAdornment
                 }}
             >
-                {combinedTextFieldProps.select && children}
+                {finalTextFieldProps.select && children}
             </TextField>
             
             <ErrorMessage
                 text={errorMessage}
-                className={`${styles['error-message']} ${combinedTextFieldProps.helperText && styles['error-with-helper']}`}
+                className={`${styles['error-message']} ${finalTextFieldProps.helperText && styles['error-with-helper']}`}
             />
         </div>
     );

@@ -32,7 +32,7 @@ export { default as TextFieldAndButton } from '@/components/molecules/TextFieldA
 
 // Organisms
 export { Navbar } from '@/components/organisms/Navbar/Navbar';
-export { default as LayoutMenu } from '@/components/organisms/layoutMenu/layoutMenu';
+export { default as LayoutMenu } from '@/components/organisms/LayoutMenu/LayoutMenu';
 export { ItemLink } from '@/components/organisms/ItemLink/ItemLink';
 export { Sidebar } from '@/components/organisms/Sidebar/Sidebar';
 
@@ -62,7 +62,7 @@ export type { TextFieldAndButtonI } from '@/components/molecules/TextFieldAndBut
 
 // Types - Organisms
 export type { NavbarPropsI } from '@/components/organisms/Navbar/Navbar.types';
-export type { LayoutMenuProps, MenuState } from '@/components/organisms/layoutMenu/LayoutMenu.types';
+export type { LayoutMenuProps, MenuState } from '@/components/organisms/LayoutMenu/LayoutMenu.types';
 export type { ItemLinkProps } from '@/components/organisms/ItemLink/ItemLink.types';
 export type { SidebarPropsI } from '@/components/organisms/Sidebar/Sidebar.types';
 
