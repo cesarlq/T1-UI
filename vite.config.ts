@@ -9,7 +9,7 @@ import path from 'node:path';
 export default defineConfig({
   plugins: [
     react({
-      jsxRuntime: 'classic'
+      jsxRuntime: 'automatic'
     }),
     svgr({
       include: '**/*.svg?react',
