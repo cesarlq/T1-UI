@@ -1,6 +1,6 @@
 {
   "name": "@t1-org/t1components",
-  "version": "4.4.9-0",
+  "version": "4.4.9-1",
   "description": "Universal React Component Library",
   "type": "module",
   "main": "./dist/index.cjs",
