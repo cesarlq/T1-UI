@@ -195,9 +195,9 @@
   font-size: tokens.$text-sm !important;
   text-transform: none !important;
   padding: 0 tokens.$space-6 !important;
-  box-shadow: 
-    tokens.$shadow-md,
-    0 0 20px rgba(tokens.$brand-primary, 0.3) !important;
+  // box-shadow: 
+  //   tokens.$shadow-md,
+  //   0 0 20px rgba(tokens.$brand-primary, 0.3) !important;
   border: none !important;
   position: relative !important;
   overflow: hidden !important;
@@ -226,9 +226,9 @@
   
   &:hover {
     background: linear-gradient(135deg, tokens.$brand-primary-hover 0%, tokens.$brand-primary-active 100%) !important;
-    box-shadow: 
-      tokens.$shadow-lg,
-      0 0 30px rgba(tokens.$brand-primary, 0.5) !important;
+    // box-shadow: 
+    //   tokens.$shadow-lg,
+    //   0 0 30px rgba(tokens.$brand-primary, 0.5) !important;
     transform: translateY(-2px) scale(1.02) !important;
 
     &::after {
