@@ -26,6 +26,7 @@
     "./dist/index.css": "./dist/index.css"
   },
   "scripts": {
+    "publish": "npm version patch && npm publish --access restricted",
     "prebuild": "rimraf dist",
     "build": "tsc --noEmit && vite build",
     "build:watch": "vite build --watch",
