@@ -38,6 +38,9 @@ export { default as LayoutMenu } from '@/components/organisms/LayoutMenu/LayoutM
 export { ItemLink } from '@/components/organisms/ItemLink/ItemLink';
 export { Sidebar } from '@/components/organisms/Sidebar/Sidebar';
 
+//Views
+export {default as RestrictedAccess} from '@/components/Views/RestrictedAccess/RestrictedAccess';
+
 // Types - Atoms
 export type { AmountInputI } from '@/components/Atoms/AmountInput/AmountInput.types';
 export type { ButtonAtomProps } from '@/components/Atoms/Button/Button.types';
@@ -69,6 +72,9 @@ export type { NavbarPropsI } from '@/components/organisms/Navbar/Navbar.types';
 export type { LayoutMenuProps, MenuState } from '@/components/organisms/LayoutMenu/LayoutMenu.types';
 export type { ItemLinkProps } from '@/components/organisms/ItemLink/ItemLink.types';
 export type { SidebarPropsI } from '@/components/organisms/Sidebar/Sidebar.types';
+
+//Views
+export type { RestrictedAccessProps } from '@/components/Views/RestrictedAccess/RestrictedAccess.types';
 
 // Context
 export { MenuProvider, useMenu } from '@/utils/menu/menuContext';
