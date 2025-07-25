@@ -1,0 +1,6 @@
+# Merge strategy para package.json
+package.json merge=ours
+package-lock.json merge=ours
+
+# Merge strategy para archivos de versión
+src/index.ts merge=ours
