@@ -21,7 +21,7 @@
   justify-content: space-between;
   flex-direction: column;
   gap: tokens.$space-3;
-  z-index: tokens.$z-fixed;
+  z-index: 20;
   box-shadow: tokens.$shadow-lg;
   backdrop-filter: blur(20px) saturate(180%);
 
