@@ -73,7 +73,7 @@ export type { LayoutMenuProps, MenuState } from '@/components/organisms/LayoutMe
 export type { ItemLinkProps } from '@/components/organisms/ItemLink/ItemLink.types';
 export type { SidebarPropsI } from '@/components/organisms/Sidebar/Sidebar.types';
 
-//Views
+// Types - Views
 export type { RestrictedAccessProps } from '@/components/Views/RestrictedAccess/RestrictedAccess.types';
 
 // Context
