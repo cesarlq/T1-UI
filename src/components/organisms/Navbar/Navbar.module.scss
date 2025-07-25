@@ -18,7 +18,7 @@
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1300;
+  z-index: 20;
   background: linear-gradient(135deg, tokens.$surface-primary 0%, rgba(tokens.$surface-secondary, 0.95) 100%);
   border-bottom: 1px solid tokens.$border-subtle;
   transition: all tokens.$duration-normal tokens.$ease-smooth;
