@@ -1,6 +1,6 @@
 {
   "name": "@t1-org/t1components",
-  "version": "4.4.13-7",
+  "version": "4.4.13",
   "description": "Universal React Component Library",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -26,7 +26,7 @@
     "./dist/index.css": "./dist/index.css"
   },
   "scripts": {
-    "publish:beta": "npm run quality && npm version prerelease && npm publish --tag heavy-beta --access restricted && git push --follow-tags",
+    "publish": "npm version patch && npm publish --access restricted",
     "prebuild": "rimraf dist",
     "build": "tsc --noEmit && vite build",
     "build:watch": "vite build --watch",
