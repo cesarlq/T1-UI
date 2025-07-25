@@ -336,7 +336,7 @@ export const ItemLink = React.memo(function ItemLink({
           variants={itemVariants}
           transition={springConfig}
         >
-          <div className={styles.rippleContainer}>
+          {/* <div className={styles.rippleContainer}>
             <AnimatePresence>
               {state.ripples.map(ripple => (
                 <RippleEffect
@@ -348,7 +348,7 @@ export const ItemLink = React.memo(function ItemLink({
                 />
               ))}
             </AnimatePresence>
-          </div>
+          </div> */}
 
           <AnimatePresence>
             {showSuccess && <NavigationSuccess />}
@@ -479,7 +479,7 @@ export const ItemLink = React.memo(function ItemLink({
       variants={itemVariants}
       transition={springConfig}
     >
-      <div className={styles.rippleContainer}>
+      {/* <div className={styles.rippleContainer}>
         <AnimatePresence>
           {state.ripples.map(ripple => (
             <RippleEffect
@@ -491,7 +491,7 @@ export const ItemLink = React.memo(function ItemLink({
             />
           ))}
         </AnimatePresence>
-      </div>
+      </div> */}
 
       <AnimatePresence>
         {showSuccess && <NavigationSuccess />}

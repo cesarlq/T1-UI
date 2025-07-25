@@ -59,7 +59,7 @@ export const SubMenuItem = React.memo(({
       whileTap={{ scale: 0.98 }}
     >
       {/* Ripple container */}
-      <div className={styles.rippleContainer}>
+      {/* <div className={styles.rippleContainer}>
         <AnimatePresence>
           {ripples.map(ripple => (
             <RippleEffect
@@ -71,7 +71,7 @@ export const SubMenuItem = React.memo(({
             />
           ))}
         </AnimatePresence>
-      </div>
+      </div> */}
 
       <span className={styles.subPathText}>
         {subItem.text}

@@ -111,6 +111,7 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: {
+          border: 'none',
           textTransform: 'none', 
           height:'2.5rem',
           display: 'flex',
