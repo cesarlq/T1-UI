@@ -29,6 +29,7 @@ export { T1Selector } from '@/components/molecules/T1Selector/T1Selector';
 export { T1ShippingBanner } from '@/components/molecules/T1ShippingBanner/T1ShippingBanner';
 export { default as Table } from '@/components/molecules/Table/Table';
 export { default as TextFieldAndButton } from '@/components/molecules/TextFieldAndButton/TextFieldAndButton';
+export { SimpleModalComponent} from '@/components/molecules/SimpleModal';
 
 // Organisms
 export { Navbar } from '@/components/organisms/Navbar/Navbar';
@@ -50,6 +51,7 @@ export type { SearchInputI } from '@/components/Atoms/Searchinput/SearchInput.ty
 export type { SwitchProps, FormSwitchProps } from '@/components/Atoms/Switch/Switch.types';
 
 // Types - Molecules
+export type { SimpleModalProps } from '@/components/molecules/SimpleModal'
 export type { BalanceBannerI } from '@/components/molecules/BalanceBanner/BalanceBanner.type';
 export type { CollapsibleCardT1Props } from '@/components/molecules/CollapsibleCardT1/CollapsibleCardT1.type';
 export type { CustomPaginationProps } from '@/components/molecules/CustomPagination/CustomPagination.types';
