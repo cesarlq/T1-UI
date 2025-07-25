@@ -16,6 +16,7 @@ export { Radio, RadioGroup, FormRadio } from '@/components/Atoms/Radio/Radio';
 export { default as SearchInput } from '@/components/Atoms/Searchinput/SearchInput';
 export { default as Select } from '@/components/Atoms/Select/Select';
 export { Switch, FormSwitch } from '@/components/Atoms/Switch/Switch';
+export { CustomAmountInput } from '@/components/Atoms/CustomAmountInput/CustomAmoutInput';
 
 // Molecules
 export { default as BalanceBanner } from '@/components/molecules/BalanceBanner/BalanceBanner';
@@ -49,6 +50,7 @@ export type * from '@/components/Atoms/PhoneInputT1';
 export type { RadioProps, RadioGroupProps, FormRadioProps } from '@/components/Atoms/Radio/Radio.types';
 export type { SearchInputI } from '@/components/Atoms/Searchinput/SearchInput.types';
 export type { SwitchProps, FormSwitchProps } from '@/components/Atoms/Switch/Switch.types';
+export type { CustomInputI as CustomAmountInputI } from '@/components/Atoms/CustomAmountInput/CustomAmountInput.types';
 
 // Types - Molecules
 export type { SimpleModalProps } from '@/components/molecules/SimpleModal'
